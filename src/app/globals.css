@@ -1,0 +1,4971 @@
+:root {
+  --ink: #292a27;
+  --muted: #66665e;
+  --paper: #fff;
+  --linen: #f5f4f0;
+  --sand: #e9e5de;
+  --line: #deddd6;
+  --accent: #777968;
+  --wa: #25d366;
+  --wa-hover: #1eb757;
+
+  /* Spacing scale. Every vertical rhythm and column gap on the site derives
+     from these four values, so a breakpoint retunes the page by changing the
+     variables rather than by restating a padding on thirty selectors. */
+  --gutter: 56px;
+  --section-y: 100px;
+  --section-y-sm: 70px;
+  --band-gap: 90px;
+  --grid-gap: 28px;
+  --wall-gap: 12px;
+  --font-body:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+  --ease: cubic-bezier(0.2, 0.65, 0.3, 1);
+}
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 110px;
+}
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-assistant), sans-serif;
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 0;
+  letter-spacing: 0.005em;
+}
+h1 {
+  font-size: clamp(36px, 3.7vw, 52px);
+}
+h2 {
+  font-size: clamp(28px, 2.6vw, 36px);
+}
+h3 {
+  font-size: 25px;
+}
+p {
+  margin: 0 0 20px;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+button,
+a,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+button {
+  cursor: pointer;
+}
+img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+a,
+button {
+  touch-action: manipulation;
+}
+::selection {
+  background: var(--sand);
+  color: var(--ink);
+}
+:focus-visible {
+  outline: 2px solid #7c6a45;
+  outline-offset: 5px;
+}
+section[id] {
+  scroll-margin-top: 12px;
+}
+.container {
+  width: min(1240px, calc(100% - var(--gutter) * 2));
+  margin-inline: auto;
+}
+.section {
+  padding-block: var(--section-y);
+}
+/* A section that follows a page head, which already carries its own top space. */
+.section-tight {
+  padding-top: var(--section-y-sm);
+}
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  font-weight: 500;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+.muted {
+  color: var(--muted);
+}
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  min-height: 50px;
+  padding: 13px 22px;
+  border: 1px solid transparent;
+  font-size: 12px;
+  font-weight: 500;
+  transition:
+    background 0.25s,
+    color 0.25s,
+    transform 0.25s;
+}
+/* One arrow for the whole site. The heading face carries no U+2197, so an
+   arrow left to inherit inside an h3 falls back to whatever the system
+   supplies and lands heavier, shorter and off-baseline next to the same
+   arrow in a text-link. Pinning it to the body face at a fixed size keeps
+   every arrow identical wherever it sits, heading or not. */
+.arrow {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 21px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0;
+  vertical-align: -0.06em;
+  transition: transform 0.25s var(--ease);
+}
+a:hover .arrow,
+button:hover .arrow {
+  transform: translate(3px, -3px);
+}
+.button-dark {
+  background: var(--ink);
+  color: white;
+}
+.button-dark:hover {
+  background: #4e5047;
+}
+.button-light {
+  background: white;
+  color: var(--ink);
+}
+.button-light:hover {
+  background: var(--sand);
+}
+/* Secondary action. Reads as the quieter sibling of .button-dark without
+   introducing a second filled colour next to it. */
+.button-outline {
+  background: transparent;
+  border-color: var(--ink);
+  color: var(--ink);
+}
+.button-outline:hover {
+  background: var(--ink);
+  color: white;
+}
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 8px 0;
+  border: 0;
+  border-bottom: 1px solid #a4a498;
+  background: none;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.skip-link {
+  position: fixed;
+  left: 15px;
+  top: -100px;
+  z-index: 100;
+  background: #fff;
+  padding: 15px;
+}
+.skip-link:focus {
+  top: 15px;
+}
+.header {
+  /* The services panel takes its ground from the bar it hangs off, so the
+     two swap together rather than a white card appearing under a bar that
+     has no ground of its own. */
+  --menu-ground: var(--paper);
+  --menu-edge: var(--line);
+  --menu-shadow: 0 18px 40px rgba(20, 22, 15, 0.1);
+  --menu-item: var(--muted);
+  --menu-item-on: var(--ink);
+  --menu-hover: var(--linen);
+  background: rgba(255, 255, 255, 0.97);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  border-bottom: 1px solid #eeede9;
+}
+/* Over the homepage hero the bar has no ground of its own — the photograph
+   is its background. It has to leave the flow to do that, so it is fixed
+   rather than sticky; the hero takes the height it used to occupy. */
+.header.is-over-hero {
+  position: fixed;
+  left: 0;
+  right: 0;
+  background: transparent;
+  border-bottom-color: transparent;
+  color: #fff;
+  transition:
+    background 0.35s var(--ease),
+    border-color 0.35s var(--ease),
+    color 0.35s var(--ease);
+}
+.header.is-over-hero .main-nav .nav-link:after {
+  background: currentColor;
+}
+/* Transparent over the hero, the bar has no ground to lend: the panel
+   takes the same dark the phone menu uses, laid over the photograph and
+   held short of solid so the image still reads through it. Pinned, the
+   tokens above come back and the panel turns white with the bar. */
+.header.is-over-hero:not(.is-pinned) {
+  --menu-ground: rgba(41, 42, 39, 0.88);
+  --menu-edge: rgba(255, 255, 255, 0.16);
+  --menu-shadow: 0 20px 44px rgba(20, 22, 15, 0.32);
+  --menu-item: rgba(255, 255, 255, 0.72);
+  --menu-item-on: #fff;
+  --menu-hover: rgba(255, 255, 255, 0.08);
+}
+/* Past the hero the bar is over ordinary white sections and takes its
+   background back. See the scroll handler in Header, and the <noscript>
+   block in layout.tsx for the case where that handler never runs. */
+.header.is-over-hero.is-pinned {
+  background: rgba(255, 255, 255, 0.97);
+  border-bottom-color: #eeede9;
+  color: var(--ink);
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 92px;
+  gap: 30px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  white-space: nowrap;
+  font-family: var(--font-assistant), sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.14em;
+  line-height: 1.2;
+}
+.brand small {
+  display: block;
+  letter-spacing: 0.18em;
+  font-size: 8px;
+  margin-top: 6px;
+}
+.brand-mark {
+  border: 1px solid currentColor;
+  width: 39px;
+  height: 43px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -7px;
+  padding-right: 7px;
+}
+.brand-mark span {
+  transform: rotate(180deg);
+  display: block;
+}
+.main-nav {
+  /* Stretched to the full height of the bar, not just to the height of its
+     own links: the services panel hangs off the bottom edge of the header
+     and measures that drop from here. */
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  gap: 31px;
+  font-size: 12px;
+}
+/* The services entry carries the three offers under it. On the bar they
+   hang as a panel off the bottom edge of the header — the group is
+   stretched to the full bar height so the pointer crosses no gap on the
+   way down to them. */
+.nav-group {
+  position: relative;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+}
+.nav-group-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.nav-group-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  opacity: 0.7;
+}
+/* A single stroke bent into a chevron, turned through a half circle when
+   the list is out. */
+.nav-chevron {
+  width: 5px;
+  height: 5px;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 0.3s var(--ease);
+}
+.nav-group-toggle[aria-expanded="true"] .nav-chevron {
+  transform: translateY(1px) rotate(225deg);
+}
+.nav-sub {
+  position: absolute;
+  top: 100%;
+  left: -20px;
+  /* Sits on the header's own bottom rule rather than below a second one. */
+  margin-top: -1px;
+  min-width: 246px;
+  padding: 9px 0;
+  background: var(--menu-ground);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--menu-edge);
+  box-shadow: var(--menu-shadow);
+  color: var(--menu-item-on);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-7px);
+  transition:
+    opacity 0.22s var(--ease),
+    transform 0.22s var(--ease),
+    visibility 0.22s,
+    /* Matches the bar's own swap on the way past the hero. */
+    background 0.35s var(--ease),
+    border-color 0.35s var(--ease);
+}
+.nav-sub.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+.nav-sub a {
+  display: block;
+  padding: 11px 22px;
+  color: var(--menu-item);
+  transition:
+    color 0.2s var(--ease),
+    background 0.2s var(--ease);
+}
+.nav-sub a:hover,
+.nav-sub a[aria-current="page"] {
+  color: var(--menu-item-on);
+  background: var(--menu-hover);
+}
+/* The index of all three, set off from the three themselves. */
+.nav-sub a:last-child {
+  margin-top: 9px;
+  padding-top: 16px;
+  border-top: 1px solid var(--menu-edge);
+}
+.main-nav .nav-link {
+  padding-block: 14px;
+  position: relative;
+}
+.main-nav .nav-link:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 8px;
+  width: 0;
+  height: 1px;
+  background: var(--ink);
+  transition: width 0.25s;
+}
+.main-nav .nav-link:hover:after,
+.main-nav .nav-link[aria-current="page"]:after {
+  width: 100%;
+}
+.nav-cta {
+  margin-left: 10px;
+  min-height: 42px;
+  padding: 10px 18px;
+  gap: 33px;
+}
+.menu-toggle {
+  display: none;
+}
+.hero {
+  position: relative;
+  display: grid;
+  /* The copy sits at the foot of the frame so the photograph is read first
+     and the top two thirds of it stay clear. */
+  align-content: end;
+  height: 100svh;
+  min-height: 540px;
+  color: white;
+  overflow: hidden;
+  background: #6d6556;
+}
+/* The scale-in belongs to the stack, not to a frame: it should play once on
+   arrival, not again on every cross-dissolve. */
+.hero-frames {
+  position: absolute;
+  inset: 0;
+  animation: hero-image-in 1.8s var(--ease) both;
+}
+/* All four frames occupy the same box and only opacity moves between them,
+   so a change costs one composite and nothing is fetched mid-rotation. */
+.hero-image {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.4s var(--ease);
+  object-position: center 60%;
+}
+.hero-image.is-active {
+  opacity: 1;
+}
+/* Under the copy at the foot of the frame, on the same gutter line as the
+   headline. Written after the shade, so unlike the dots it needs no
+   z-index to clear it. */
+.hero-scroll {
+  position: absolute;
+  left: var(--gutter);
+  bottom: 30px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 10px;
+  letter-spacing: 0.055em;
+  color: #f2f0e9;
+}
+.hero-scroll span {
+  font-size: 17px;
+  animation: hero-nudge 2.6s var(--ease) infinite;
+}
+@keyframes hero-nudge {
+  0%,
+  55%,
+  100% {
+    transform: translateY(0);
+  }
+  28% {
+    transform: translateY(5px);
+  }
+}
+/* Centred along the foot of the frame, between the copy and the cue. */
+.hero-dots {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  /* Above the shade, which is written after it and would otherwise both
+     dim the dots and swallow the clicks. */
+  z-index: 1;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 4px;
+}
+.hero-dots button {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.hero-dots button:after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border: 1px solid #f2f0e9;
+  border-radius: 50%;
+  opacity: 0.55;
+  transition:
+    background 0.4s var(--ease),
+    opacity 0.4s var(--ease);
+}
+.hero-dots button.is-active:after {
+  background: #f2f0e9;
+  opacity: 1;
+}
+.hero-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(18, 20, 15, 0.42), transparent 18%),
+    linear-gradient(
+      0deg,
+      rgba(18, 20, 15, 0.62),
+      rgba(18, 20, 15, 0.14) 40%,
+      transparent 60%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(18, 20, 15, 0.3) 0%,
+      rgba(18, 20, 15, 0.08) 55%,
+      transparent 100%
+    );
+}
+/* The bar is out of the flow and lying on top of the photograph, so its
+   height is carried here: inside a centred track this padding lands the copy
+   just below the true middle, clear of the bar rather than under it.
+   It cannot go on .hero — the frames and the shade are positioned against
+   that element's padding box and would lose the top of the picture. */
+.hero-content {
+  position: relative;
+  padding-top: 92px;
+  /* Clear of the dot row, which occupies the lowest 52px of the frame. */
+  padding-bottom: 84px;
+  animation: hero-copy-in 1s 0.15s both;
+}
+/* A whole sentence rather than a few display words, so it is given the
+   width to fall into two lines and `balance` to pick the break — a hard
+   <br> here would be wrong at half the widths this has to work at. */
+.hero-content h1 {
+  font-size: clamp(28px, 2.5vw, 40px);
+  margin-bottom: 26px;
+  max-width: 760px;
+  text-wrap: balance;
+}
+/* Two rows, not two columns. The eyebrow takes the first row on its own so the
+   copy on the right begins level with the heading rather than beside the label
+   above it, and `baseline` puts the heading's first line and the copy's first
+   line on one line — the two type sizes are far enough apart that aligning
+   their boxes instead would leave the small text sitting visibly high. */
+.intro {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  column-gap: var(--band-gap);
+  align-items: baseline;
+}
+.intro > .eyebrow {
+  grid-column: 1;
+  grid-row: 1;
+}
+.intro h2 {
+  grid-column: 1;
+  grid-row: 2;
+  line-height: 1.35;
+}
+.intro-copy {
+  grid-column: 2;
+  grid-row: 2;
+}
+/* No measure of its own: the grid column sets the line length, so the copy's
+   right edge lands on the container edge rather than short of it. */
+.intro-copy {
+  color: var(--muted);
+}
+.intro-copy .text-link {
+  color: var(--ink);
+  margin-top: 6px;
+}
+/* Intro mosaic. Three columns across the 12-column frame: a tall frame holds
+   each outer edge and the middle column is halved into a stacked pair, so the
+   four images read at four distances without any of them repeating a shape.
+
+   The band runs the full width of the page rather than stopping at the 1240px
+   container, the same way .philosophy does: the section is no longer a
+   container, and the heading block above carries one of its own instead. That
+   keeps the bleed out of the CSS entirely — no 100vw, no negative margins, and
+   nothing for a scrollbar to push sideways.
+
+   It spreads sideways only. No frame carries an aspect ratio, so none of them
+   derive a height from their width — the band's own height is the single
+   source, the two rows split it, and all four frames stretch into it. A wider
+   screen therefore widens the photographs and crops them, rather than pushing
+   the rest of the homepage further down. .philosophy-image solves the same
+   problem the same way, with a min-height under a covering image. */
+.intro-mosaic {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: var(--grid-gap);
+  margin-top: 70px;
+  height: clamp(560px, 68vh, 840px);
+}
+.intro-mosaic figure {
+  margin: 0;
+  overflow: hidden;
+  background: var(--sand);
+}
+.mosaic-room {
+  grid-column: 1 / 5;
+  grid-row: 1 / 3;
+}
+.mosaic-detail {
+  grid-column: 5 / 9;
+  grid-row: 1;
+}
+.mosaic-threshold {
+  grid-column: 5 / 9;
+  grid-row: 2;
+}
+.mosaic-bedroom {
+  grid-column: 9 / 13;
+  grid-row: 1 / 3;
+}
+.services-section {
+  background: var(--linen);
+}
+.section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 35px;
+  margin-bottom: 40px;
+}
+.section-heading .eyebrow {
+  margin-bottom: 14px;
+}
+.section-heading > p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--grid-gap);
+}
+
+/* Service tiles. The photograph is the whole card — no copy block beneath it
+   — and only the title sits on the image at rest. The summary and the link
+   are collapsed to zero height rather than hidden, which keeps them in the
+   accessibility tree and lets the open state be a height transition instead of
+   a measured JavaScript one. */
+.service-tile {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 0.82;
+  background: var(--sand);
+  color: #fff;
+}
+.service-tile img {
+  transition: transform 0.9s var(--ease);
+}
+/* Two scrims, not one: gradients do not interpolate, so the resting scrim is
+   fixed and a second, deeper one fades in over it on hover. */
+.service-tile:before,
+.service-tile-scrim {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.service-tile:before {
+  background: linear-gradient(
+    to top,
+    rgba(26, 24, 21, 0.66) 0%,
+    rgba(26, 24, 21, 0.22) 34%,
+    rgba(26, 24, 21, 0) 62%
+  );
+}
+.service-tile-scrim {
+  opacity: 0;
+  background: linear-gradient(
+    to top,
+    rgba(26, 24, 21, 0.78) 0%,
+    rgba(26, 24, 21, 0.5) 55%,
+    rgba(26, 24, 21, 0.18) 100%
+  );
+  transition: opacity 0.6s var(--ease);
+}
+.service-tile-body {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 2;
+  padding: 28px 28px 26px;
+}
+.service-tile-body h3 {
+  font-size: 27px;
+}
+/* 0fr → 1fr is the height animation: the reveal grows from the bottom edge, so
+   the title rises ahead of the copy rather than the copy dropping over it. */
+.service-tile-reveal {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.55s var(--ease);
+}
+.service-tile-reveal > div {
+  min-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.35s var(--ease),
+    transform 0.5s var(--ease);
+}
+.service-tile-reveal p {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 13px;
+  line-height: 1.85;
+  margin: 14px 0 18px;
+}
+.service-tile-reveal .text-link {
+  color: #fff;
+  border-bottom-color: rgba(255, 255, 255, 0.45);
+  padding-bottom: 6px;
+}
+/* Hover is gated on a real pointer. On a touch screen the tile stays a
+   photograph, a title and a tap through to the service page. */
+@media (hover: hover) and (pointer: fine) {
+  .service-tile:hover .service-tile-reveal {
+    grid-template-rows: 1fr;
+  }
+  .service-tile:hover .service-tile-reveal > div {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.08s;
+  }
+  .service-tile:hover .service-tile-scrim {
+    opacity: 1;
+  }
+  .service-tile:hover img {
+    transform: scale(1.045);
+  }
+}
+/* Keyboard users get the open state on every device, pointer or not. */
+.service-tile:focus-visible .service-tile-reveal {
+  grid-template-rows: 1fr;
+}
+.service-tile:focus-visible .service-tile-reveal > div {
+  opacity: 1;
+  transform: none;
+}
+.service-tile:focus-visible .service-tile-scrim {
+  opacity: 1;
+}
+.space-filters {
+  display: flex;
+  gap: 28px;
+  margin-bottom: 28px;
+  border-bottom: 1px solid var(--line);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.space-filters::-webkit-scrollbar {
+  display: none;
+}
+.space-filters button {
+  white-space: nowrap;
+}
+.space-filters button {
+  background: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  padding: 10px 0 13px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.space-filters button[aria-pressed="true"] {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+/* Editorial grid. Three columns, and the cards line up row by row: every
+   card in a row is exactly as tall as the ones beside it, so each row closes
+   flush left to right. What varies is the row. The rhythm runs three-up,
+   then a pair — a narrow portrait beside a landscape stretched across the
+   two remaining columns — then three-up again on a different proportion. No
+   two consecutive rows are the same shape or the same height. */
+.spaces-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  /* Tighter than the rest of the site's grids on purpose. The gaps are the
+     mortar here: close them up and the photographs read as one wall instead
+     of as separate cards. */
+  gap: var(--wall-gap);
+  /* A floor for the filter swap, so a set of one does not collapse the page
+     under the buttons. align-content keeps it a floor: without it the rows
+     stretch to fill the 400px, and a card with no shape of its own — one
+     widened to close a row — grows with them while its flush neighbour does
+     not. */
+  min-height: 400px;
+  align-content: start;
+}
+/* The card is the photograph. Nothing is stacked under it — the name sits on
+   the image, on a bar flush to the bottom edge, and that is the whole card. */
+.space-card {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  background: var(--sand);
+  animation: hero-copy-in 0.4s both;
+}
+/* The photograph is taken out of flow so its own proportions can never push
+   the card taller than the shape the row asked for — it fills whatever
+   height the row settles on. Without this a card stretched across two
+   columns, which carries no shape of its own, would grow to its image's full
+   height and drag the whole row up with it. */
+.space-card img {
+  position: absolute;
+  inset: 0;
+  transition: transform 0.8s var(--ease);
+}
+.space-card:hover img {
+  transform: scale(1.04);
+}
+/* Rows of three, then a pair, repeating every five cards. Only the shape of
+   the one-column cards is set — the row height follows from it, and anything
+   stretched beside them simply takes that height. The three-up rows run on a
+   ten-card cycle rather than a five, so the row above a pair and the row
+   below it are never the same proportion either. */
+.spaces-grid > :nth-child(10n + 1),
+.spaces-grid > :nth-child(10n + 2),
+.spaces-grid > :nth-child(10n + 3) {
+  aspect-ratio: 1.3;
+}
+.spaces-grid > :nth-child(10n + 6),
+.spaces-grid > :nth-child(10n + 7),
+.spaces-grid > :nth-child(10n + 8) {
+  aspect-ratio: 1.05;
+}
+/* The pair row. The portrait on the left sets the height; the landscape
+   beside it is stretched across the other two columns to meet it. */
+.spaces-grid > :nth-child(5n + 4) {
+  aspect-ratio: 0.8;
+}
+.spaces-grid > :nth-child(5n + 5) {
+  grid-column: span 2;
+  aspect-ratio: auto;
+}
+/* A set that runs out mid-row would otherwise leave a hole in it. The last
+   card widens to close the row instead — across what is left of a three-up
+   row, or across the whole width when it is the only card on its row. Which
+   case applies is fixed by where the card falls in the five-card rhythm. */
+.spaces-grid > :last-child:nth-child(5n + 2) {
+  grid-column: span 2;
+  aspect-ratio: auto;
+}
+.spaces-grid > :last-child:nth-child(5n + 1),
+.spaces-grid > :last-child:nth-child(5n + 4) {
+  grid-column: span 3;
+  /* Alone on its row, with no neighbour to take a height from. */
+  aspect-ratio: 2.8;
+}
+/* The bar carries the site's eyebrow setting rather than the heading one it
+   inherits from h3 — at this size, on a photograph, the letter-spaced caps
+   are what keeps one line of type from reading as a caption pasted on. */
+.card-caption {
+  position: absolute;
+  inset: auto 0 0;
+  margin: 0;
+  padding: 14px 16px;
+  background: rgba(41, 42, 39, 0.86);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  /* One line, always. A long name is cut rather than allowed to grow the bar
+     into a paragraph over the photograph. */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background 0.4s var(--ease);
+}
+.space-card:hover .card-caption {
+  background: var(--ink);
+}
+.space-card:nth-child(1) img {
+  object-position: 56%;
+}
+/* Only the phone folds the set, so only the phone gets the control. It is
+   rendered whenever the set is long enough to fold, and turned on in the
+   one breakpoint that actually hides anything. */
+.spaces-more {
+  display: none;
+}
+.concept-note {
+  font-size: 10px;
+  color: var(--muted);
+  margin: 27px 0 0;
+}
+.philosophy {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--linen);
+}
+.philosophy-image {
+  min-height: 590px;
+}
+.philosophy-image img {
+  object-position: 40%;
+}
+.philosophy-copy {
+  padding: var(--section-y-sm) clamp(35px, 7vw, 110px);
+  align-self: center;
+}
+.philosophy-copy h2 {
+  margin-bottom: 25px;
+}
+.philosophy-copy > p:not(.eyebrow) {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.95;
+}
+/* Material swatches. Four square macros under the philosophy copy, each with
+   a one-word caption. They sit on linen, so the frames need no border — the
+   photograph's own edge is the edge. */
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  list-style: none;
+  margin: 30px 0 27px;
+  padding: 0;
+}
+.swatches li {
+  display: grid;
+  gap: 9px;
+}
+.swatches img {
+  aspect-ratio: 1;
+}
+.swatches span {
+  font-size: 10px;
+  letter-spacing: 0.055em;
+  color: var(--muted);
+}
+/* Process. The steps are a column that scrolls; the photograph beside them
+   is pinned and cross-faded. Row heights come from the copy, so the stage
+   never decides how tall a step is — which is what lets the steps stay at
+   one line without the picture collapsing with them. */
+.process {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: var(--band-gap);
+  align-items: start;
+  margin-top: 55px;
+}
+.process-steps {
+  grid-area: 1 / 1;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.process-steps li {
+  border-top: 1px solid var(--line);
+  padding: 26px 0 64px;
+}
+.process-steps li:last-child {
+  padding-bottom: 26px;
+}
+/* Dimming is gated on `is-live`: without JavaScript nothing ever becomes
+   active, and a permanently greyed-out list would be worse than no effect. */
+.process.is-live .process-steps li {
+  opacity: 0.4;
+  transition: opacity 0.45s var(--ease);
+}
+.process.is-live .process-steps li.is-active {
+  opacity: 1;
+}
+.process-steps h3 {
+  font-size: 22px;
+  line-height: 1.35;
+  margin-bottom: 13px;
+  max-width: 280px;
+}
+.process-steps p {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.9;
+  margin: 0;
+}
+/* Clear of the sticky header. Sticky works here because `align-items: start`
+   leaves the grid area the full height of the row while the image sits at the
+   top of it — the area is what a sticky item travels inside. */
+.process-stage {
+  grid-area: 1 / 2;
+  position: sticky;
+  top: 118px;
+  /* The dimmed steps below carry `opacity`, which paints them in the same
+     layer as positioned elements — without this they would come out over
+     the photograph, their text showing through it. */
+  z-index: 1;
+}
+/* Shown only once the columns collapse; see the narrow-width block. */
+.process-step-image {
+  display: none;
+}
+.process-stage-inner {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--sand);
+}
+.process-stage img {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.6s var(--ease);
+}
+.process-stage img.is-active {
+  opacity: 1;
+}
+/* UAE band. A room behind a scrim rather than a flat fill: the copy is the
+   same, but it now sits on something. `isolation` keeps the scrim's blend
+   inside the band instead of reaching the section above it. */
+.uae-banner {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  align-items: center;
+  min-height: min(720px, 78vh);
+  color: white;
+  text-align: center;
+  padding-block: calc(var(--section-y-sm) + 22px);
+  background: #3a3d34;
+}
+/* Same mechanism as .parallax: the picture is pinned to the viewport, so
+   the band scrolls over a still image rather than carrying it along. A
+   fixed attachment sizes `cover` against the viewport, not the element,
+   which is why there is no object-position to set here. */
+.uae-image {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+/* Touch browsers either ignore a fixed attachment (iOS Safari) or size it
+   against a viewport that changes as the toolbars collapse, and reduced
+   motion asks for no scroll-linked effect at all. */
+@media (hover: none), (prefers-reduced-motion: reduce) {
+  .uae-image {
+    background-attachment: scroll;
+  }
+}
+/* Two layers: a flat wash that guarantees contrast wherever the photograph
+   happens to be pale, and a vertical gradient that keeps the band's edges
+   darker than its middle so it reads as one object. */
+.uae-shade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(180deg, #1d20198c, #1d201947 45%, #1d20198c), #23261f5e;
+}
+.uae-banner > .container {
+  position: relative;
+}
+.uae-banner .eyebrow {
+  color: #eceee2;
+  margin-bottom: 16px;
+}
+.uae-banner h2 {
+  margin-bottom: 20px;
+}
+.uae-banner p:not(.eyebrow) {
+  font-size: 13px;
+  color: #eff0e8;
+}
+.locations {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  margin-top: 30px;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+}
+.locations span + span:before {
+  content: "·";
+  margin-right: 30px;
+}
+
+/* 10. Credibility row. One line of facts, the same weight as the strip under
+   the hero so the two read as a pair bracketing the page. */
+.stats-strip {
+  background: var(--linen);
+}
+.stats-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0 30px;
+  min-height: 62px;
+}
+.stats-strip span {
+  font-family: var(--font-assistant);
+  font-size: 15px;
+  letter-spacing: 0.035em;
+}
+.stats-strip span + span:before {
+  content: "·";
+  margin-right: 30px;
+  color: #909283;
+}
+.stats-note {
+  margin: -6px 0 16px;
+  text-align: center;
+}
+.faq-section {
+  display: grid;
+  grid-template-columns: 0.78fr 1.22fr;
+  gap: var(--band-gap);
+}
+/* The figure is a grid item, so it stretches to the row height on its own.
+   The picture is then taken out of flow inside it — left in flow it would
+   resolve to its own intrinsic aspect ratio and push the row taller than
+   the questions beside it, which is the whole thing this avoids. */
+.faq-image {
+  position: relative;
+  min-height: 420px;
+  margin: 0;
+  overflow: hidden;
+}
+.faq-image img {
+  position: absolute;
+  inset: 0;
+}
+.faq-section h2 {
+  margin-bottom: 30px;
+}
+.faq-section .eyebrow {
+  font-size: 9px;
+}
+.faq-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 42px;
+  margin-top: 32px;
+}
+/* The questions page: same two columns, no figure. */
+.faq-page {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: var(--band-gap);
+  align-items: start;
+}
+.faq-page h2 {
+  margin-bottom: 26px;
+}
+.faq-page + .band {
+  margin-top: var(--section-y);
+}
+.faqs {
+  border-top: 1px solid var(--line);
+}
+.faqs details {
+  border-bottom: 1px solid var(--line);
+}
+.faqs summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+  padding: 24px 0;
+  font-size: 13px;
+}
+.faqs summary::-webkit-details-marker {
+  display: none;
+}
+.faqs summary span {
+  font-size: 23px;
+  font-weight: 300;
+  line-height: 1;
+  transition: transform 0.3s;
+}
+.faqs details[open] summary span {
+  transform: rotate(45deg);
+}
+/* The answer ends on the same line as the rules above and below it; the toggle
+   sits on the summary row, not this one, so there is nothing to clear. */
+.faqs details p {
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 25px;
+  line-height: 1.9;
+}
+/* Recent concepts. A full-bleed row of six squares above the footer — the
+   strip runs edge to edge while its heading stays on the container grid, so
+   the pictures read as a band rather than as another card row. */
+.recent {
+  padding-bottom: var(--section-y-sm);
+  padding-top: var(--section-y-sm);
+}
+.recent-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 35px;
+  margin-bottom: 30px;
+}
+.recent-head .eyebrow {
+  margin-bottom: 14px;
+}
+.recent-strip {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.recent-strip a {
+  position: relative;
+  display: block;
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+.recent-strip img {
+  transition: transform 0.7s var(--ease);
+}
+/* The title is the caption and the affordance both: hidden until the frame
+   is pointed at or focused, so the row stays a row of photographs. */
+.recent-strip a > span {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 14px 15px;
+  background: linear-gradient(0deg, #14160fc4, transparent);
+  color: #fff;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 0.35s var(--ease),
+    transform 0.35s var(--ease);
+}
+@media (hover: hover) and (pointer: fine) {
+  .recent-strip a:hover img {
+    transform: scale(1.05);
+  }
+}
+.recent-strip a:hover > span,
+.recent-strip a:focus-visible > span {
+  opacity: 1;
+  transform: none;
+}
+.recent .concept-note {
+  margin-top: 18px;
+}
+
+.contact-section {
+  background: var(--linen);
+}
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: var(--band-gap);
+}
+.contact-grid h2 {
+  font-size: 36px;
+  margin-bottom: 25px;
+}
+.contact-grid > div > p:not(.eyebrow) {
+  color: var(--muted);
+  font-size: 13px;
+}
+.contact-detail {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-top: 45px;
+  font-size: 11px;
+  color: var(--muted);
+}
+.contact-detail strong {
+  font-weight: 400;
+  color: var(--ink);
+}
+.small-symbol {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  font-size: 20px;
+}
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+.contact-form label {
+  font-size: 11px;
+  display: block;
+  margin-bottom: 16px;
+}
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid #bebeb2;
+  background: transparent;
+  border-radius: 0;
+  color: var(--ink);
+  /* The field sits inside its own label, so it needs clearance above it for
+     the focus ring to stand off without crossing the label text. The row
+     rhythm is unchanged — this 7px comes off the label's margin-bottom. */
+  margin-top: 7px;
+  padding: 11px 0;
+  font-size: 13px;
+  min-height: 45px;
+}
+/* Pulled in from the global 5px, which on these fields reached up into the
+   label above even with the clearance. */
+.contact-form input:focus-visible,
+.contact-form select:focus-visible,
+.contact-form textarea:focus-visible {
+  outline-offset: 3px;
+}
+.contact-form textarea {
+  resize: vertical;
+}
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: #78786f;
+  opacity: 1;
+}
+.contact-form .form-note {
+  font-size: 10px;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+.form-note a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.enquiry-result {
+  margin-top: 25px;
+  border: 1px solid var(--line);
+  padding: 20px;
+}
+.enquiry-result h3 {
+  font-size: 23px;
+  margin-bottom: 10px;
+}
+.enquiry-result p {
+  font-size: 12px;
+  color: var(--muted);
+}
+.enquiry-result textarea {
+  font-size: 12px;
+  margin-block: 10px;
+}
+.footer {
+  background: #292b27;
+  color: #f0f0e9;
+  padding-top: 58px;
+}
+.footer-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-bottom: 52px;
+  gap: 35px;
+}
+.footer-top > .brand {
+  font-size: 17px;
+}
+.footer-top > p {
+  font-family: var(--font-assistant);
+  font-size: 22px;
+  line-height: 1.5;
+  margin: 0;
+  color: #d6d8ce;
+}
+.footer nav {
+  display: flex;
+  gap: 30px;
+  font-size: 11px;
+  padding-top: 8px;
+}
+.footer-bottom {
+  border-top: 1px solid #52554c;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding-block: 22px;
+  font-size: 9px;
+  color: #c6c9bd;
+}
+.will-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.75s var(--ease),
+    transform 0.75s var(--ease);
+}
+.will-reveal.revealed {
+  opacity: 1;
+  transform: none;
+}
+.services-grid > :nth-child(2) {
+  transition-delay: 0.09s;
+}
+.services-grid > :nth-child(3) {
+  transition-delay: 0.18s;
+}
+.breadcrumb {
+  display: flex;
+  gap: 15px;
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 40px;
+}
+.prose {
+  max-width: 780px;
+  padding-block: var(--section-y-sm) var(--section-y);
+}
+.prose h1 {
+  margin-bottom: 35px;
+}
+.prose h2 {
+  font-size: 25px;
+  margin: 30px 0 12px;
+}
+.prose p {
+  color: var(--muted);
+}
+@keyframes hero-image-in {
+  from {
+    transform: scale(1.045);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@keyframes hero-copy-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (max-width: 1100px) {
+  :root {
+    --gutter: 32px;
+    --section-y: 84px;
+    --section-y-sm: 60px;
+    --band-gap: 55px;
+    --grid-gap: 20px;
+  }
+  .main-nav {
+    gap: 22px;
+  }
+  .main-nav .nav-cta {
+    margin-left: 0;
+    gap: 20px;
+  }
+  .brand {
+    font-size: 16px;
+  }
+  .philosophy-copy {
+    padding: 50px 40px;
+  }
+  .philosophy-image {
+    min-height: 540px;
+  }
+  .process-stage {
+    top: 104px;
+  }
+  .footer nav {
+    gap: 20px;
+  }
+}
+@media (max-width: 800px) {
+  :root {
+    --gutter: 20px;
+    --section-y: 65px;
+    --section-y-sm: 48px;
+    /* Columns are stacked below this width, so the same token now measures
+       the space between a heading and the copy beneath it. */
+    --band-gap: 30px;
+  }
+  .nav-inner {
+    min-height: 76px;
+  }
+  .hero-content {
+    padding-top: 76px;
+  }
+  .brand {
+    font-size: 16px;
+  }
+  .brand-mark {
+    width: 33px;
+    height: 37px;
+    font-size: 30px;
+  }
+  .menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    background: none;
+    border: 0;
+    padding: 12px 0 12px 15px;
+    color: var(--ink);
+  }
+  .header.is-over-hero .menu-toggle {
+    color: inherit;
+  }
+  /* Two rules that cross into an x. Nothing else: the bar is quiet enough
+     that a third line would be the loudest thing on it. */
+  .menu-icon {
+    position: relative;
+    display: block;
+    width: 22px;
+    height: 12px;
+  }
+  .menu-icon i {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transition:
+      transform 0.3s var(--ease),
+      top 0.3s var(--ease);
+  }
+  .menu-icon i:first-child {
+    top: 0;
+  }
+  .menu-icon i:last-child {
+    top: 11px;
+  }
+  .is-menu-open .menu-icon i {
+    top: 5px;
+  }
+  .is-menu-open .menu-icon i:first-child {
+    transform: rotate(45deg);
+  }
+  .is-menu-open .menu-icon i:last-child {
+    transform: rotate(-45deg);
+  }
+  /* Open, the panel is the screen: one dark ground out of the site's own
+     ink, held just short of solid so the photograph or page beneath still
+     reads through it. The bar itself goes transparent and sits on top, so
+     the mark and the close control stay where they were. */
+  .header.is-menu-open,
+  .header.is-over-hero.is-menu-open,
+  .header.is-over-hero.is-pinned.is-menu-open {
+    background: transparent;
+    border-bottom-color: transparent;
+    color: #fff;
+  }
+  .header.is-menu-open .brand,
+  .header.is-menu-open .menu-toggle {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+  }
+  .main-nav {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    padding: 96px var(--gutter) calc(var(--gutter) + 20px);
+    background: rgba(41, 42, 39, 0.94);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    color: #fff;
+    font-size: 15px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  @keyframes nav-panel-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  .main-nav.is-open {
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+    gap: 0;
+    animation: nav-panel-in 0.32s var(--ease) both;
+  }
+  .main-nav .nav-link,
+  .nav-sub a {
+    padding: 0;
+    letter-spacing: 0.02em;
+  }
+  .main-nav > .nav-link,
+  .nav-group-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 2px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  /* The panel has no room for a hanging menu and no pointer to keep it
+     open: the same three offers drop into the column instead. */
+  .nav-group {
+    position: static;
+    align-self: auto;
+    display: block;
+  }
+  /* The bar's underline animation has no place here — a row is already a
+     row, and the current page is marked by holding full white instead. */
+  .main-nav .nav-link:after {
+    content: none;
+  }
+  .main-nav .nav-link,
+  .nav-sub a {
+    color: rgba(255, 255, 255, 0.72);
+    transition: color 0.25s var(--ease);
+  }
+  .main-nav .nav-link[aria-current="page"],
+  .nav-sub a[aria-current="page"],
+  .main-nav .nav-link:hover,
+  .nav-sub a:hover {
+    color: #fff;
+    background: none;
+  }
+  .nav-group-row .nav-link {
+    flex: 1;
+  }
+  .nav-group-toggle {
+    width: 44px;
+    height: 44px;
+    margin: -14px -12px -14px 0;
+    opacity: 1;
+  }
+  .nav-chevron {
+    width: 7px;
+    height: 7px;
+    border-right: 1px solid currentColor;
+    border-bottom: 1px solid currentColor;
+    transform: translateY(-2px) rotate(45deg);
+    transition: transform 0.3s var(--ease);
+  }
+  .nav-group-toggle[aria-expanded="true"] .nav-chevron {
+    transform: translateY(2px) rotate(225deg);
+  }
+  .nav-sub {
+    position: static;
+    display: grid;
+    grid-template-rows: 0fr;
+    min-width: 0;
+    margin-top: 0;
+    padding: 0;
+    background: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: 0;
+    box-shadow: none;
+    color: inherit;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition: grid-template-rows 0.34s var(--ease);
+  }
+  .nav-sub.is-open {
+    grid-template-rows: 1fr;
+  }
+  .nav-sub > div {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .nav-sub a {
+    padding: 13px 2px 13px 18px;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    border-left: 1px solid rgba(255, 255, 255, 0.16);
+    margin-left: 2px;
+  }
+  .nav-sub a:last-child {
+    margin-top: 0;
+    padding-top: 13px;
+    border-top: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  .main-nav .nav-cta {
+    margin-top: 28px;
+    justify-content: center;
+  }
+  .hero-content h1 {
+    font-size: 30px;
+  }
+  .hero-content {
+    padding-bottom: 72px;
+  }
+  .hero-shade {
+    background:
+      linear-gradient(180deg, #14160f7a, transparent 20%),
+      linear-gradient(0deg, #14160fab, #14160f2e 44%, transparent 64%),
+      linear-gradient(90deg, #14160f3d, #0000);
+  }
+  .hero-image {
+    object-position: 60%;
+  }
+  .hero-dots {
+    bottom: 22px;
+  }
+  .hero-scroll {
+    bottom: 24px;
+    font-size: 9px;
+    gap: 9px;
+  }
+  /* Touch targets. 44px is the smallest comfortable tap area, and iOS zooms
+     the page on focus for any field under 16px. */
+  .space-filters button {
+    min-height: 44px;
+    padding: 10px 0;
+  }
+  .footer-cols a {
+    padding: 9px 0;
+  }
+  .contact-form input,
+  .contact-form select,
+  .contact-form textarea {
+    font-size: 16px;
+  }
+  .intro {
+    grid-template-columns: 1fr 1fr;
+  }
+  .intro h2 {
+    font-size: 28px;
+  }
+  .intro-copy {
+    font-size: 13px;
+  }
+  /* Three columns is one too many here — the stacked middle pair would be
+     smaller than a thumbnail. The anchor and the pair beside it survive as
+     two columns, and the fourth frame closes the band across both, so the
+     flush top and bottom edges carry over from the wide layout. */
+  .intro-mosaic {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: none;
+    height: auto;
+    margin-top: 44px;
+  }
+  /* Narrow enough that height can follow width again: the pair's ratios set
+     the band, and the anchor beside them stretches to match. */
+  .mosaic-room {
+    grid-column: 1;
+    grid-row: 1 / 3;
+  }
+  .mosaic-detail {
+    grid-column: 2;
+    grid-row: 1;
+    aspect-ratio: 3 / 2;
+  }
+  .mosaic-threshold {
+    grid-column: 2;
+    grid-row: 2;
+    aspect-ratio: 3 / 2;
+  }
+  .mosaic-bedroom {
+    grid-column: 1 / 3;
+    grid-row: 3;
+    aspect-ratio: 16 / 9;
+  }
+  .section-heading {
+    gap: 25px;
+  }
+  .section-heading > p {
+    font-size: 12px;
+  }
+  .service-tile {
+    aspect-ratio: 0.78;
+  }
+  .service-tile-body {
+    padding: 20px 20px 18px;
+  }
+  .service-tile-body h3 {
+    font-size: 22px;
+  }
+  .service-tile-reveal p {
+    font-size: 12px;
+    margin: 11px 0 14px;
+  }
+  .service-tile-reveal .text-link {
+    font-size: 10px;
+    gap: 8px;
+  }
+  /* Two columns, then one below. Three is too many at this width, and the
+     mixed row rhythm above has nothing left to mix once the rows are this
+     narrow — so every shape and every column span the grid sets is dropped
+     for one crop, and the set is folded after four rather than running on
+     past everything after it. */
+  .spaces-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    min-height: 0;
+    /* Carried as a variable so the narrower breakpoint below can retune the
+       crop by setting one value, rather than restating a selector list long
+       enough that the next person has to win a specificity argument with
+       it. */
+    --card-ratio: 1.05;
+  }
+  .space-card,
+  .spaces-grid > :nth-child(10n + 1),
+  .spaces-grid > :nth-child(10n + 2),
+  .spaces-grid > :nth-child(10n + 3),
+  .spaces-grid > :nth-child(10n + 6),
+  .spaces-grid > :nth-child(10n + 7),
+  .spaces-grid > :nth-child(10n + 8),
+  .spaces-grid > :nth-child(5n + 4),
+  .spaces-grid > :nth-child(5n + 5),
+  .spaces-grid > :last-child:nth-child(5n + 1),
+  .spaces-grid > :last-child:nth-child(5n + 2),
+  .spaces-grid > :last-child:nth-child(5n + 4) {
+    aspect-ratio: var(--card-ratio);
+    grid-column: auto;
+  }
+  /* The folded tail. Hidden rather than unmounted, so opening it is a class
+     on the grid and not a re-render of the whole set. */
+  .spaces-grid:not(.is-expanded) > .space-card:nth-child(n + 5) {
+    display: none;
+  }
+  .spaces-more {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    margin-top: var(--wall-gap);
+    padding: 16px;
+    border: 1px solid var(--line);
+    background: none;
+    color: var(--ink);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .spaces-more:active {
+    background: var(--linen);
+  }
+  .philosophy-copy {
+    padding: 40px 30px;
+  }
+  .philosophy-copy h2 {
+    font-size: 28px;
+  }
+  .philosophy-image {
+    min-height: 520px;
+  }
+  .swatches {
+    gap: 9px;
+  }
+  /* No column to sit beside. A pinned photograph in a single column would
+     have the steps sliding underneath it — the active step's own title ends
+     up behind the picture describing it — so the stage is dropped and each
+     step gets its own photograph under its copy instead. */
+  .process {
+    display: block;
+    margin-top: 38px;
+  }
+  .process-stage {
+    display: none;
+  }
+  .process-step-image {
+    display: block;
+    margin-top: 22px;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: var(--sand);
+  }
+  /* Every step is read in full here, so nothing is dimmed: the fade belongs
+     to the sticky stage, which tells you which of four pictures is live. */
+  .process.is-live .process-steps li,
+  .process.is-live .process-steps li.is-active {
+    opacity: 1;
+  }
+  .process-steps li {
+    padding: 22px 0 40px;
+  }
+  .process-steps h3 {
+    max-width: none;
+  }
+  .step-number {
+    margin-bottom: 15px;
+  }
+  .uae-banner {
+    min-height: min(580px, 64vh);
+  }
+  .stats-row {
+    gap: 0 20px;
+    min-height: 58px;
+  }
+  .stats-strip span {
+    font-size: 13px;
+  }
+  .stats-strip span + span:before {
+    margin-right: 20px;
+  }
+  .faq-section,
+  .faq-page,
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+  /* Stacked, the figure has no column to match, so it takes a shape of its
+     own — and goes after the questions rather than before them, so the
+     heading is still the first thing in the section. */
+  .faq-image {
+    order: 1;
+    min-height: 0;
+    aspect-ratio: 16 / 10;
+    margin-top: 34px;
+  }
+  .recent-strip {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  h1 br,
+  h2 br,
+  .section-heading > p br,
+  .page-lead br {
+    display: none;
+  }
+  .contact-detail {
+    margin-top: 20px;
+  }
+  .footer-top {
+    flex-wrap: wrap;
+  }
+  .footer-top > p {
+    font-size: 20px;
+  }
+  .footer nav {
+    width: 100%;
+    padding: 0;
+  }
+}
+@media (max-width: 560px) {
+  :root {
+    --section-y: 55px;
+    --section-y-sm: 42px;
+    --band-gap: 26px;
+    --grid-gap: 32px;
+  }
+  .eyebrow {
+    font-size: 9px;
+    margin-bottom: 15px;
+  }
+  .hero-content h1 {
+    font-size: 26px;
+    line-height: 1.25;
+  }
+  .hero-content {
+    padding-bottom: 66px;
+  }
+  .intro {
+    grid-template-columns: 1fr;
+    align-items: start;
+    row-gap: var(--band-gap);
+  }
+  .intro > .eyebrow,
+  .intro h2,
+  .intro-copy {
+    grid-column: 1;
+    grid-row: auto;
+  }
+  .intro > .eyebrow {
+    margin-bottom: 0;
+  }
+  .intro h2 {
+    font-size: 30px;
+  }
+  .intro-copy {
+    font-size: 13px;
+  }
+  /* One column, but the shapes keep alternating: four identical crops stacked
+     vertically is the thing that reads as filler. Every frame needs its own
+     ratio back here — nothing is left to stretch against. */
+  .intro-mosaic {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-top: 34px;
+  }
+  .intro-mosaic figure {
+    grid-column: 1;
+    grid-row: auto;
+  }
+  .mosaic-room,
+  .mosaic-bedroom {
+    aspect-ratio: 4 / 5;
+  }
+  .mosaic-detail,
+  .mosaic-threshold {
+    aspect-ratio: 3 / 2;
+  }
+  .section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .section-heading > p br {
+    display: none;
+  }
+  /* One column, and the title is the whole of it, so the tiles flatten out:
+     three full-height portraits would be most of the page. */
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  .service-tile {
+    aspect-ratio: 1.15;
+  }
+  .service-tile-body {
+    padding: 24px 22px 22px;
+  }
+  .service-tile-body h3 {
+    font-size: 26px;
+  }
+  .space-filters {
+    gap: 23px;
+  }
+  .space-filters button {
+    font-size: 11px;
+  }
+  /* One card per row on a phone. Two columns here would put each card at
+     about 165px across — too small to read a room in. The crop widens with
+     the card: full-width and portrait, barely one and a half would fit on
+     screen at a time and the set would feel far longer than it is. */
+  .spaces-grid {
+    grid-template-columns: minmax(0, 1fr);
+    --card-ratio: 1.24;
+  }
+  .card-caption {
+    padding: 12px 14px;
+  }
+  .concept-note {
+    font-size: 10px;
+  }
+  .philosophy {
+    grid-template-columns: 1fr;
+  }
+  .philosophy-image {
+    min-height: 0;
+    aspect-ratio: 1.1;
+  }
+  .philosophy-copy {
+    padding: 45px 24px;
+  }
+  .philosophy-copy h2 {
+    font-size: 30px;
+  }
+  .swatches {
+    gap: 7px;
+    margin-top: 26px;
+  }
+  .swatches span {
+    font-size: 9px;
+  }
+  .process {
+    margin-top: 32px;
+  }
+  .process-steps li {
+    padding: 20px 0 34px;
+  }
+  .process-steps h3 {
+    font-size: 22px;
+  }
+  .process-step-image {
+    margin-top: 18px;
+  }
+  .uae-banner {
+    min-height: 500px;
+  }
+  .stats-row {
+    gap: 2px 14px;
+    padding-block: 14px;
+  }
+  .stats-strip span {
+    font-size: 12px;
+  }
+  .stats-strip span + span:before {
+    margin-right: 14px;
+  }
+  .faq-actions {
+    gap: 10px 30px;
+    margin-top: 26px;
+  }
+  .recent-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .recent-strip {
+    gap: 3px;
+  }
+  .locations {
+    gap: 14px;
+    font-size: 10px;
+  }
+  .locations span + span:before {
+    margin-right: 14px;
+  }
+  .faq-section .eyebrow {
+    font-size: 8px;
+  }
+  .faqs summary {
+    font-size: 12px;
+  }
+  .contact-grid h2 {
+    font-size: 31px;
+  }
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .contact-form label {
+    font-size: 10px;
+  }
+  .footer-top {
+    gap: 32px;
+    padding-bottom: 35px;
+  }
+  .footer-top > .brand {
+    font-size: 15px;
+  }
+  .footer-top > p {
+    font-size: 18px;
+  }
+  .footer-bottom {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 9px;
+    /* Clearance for the floating WhatsApp button, which sits over this row
+       when the page is scrolled to the end. */
+    padding-bottom: 78px;
+  }
+  .footer-bottom > span:nth-child(2) {
+    order: 3;
+    width: 100%;
+  }
+  .prose h1 {
+    font-size: 33px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .will-reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ==================================================================
+   Page transitions
+   ==================================================================
+   Each page is its own document, so arriving and leaving are two separate
+   moments. Arriving is the page-fade-in animation, which needs no
+   JavaScript; leaving is the .is-leaving class, added by PageFade a moment
+   before the browser is sent to the next page. Only opacity moves — main
+   carries sticky columns and fixed backgrounds that a transform would tear
+   loose from the viewport.
+
+   The mark is what makes the gap between the two documents worth having:
+   the page clears to the bare paper ground and the mark stands on it, so
+   the handover reads as the studio's own rather than as a blank screen. It
+   fades up as the page leaves and back down as the next one arrives — the
+   two documents each own half of one continuous movement.
+
+   Every animation fills backwards rather than forwards: once it has finished
+   it stops applying, leaving the exit transitions free to take the property
+   back. The reduced-motion block above cancels all of them, and because the
+   content rests at opacity 1 and the mark at 0, the page simply appears. */
+@keyframes page-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+main,
+.footer,
+.header,
+.wa-fab {
+  /* Held back a moment so the mark has the screen to itself before the
+     page comes up underneath it. Everything the visitor can see is in
+     here — bar, content and disc together — so the gap between documents
+     is the paper ground and the mark, and nothing else. */
+  animation: page-fade-in 0.45s var(--ease) 0.1s backwards;
+}
+
+/* Above the bar, and never takes a pointer — it is scenery, not a control,
+   and the screen reader has the real brand link in the header. */
+.page-mark {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  opacity: 0;
+  color: var(--ink);
+  font-family: var(--font-assistant), sans-serif;
+  animation: page-mark-out 0.42s var(--ease) backwards;
+}
+.page-mark .brand-mark {
+  transform: scale(1.35);
+}
+@keyframes page-mark-out {
+  from {
+    opacity: 1;
+  }
+}
+body.is-leaving .page-mark {
+  opacity: 1;
+  transition: opacity 0.2s var(--ease);
+}
+body.is-leaving main,
+body.is-leaving .footer,
+body.is-leaving .header,
+body.is-leaving .wa-fab {
+  opacity: 0;
+  transition: opacity 0.24s var(--ease);
+}
+
+/* ==================================================================
+   Inner pages
+   ================================================================== */
+.page-head {
+  padding-block: var(--section-y-sm) 0;
+}
+.page-head .breadcrumb {
+  margin-bottom: 34px;
+}
+.page-head h1 {
+  max-width: 19ch;
+  margin-bottom: 26px;
+  text-wrap: balance;
+}
+.page-head-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: var(--band-gap);
+  align-items: start;
+}
+/* No measure of its own: the grid column is the measure, so the lead's right
+   edge lands on the container edge — the same line the page image and the
+   header above it stop on. */
+.page-lead {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.9;
+}
+.page-lead p:last-child {
+  margin-bottom: 0;
+}
+.page-head-actions,
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px 26px;
+}
+.page-head-actions {
+  margin-top: 28px;
+}
+/* Copy inside a page lead that is a caption rather than a sentence. */
+.lead-note {
+  font-size: 12px;
+  margin-bottom: 0;
+}
+/* A marquee sitting directly under a page head. */
+.marquee-wrap {
+  margin-top: var(--section-y-sm);
+}
+/* The link that closes a card in a card grid. */
+.card-link {
+  margin: 20px 0 0;
+}
+.coverage-note {
+  margin-top: 40px;
+}
+.page-media {
+  margin-top: 55px;
+  aspect-ratio: 2.1;
+  overflow: hidden;
+  background: var(--sand);
+}
+.page-media img {
+  animation: hero-image-in 1.6s var(--ease) both;
+}
+.band {
+  padding-block: var(--section-y);
+}
+.band-linen {
+  background: var(--linen);
+}
+.band-ink {
+  background: var(--ink);
+  color: #f0f0e9;
+}
+.band-ink h2,
+.band-ink h3 {
+  color: #fff;
+}
+.band-ink .muted,
+.band-ink p {
+  color: #c9cbc0;
+}
+.band-ink .text-link {
+  color: #f0f0e9;
+  border-color: #6c6f63;
+}
+
+/* Two-column text block */
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: var(--band-gap);
+  align-items: start;
+}
+/* The 1.25fr column is the measure. Without that, the copy stopped well short
+   of the container edge while the heading beside it ran to its own column. */
+.split-copy {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.95;
+}
+.split h2 {
+  margin-bottom: 22px;
+}
+
+/* Numbered or plain feature list */
+.feature-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1px;
+  background: var(--line);
+  border-block: 1px solid var(--line);
+}
+.feature-list li {
+  background: var(--paper);
+  padding: 30px 0;
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr) 220px;
+  gap: 40px;
+}
+.band-linen .feature-list li {
+  background: var(--linen);
+}
+.feature-list .step-number {
+  font-size: 21px;
+  margin-bottom: 8px;
+}
+.feature-list .eyebrow {
+  margin-bottom: 8px;
+}
+.feature-list h3 {
+  font-size: 21px;
+  line-height: 1.35;
+}
+/* The row's third column already holds the copy off the right edge; a measure
+   on top of that inset it twice. */
+.feature-list p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.9;
+}
+.feature-list-image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  align-self: center;
+}
+
+/* Principles — an image-led reference library rather than a linear list. */
+.principle-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+.principle-card {
+  background: var(--paper);
+  min-width: 0;
+}
+.band-linen .principle-card {
+  background: var(--linen);
+}
+.principle-card-media {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background: var(--sand);
+}
+.principle-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 500ms var(--ease);
+}
+.principle-card:hover .principle-card-media img {
+  transform: scale(1.025);
+}
+.principle-card-media span {
+  position: absolute;
+  left: 22px;
+  bottom: 17px;
+  color: #fff;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-shadow: 0 1px 12px rgba(18, 20, 15, 0.48);
+}
+.principle-card-copy {
+  padding: 25px 28px 29px;
+}
+.principle-card h3 {
+  margin-bottom: 12px;
+  font-size: 23px;
+  line-height: 1.25;
+}
+/* Card padding is the only inset — the copy reaches the same right edge as the
+   image above it. */
+.principle-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.85;
+}
+
+/* Card grid — audiences, principles, outcomes */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+.card-grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.card-grid > * {
+  background: var(--paper);
+  padding: 36px 32px 40px;
+  display: flex;
+  flex-direction: column;
+}
+.card-grid .card-link {
+  margin-top: auto;
+  padding-top: 20px;
+}
+.band-linen .card-grid > * {
+  background: var(--linen);
+}
+.card-grid .eyebrow {
+  min-height: 3.2em;
+  margin-bottom: 12px;
+}
+.card-grid h3 {
+  font-size: 21px;
+  line-height: 1.35;
+  margin-bottom: 14px;
+  max-width: 18ch;
+}
+.card-grid p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.9;
+}
+.card-grid .step-number {
+  font-size: 21px;
+  margin-bottom: 22px;
+}
+
+/* Checklist */
+.checklist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 40px;
+}
+.checklist li {
+  border-bottom: 1px solid var(--line);
+  padding: 17px 0 17px 26px;
+  position: relative;
+  font-size: 13px;
+  color: var(--muted);
+}
+.checklist li:before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+/* Comparison table */
+.compare-table {
+  border-top: 1px solid var(--line);
+  margin-top: 45px;
+}
+.compare-table dl {
+  display: grid;
+  grid-template-columns: 190px repeat(3, minmax(0, 1fr));
+  gap: 0 32px;
+  margin: 0;
+  border-bottom: 1px solid var(--line);
+  padding-block: 22px;
+  align-items: start;
+}
+.compare-table dt {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+.compare-table dd {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.8;
+}
+/* The heading row is a row like any other: the same vertical padding as the
+   dl rows beneath it, and the same rule closing it off. */
+.compare-head {
+  display: grid;
+  grid-template-columns: 190px repeat(3, minmax(0, 1fr));
+  gap: 0 32px;
+  padding-block: 22px;
+  border-bottom: 1px solid var(--line);
+  align-items: baseline;
+}
+.compare-head h3 {
+  font-size: 22px;
+  margin: 0;
+}
+.compare-head a {
+  border-bottom: 1px solid #a4a498;
+  padding-bottom: 3px;
+}
+.compare-head > span:first-child {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* Marquee strip */
+.marquee {
+  overflow: hidden;
+  border-block: 1px solid var(--line);
+  padding-block: 22px;
+  mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 9%,
+    #000 91%,
+    transparent
+  );
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 42s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+.marquee-track > span {
+  font-family: var(--font-assistant), sans-serif;
+  font-size: 19px;
+  letter-spacing: 0.02em;
+  padding-inline: 34px;
+  white-space: nowrap;
+  color: var(--ink);
+}
+.marquee-track > span:after {
+  content: "◆";
+  color: #9a9c8c;
+  margin-left: 68px;
+  font-size: 7px;
+  vertical-align: middle;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* CTA band */
+.cta-band {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: var(--band-gap);
+  align-items: center;
+}
+.cta-band h2 {
+  margin-bottom: 18px;
+}
+.cta-band p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.9;
+}
+.cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 28px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* Prev / next pager */
+.pager {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--line);
+  border-block: 1px solid var(--line);
+  margin-top: 20px;
+}
+.pager a {
+  background: var(--paper);
+  padding: 34px 30px;
+  display: block;
+  transition: background 0.3s;
+}
+.pager a:hover {
+  background: var(--linen);
+}
+.pager a:last-child {
+  text-align: right;
+}
+.pager .eyebrow {
+  margin-bottom: 10px;
+  color: var(--muted);
+}
+.pager h3 {
+  font-size: 23px;
+}
+
+/* ==================================================================
+   Voices — the client quote stage
+   ================================================================== */
+.voices-head {
+  margin-bottom: 44px;
+}
+.voices-head .eyebrow {
+  margin-bottom: 14px;
+}
+.voices-head h2 {
+  max-width: 20ch;
+}
+.voices-stage {
+  position: relative;
+  border-top: 1px solid var(--line);
+  padding-top: 62px;
+}
+.band-ink .voices-stage {
+  border-color: #4d5048;
+}
+/* The opening mark is set as a graphic, outdented so the quote itself keeps
+   a flush left edge with everything else on the page. */
+.voices-mark {
+  position: absolute;
+  top: 10px;
+  left: -2px;
+  font-family: var(--font-assistant), sans-serif;
+  font-size: 72px;
+  line-height: 1;
+  color: var(--accent);
+  opacity: 0.45;
+  pointer-events: none;
+  user-select: none;
+}
+.band-ink .voices-mark {
+  color: #9aa08a;
+  opacity: 0.55;
+}
+/* Every quote occupies the same grid cell, so the stage is as tall as the
+   longest one and nothing below it moves when the quote changes. */
+.voices-body {
+  display: grid;
+}
+/* The quote sits left, the attribution right, its baseline aligned with the
+   quote's last line. `align-self: start` keeps each item at its natural
+   height inside the shared cell, so the caption follows its own quote rather
+   than the tallest one. */
+.voices-item {
+  grid-area: 1 / 1;
+  align-self: start;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 240px;
+  gap: 60px;
+  align-items: end;
+  margin: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition:
+    opacity 0.5s var(--ease),
+    transform 0.5s var(--ease);
+}
+.voices-item.is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+.voices-item blockquote {
+  margin: 0;
+  max-width: 34ch;
+  font-family: var(--font-assistant), sans-serif;
+  font-size: clamp(23px, 2.3vw, 31px);
+  line-height: 1.45;
+  letter-spacing: 0.005em;
+}
+.voices-item figcaption {
+  font-size: 11px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+.band-ink .voices-item figcaption {
+  color: #aeb1a5;
+}
+.voices-item figcaption strong {
+  display: block;
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+}
+.band-ink .voices-item figcaption strong {
+  color: #fff;
+}
+.voices-controls {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-top: 48px;
+  padding-top: 26px;
+  border-top: 1px solid var(--line);
+}
+.band-ink .voices-controls {
+  border-color: #4d5048;
+}
+.voices-count {
+  margin: 0;
+  font-family: var(--font-assistant), sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.voices-count strong {
+  font-weight: 400;
+  color: var(--ink);
+}
+.band-ink .voices-count strong {
+  color: #fff;
+}
+.voices-count span {
+  margin-inline: 7px;
+  opacity: 0.5;
+}
+/* A segmented rule doubling as the pager. Each segment is a real button with
+   a 44px tall hit area; only the 2px rule inside it is painted. */
+.voices-track {
+  list-style: none;
+  display: flex;
+  gap: 8px;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+}
+.voices-track li {
+  flex: 1;
+  max-width: 78px;
+}
+.voices-track button {
+  display: block;
+  width: 100%;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  position: relative;
+}
+.voices-track button:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  background: var(--line);
+  transition: background 0.3s;
+}
+.voices-track button:hover:before {
+  background: #b6b6aa;
+}
+.voices-track button[aria-current="true"]:before {
+  background: var(--ink);
+}
+.band-ink .voices-track button:before {
+  background: #565951;
+}
+.band-ink .voices-track button[aria-current="true"]:before {
+  background: #fff;
+}
+.voices-arrows {
+  display: flex;
+  gap: 10px;
+}
+.voices-arrows button {
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1;
+  transition:
+    background 0.25s,
+    border-color 0.25s;
+}
+.voices-arrows button:hover {
+  background: var(--sand);
+}
+.band-ink .voices-arrows button {
+  border-color: #575a50;
+  color: #f0f0e9;
+}
+.band-ink .voices-arrows button:hover {
+  background: #3a3c37;
+}
+.voices-note {
+  margin-top: 26px;
+}
+
+/* ==================================================================
+   Parallax band
+   ================================================================== */
+.parallax {
+  position: relative;
+  overflow: hidden;
+  height: min(620px, 72vh);
+  background: #6d6556;
+  color: #fff;
+  display: grid;
+  align-items: center;
+}
+.parallax-frame {
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* Pins the picture to the viewport, so the band scrolls over a still
+     image instead of carrying it along. */
+  background-attachment: fixed;
+  /* A background takes no `srcset`, so the responsive ladder arrives as three
+     custom properties on the element (see Parallax in creative.tsx) and the
+     media queries below choose between them. The band is full-bleed, so the
+     breakpoints are viewport widths rather than layout ones. */
+  background-image: var(--band-sm);
+}
+@media (min-width: 768px) {
+  .parallax-frame {
+    background-image: var(--band-md);
+  }
+}
+@media (min-width: 1400px) {
+  .parallax-frame {
+    background-image: var(--band-lg);
+  }
+}
+/* Touch browsers either ignore a fixed attachment (iOS Safari) or size
+   the image against a viewport that changes as the toolbars collapse,
+   and reduced motion asks for no scroll-linked effect at all. Both fall
+   back to a plain cover crop that travels with the band. */
+@media (hover: none), (prefers-reduced-motion: reduce) {
+  .parallax-frame {
+    background-attachment: scroll;
+  }
+}
+.parallax:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(18, 20, 15, 0.72) 0%,
+      rgba(18, 20, 15, 0.52) 42%,
+      rgba(18, 20, 15, 0.16) 100%
+    ),
+    linear-gradient(0deg, rgba(18, 20, 15, 0.3), transparent 45%);
+}
+.parallax-copy {
+  position: relative;
+  z-index: 1;
+  width: min(1240px, calc(100% - var(--gutter) * 2));
+  margin-inline: auto;
+}
+.parallax-copy h2 {
+  max-width: 20ch;
+  margin-bottom: 20px;
+}
+.parallax-copy p {
+  max-width: 48ch;
+  font-size: 13px;
+  line-height: 1.9;
+  color: #f1f1ea;
+}
+.parallax-copy .eyebrow {
+  color: #e6e6dc;
+}
+
+/* ==================================================================
+   Before / after comparison
+   ================================================================== */
+.compare {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 1.78;
+  overflow: hidden;
+  background: var(--sand);
+  touch-action: pan-y;
+}
+.compare-clip {
+  position: absolute;
+  inset: 0;
+  clip-path: inset(0 calc(100% - var(--pos)) 0 0);
+}
+.compare-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--pos);
+  width: 1px;
+  background: rgba(255, 255, 255, 0.85);
+  pointer-events: none;
+}
+/* Centred on the seam by its own half-width rather than by an alignment
+   property: the line is 1px wide, and an item wider than the box it is
+   aligned in gets clamped to the start edge instead of straddling it. */
+.compare-grip {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--ink);
+  display: grid;
+  place-items: center;
+  font-size: 15px;
+  box-shadow: 0 2px 14px rgba(20, 22, 15, 0.22);
+}
+/* The chip is white wherever it lands, so it states its own text colour
+   rather than inheriting one — on the homepage it sits inside a dark band. */
+.compare-tag {
+  position: absolute;
+  top: 16px;
+  padding: 5px 12px;
+  background: rgba(255, 255, 255, 0.93);
+  color: var(--ink);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  z-index: 1;
+}
+.compare-tag-before {
+  left: 16px;
+}
+.compare-tag-after {
+  right: 16px;
+}
+.compare-label {
+  position: absolute;
+  left: -9999px;
+}
+.compare-range {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  background: transparent;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: ew-resize;
+}
+/* The thumb is a drag target and nothing else — the handle the visitor sees is
+   .compare-grip, drawn separately and positioned off --pos. It has to stay
+   invisible, which takes more than a transparent background: iOS Safari keeps
+   painting the UA thumb's own border and shadow through `appearance: none`, so
+   those are cleared explicitly and `opacity` closes off anything left. Opacity
+   does not affect hit testing, so the target is still 52x200. */
+.compare-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 52px;
+  height: 200px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  opacity: 0;
+  cursor: ew-resize;
+}
+.compare-range::-moz-range-thumb {
+  width: 52px;
+  height: 200px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  opacity: 0;
+  cursor: ew-resize;
+}
+/* Same again for the track, which iOS also gives a default fill. */
+.compare-range::-webkit-slider-runnable-track,
+.compare-range::-moz-range-track {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+.compare-range:focus-visible {
+  outline-offset: -4px;
+}
+.compare-note {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 14px;
+}
+
+/* ==================================================================
+   On-this-page index
+   ================================================================== */
+.service-body {
+  display: grid;
+  grid-template-columns: 210px 1fr;
+  gap: var(--band-gap);
+  align-items: start;
+}
+.page-index {
+  position: sticky;
+  top: 130px;
+}
+.page-index ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-left: 1px solid var(--line);
+}
+.page-index a {
+  display: block;
+  padding: 9px 0 9px 18px;
+  margin-left: -1px;
+  border-left: 1px solid transparent;
+  font-size: 12px;
+  color: var(--muted);
+  transition:
+    color 0.25s,
+    border-color 0.25s;
+}
+.page-index a:hover {
+  color: var(--ink);
+}
+.page-index a[aria-current="true"] {
+  color: var(--ink);
+  border-left-color: var(--ink);
+}
+.service-sections > section {
+  padding-bottom: 80px;
+}
+.service-sections > section:last-child {
+  padding-bottom: 0;
+}
+.service-sections h2 {
+  font-size: 30px;
+  margin-bottom: 24px;
+}
+
+/* ==================================================================
+   WhatsApp
+   ================================================================== */
+.button.has-glyph {
+  justify-content: center;
+  gap: 14px;
+}
+.button.has-glyph .glyph {
+  font-size: 0;
+  display: block;
+}
+.glyph svg {
+  width: 17px;
+  height: 17px;
+  display: block;
+}
+/* Floating WhatsApp button. Always present, on every page, at every scroll
+   position — matching the sibling DecoPaint site: a WhatsApp green disc that
+   rocks like a ringing handset inside two expanding rings. This is the one
+   place the site steps outside its own palette; the green is what makes the
+   control recognisable before it is read. */
+.wa-fab {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 40;
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--wa);
+  color: #fff;
+  box-shadow: 0 6px 22px rgba(20, 22, 15, 0.22);
+  isolation: isolate;
+  transform-origin: center;
+  transition:
+    background 0.25s,
+    box-shadow 0.25s,
+    opacity 0.25s var(--ease);
+  animation: wa-rock 1.8s ease-in-out infinite;
+}
+.has-menu-open .wa-fab {
+  opacity: 0;
+  pointer-events: none;
+}
+.wa-fab:hover {
+  background: var(--wa-hover);
+  box-shadow: 0 10px 28px rgba(20, 22, 15, 0.3);
+}
+.wa-fab:before,
+.wa-fab:after {
+  content: "";
+  position: absolute;
+  inset: -7px;
+  z-index: -1;
+  border: 2px solid rgba(37, 211, 102, 0.55);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: wa-pulse 1.8s ease-out infinite;
+}
+.wa-fab:after {
+  animation-delay: 0.9s;
+}
+.wa-glyph {
+  display: grid;
+  place-items: center;
+}
+.wa-glyph svg {
+  width: 28px;
+  height: 28px;
+  display: block;
+}
+@keyframes wa-rock {
+  0%,
+  44%,
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+  4%,
+  12%,
+  20% {
+    transform: rotate(-12deg) scale(1.04);
+  }
+  8%,
+  16%,
+  24% {
+    transform: rotate(12deg) scale(1.04);
+  }
+  30% {
+    transform: rotate(-6deg) scale(1.02);
+  }
+  36% {
+    transform: rotate(6deg) scale(1.02);
+  }
+}
+@keyframes wa-pulse {
+  0% {
+    opacity: 0.65;
+    transform: scale(0.82);
+  }
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+.enquiry-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 26px;
+  margin-block: 18px 6px;
+}
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+}
+
+/* ==================================================================
+   Inner-page responsive
+   ================================================================== */
+@media (max-width: 1100px) {
+  .service-body {
+    grid-template-columns: 180px 1fr;
+  }
+  .feature-list li {
+    grid-template-columns: 170px minmax(0, 1fr) 190px;
+    gap: 28px;
+  }
+  .principle-card-copy {
+    padding: 22px 24px 26px;
+  }
+}
+@media (max-width: 800px) {
+  .page-head-grid {
+    grid-template-columns: 1fr;
+  }
+  .page-head h1 {
+    max-width: none;
+    margin-bottom: 20px;
+  }
+  .page-media {
+    margin-top: 40px;
+    aspect-ratio: 1.7;
+  }
+  .split {
+    grid-template-columns: 1fr;
+  }
+  .card-grid,
+  .card-grid-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .card-grid > * {
+    padding: 30px 26px 34px;
+  }
+  .service-body {
+    grid-template-columns: 1fr;
+  }
+  .page-index {
+    position: static;
+  }
+  .page-index ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 6px;
+    border-left: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .page-index a {
+    padding: 8px 14px 12px 0;
+    margin: 0;
+    border-left: 0;
+    border-bottom: 2px solid transparent;
+  }
+  .page-index a[aria-current="true"] {
+    border-left-color: transparent;
+    border-bottom-color: var(--ink);
+  }
+  .service-sections > section {
+    padding-bottom: 55px;
+  }
+  .service-sections h2 {
+    font-size: 27px;
+  }
+  .compare-table dl,
+  .compare-head {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .compare-table dl {
+    padding-block: 18px;
+  }
+  .compare-table dt {
+    margin-bottom: 10px;
+  }
+  .compare-table dd {
+    padding: 7px 0 7px 16px;
+    border-left: 1px solid var(--line);
+    margin-bottom: 4px;
+  }
+  .compare-head {
+    display: none;
+  }
+  .compare-table dd:before {
+    content: attr(data-service);
+    display: block;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 5px;
+  }
+  .cta-band {
+    grid-template-columns: 1fr;
+  }
+  .cta-actions {
+    justify-content: flex-start;
+  }
+  .card-grid .eyebrow {
+    min-height: 0;
+  }
+  .parallax {
+    height: min(520px, 70vh);
+  }
+  .parallax-copy {
+    width: calc(100% - 40px);
+  }
+  .voices-head {
+    margin-bottom: 34px;
+  }
+  .voices-stage {
+    padding-top: 50px;
+  }
+  .voices-mark {
+    font-size: 58px;
+  }
+  .voices-item {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    align-items: start;
+  }
+  .voices-item blockquote {
+    max-width: 28ch;
+  }
+  .voices-controls {
+    margin-top: 38px;
+  }
+  .marquee-track > span {
+    font-size: 15px;
+    padding-inline: 22px;
+  }
+  .marquee-track > span:after {
+    margin-left: 44px;
+  }
+}
+@media (max-width: 560px) {
+  .page-head .breadcrumb {
+    margin-bottom: 24px;
+  }
+  .page-lead {
+    font-size: 13px;
+  }
+  .page-media {
+    aspect-ratio: 1.25;
+    margin-top: 32px;
+  }
+  .card-grid,
+  .card-grid-2 {
+    grid-template-columns: 1fr;
+  }
+  .feature-list li {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 24px 0;
+  }
+  .feature-list-image {
+    width: min(100%, 360px);
+    margin-top: 8px;
+  }
+  .principle-grid {
+    grid-template-columns: 1fr;
+  }
+  .principle-card-media {
+    aspect-ratio: 4 / 3;
+  }
+  .checklist {
+    grid-template-columns: 1fr;
+  }
+  .voices-stage {
+    padding-top: 42px;
+  }
+  .voices-mark {
+    font-size: 48px;
+  }
+  .voices-item {
+    gap: 24px;
+  }
+  .voices-item blockquote {
+    max-width: none;
+  }
+  .voices-controls {
+    flex-wrap: wrap;
+    gap: 0 20px;
+    margin-top: 32px;
+  }
+  .voices-track {
+    order: 3;
+    flex-basis: 100%;
+    max-width: none;
+  }
+  .voices-track li {
+    max-width: none;
+  }
+  .voices-track button {
+    height: 34px;
+  }
+  .voices-count {
+    flex: 1;
+  }
+  .pager {
+    grid-template-columns: 1fr;
+  }
+  .pager a,
+  .pager a:last-child {
+    text-align: left;
+    padding: 26px 0;
+  }
+  .compare {
+    aspect-ratio: 1.15;
+  }
+  .compare-grip {
+    width: 40px;
+    height: 40px;
+    font-size: 13px;
+  }
+  .wa-fab {
+    right: 16px;
+    bottom: 16px;
+    width: 54px;
+    height: 54px;
+  }
+  .wa-glyph svg {
+    width: 26px;
+    height: 26px;
+  }
+  .page-head-actions .button,
+  .hero-actions .button,
+  .cta-actions .button,
+  .form-actions .button,
+  .enquiry-actions .button {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-scroll span,
+  .hero-frames,
+  .marquee-track,
+  .main-nav,
+  .wa-fab {
+    animation: none !important;
+  }
+  .nav-sub {
+    transition: none;
+  }
+  .wa-fab:before,
+  .wa-fab:after {
+    display: none;
+  }
+}
+
+/* Alternating offer rows (services overview) */
+.offer-rows {
+  display: grid;
+  gap: var(--section-y);
+}
+.offer-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--band-gap);
+  align-items: center;
+}
+.offer-row:nth-child(even) .offer-media {
+  order: 2;
+}
+.offer-media {
+  aspect-ratio: 1.18;
+  overflow: hidden;
+  background: var(--sand);
+}
+.offer-media img {
+  transition: transform 0.9s var(--ease);
+}
+.offer-row:hover .offer-media img {
+  transform: scale(1.03);
+}
+.offer-copy h2 {
+  margin-bottom: 18px;
+}
+/* The points list below runs the full column, so the summary above it has to
+   end on the same line. */
+.offer-copy > p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.9;
+}
+.offer-points {
+  list-style: none;
+  margin: 0 0 30px;
+  padding: 0;
+}
+.offer-points li {
+  position: relative;
+  padding: 10px 0 10px 24px;
+  border-top: 1px solid var(--line);
+  font-size: 12.5px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+.offer-points li:before {
+  content: "◆";
+  position: absolute;
+  left: 0;
+  top: 14px;
+  color: var(--accent);
+  font-size: 6px;
+}
+.offer-index {
+  font-family: var(--font-assistant), sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 14px;
+}
+@media (max-width: 800px) {
+  .offer-rows {
+    gap: var(--section-y);
+  }
+  .offer-row {
+    grid-template-columns: 1fr;
+  }
+  .offer-row:nth-child(even) .offer-media {
+    order: 0;
+  }
+  .offer-media {
+    aspect-ratio: 1.5;
+  }
+}
+@media (max-width: 560px) {
+  .offer-media {
+    aspect-ratio: 1.25;
+  }
+  .offer-copy > p {
+    font-size: 13px;
+  }
+}
+
+.pager-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.pager-3 a:last-child {
+  text-align: left;
+}
+@media (max-width: 800px) {
+  .pager-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Footer columns */
+.footer-brand p {
+  font-family: var(--font-assistant), sans-serif;
+  font-size: 22px;
+  line-height: 1.5;
+  margin: 26px 0 0;
+  color: #d6d8ce;
+}
+.footer-cols {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 40px;
+  min-width: min(740px, 62%);
+}
+.footer-cols nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+}
+.footer-cols .eyebrow {
+  color: #9b9e92;
+  margin-bottom: 14px;
+}
+.footer-cols a {
+  font-size: 12px;
+  padding: 6px 0;
+  color: #dcded4;
+  transition: color 0.25s;
+}
+.footer-cols a:hover {
+  color: #fff;
+}
+@media (max-width: 800px) {
+  .footer-top {
+    flex-direction: column;
+    gap: 40px;
+  }
+  .footer-cols {
+    min-width: 0;
+    width: 100%;
+    gap: 24px;
+  }
+  .footer-brand p {
+    font-size: 20px;
+    margin-top: 20px;
+  }
+}
+@media (max-width: 560px) {
+  .footer-cols {
+    grid-template-columns: 1fr 1fr;
+  }
+  .footer-cols nav:last-child {
+    grid-column: span 2;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Footer socials and address
+ * ------------------------------------------------------------------ */
+.social-row {
+  display: flex;
+  gap: 12px;
+  list-style: none;
+  margin: 26px 0 0;
+  padding: 0;
+}
+.social-row a {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #52554c;
+  border-radius: 50%;
+  color: #dcded4;
+  transition:
+    color 0.25s,
+    border-color 0.25s,
+    background 0.25s;
+}
+.social-row svg {
+  width: 17px;
+  height: 17px;
+  display: block;
+}
+.social-row a:hover,
+.social-row a:focus-visible {
+  color: #292b27;
+  background: #f0f0e9;
+  border-color: #f0f0e9;
+}
+/* The build credit sits last in the bottom row and is pushed to the far end,
+   so the copyright and the privacy link keep the positions they had. It drops
+   to its own line before the row would start wrapping awkwardly. */
+.footer-credit {
+  margin-left: auto;
+  color: #9b9e92;
+}
+@media (max-width: 700px) {
+  .footer-credit {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+.footer-address {
+  font-style: normal;
+  font-size: 12px;
+  line-height: 1.7;
+  color: #b9bcb0;
+  padding: 6px 0;
+  max-width: 24ch;
+}
+.contact-address {
+  font-style: normal;
+  display: block;
+  max-width: 30ch;
+}
+
+/* ------------------------------------------------------------------ *
+ * Trust bar — a continuous marquee of client marks
+ * ------------------------------------------------------------------ */
+.partners-head {
+  margin-bottom: 44px;
+  text-align: center;
+}
+/* Letter-spacing is added after the last character as well as between, so a
+   centred uppercase line sits one space left of true centre. The indent gives
+   that space back to the front. */
+.partners-head .eyebrow {
+  text-indent: 0.18em;
+}
+.partners-head h2 {
+  margin: 0;
+  text-wrap: balance;
+}
+/* The strip is full width — it sits outside the container in the markup, so
+   nothing here has to undo one. The mask is what makes it read as continuous
+   rather than clipped: without it a logo is cut in half against the linen at
+   each edge, which is the thing that makes a marquee look broken. */
+.partner-marquee {
+  display: flex;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 9%,
+    #000 91%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 9%,
+    #000 91%,
+    transparent
+  );
+}
+/* min-width keeps one copy at least as wide as the screen, so the pair always
+   covers the frame however few logos the set holds; space-around then spreads
+   them when the natural width falls short. flex: none stops the two copies
+   sharing the space instead of queueing. */
+.partner-track {
+  display: flex;
+  flex: none;
+  min-width: 100%;
+  align-items: center;
+  justify-content: space-around;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  animation: partner-marquee 52s linear infinite;
+}
+.partner-track li {
+  flex: none;
+  display: grid;
+  place-items: center;
+  padding-inline: clamp(26px, 3.2vw, 58px);
+}
+/* The logos arrive at eight different weights and two different source
+   resolutions. Desaturating and holding them back to a common opacity is what
+   stops the row reading as eight competing brands instead of one quiet strip;
+   full colour returns on hover. */
+.partner-track img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 58px;
+  max-width: 200px;
+  object-fit: contain;
+  filter: grayscale(1);
+  opacity: 0.55;
+  transition:
+    filter 0.3s var(--ease),
+    opacity 0.3s var(--ease);
+}
+@keyframes partner-marquee {
+  to {
+    transform: translateX(-100%);
+  }
+}
+/* Hovering holds the strip still and lifts the one mark under the cursor —
+   the row is there to be read, and a logo that will not stop moving cannot be.
+   Both copies pause together or the seam would drift apart. */
+@media (hover: hover) and (pointer: fine) {
+  .partner-marquee:hover .partner-track {
+    animation-play-state: paused;
+  }
+  .partner-track li:hover img {
+    filter: none;
+    opacity: 1;
+  }
+}
+/* Touch devices get no hover, so the marks stay in near-full colour there
+   rather than permanently greyed. */
+@media (hover: none) {
+  .partner-track img {
+    filter: none;
+    opacity: 0.8;
+  }
+}
+.partners-note {
+  margin-top: 20px;
+}
+@media (max-width: 900px) {
+  .partners-head {
+    margin-bottom: 32px;
+  }
+}
+@media (max-width: 560px) {
+  .partner-track img {
+    max-height: 42px;
+  }
+  .partner-track li {
+    padding-inline: 22px;
+  }
+  /* Fewer logos fit, so the same distance has to be covered faster or the
+     strip reads as stalled. */
+  .partner-track {
+    animation-duration: 34s;
+  }
+}
+/* Motion is the whole device here, so there is nothing to slow down — the
+   strip becomes what it would have been without it: a static, centred,
+   wrapping row, with the duplicate copy dropped entirely. */
+@media (prefers-reduced-motion: reduce) {
+  .partner-marquee {
+    display: block;
+    overflow: visible;
+    padding-inline: var(--gutter);
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .partner-track {
+    animation: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    min-width: 0;
+    row-gap: 14px;
+  }
+  .partner-track[aria-hidden="true"] {
+    display: none;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Founder's note
+ * ------------------------------------------------------------------ */
+.founder-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+  gap: var(--gutter);
+  align-items: start;
+}
+.founder-media {
+  margin: 0;
+  overflow: hidden;
+  background: var(--linen);
+}
+.founder-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+.founder-copy p {
+  max-width: 58ch;
+}
+.founder-copy .eyebrow {
+  margin-bottom: 22px;
+}
+/* The first paragraph is set a size up: it is the line that has to make a
+   visitor decide the note is worth reading. */
+.founder-copy .eyebrow + p {
+  font-family: var(--font-assistant), sans-serif;
+  font-size: 22px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.founder-sign {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 34px;
+  padding-top: 26px;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+  color: var(--muted);
+}
+.founder-sign strong {
+  font-family: var(--font-assistant), sans-serif;
+  font-weight: 400;
+  font-size: 17px;
+  color: var(--ink);
+}
+.founder-note-flag {
+  margin-top: 34px;
+}
+@media (max-width: 900px) {
+  .founder-inner {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+  .founder-media img {
+    aspect-ratio: 3 / 2;
+  }
+  .founder-copy .eyebrow + p {
+    font-size: 20px;
+  }
+}
+
+
+/* ==================================================================
+   Interior organizing
+   ------------------------------------------------------------------
+   These pages argue visually. The work is a drawer, a shelf, a rail —
+   things you judge by looking, not by reading — so the layout gives the
+   photograph the page and lets type behave like a caption. Three rules
+   hold it together:
+
+     1. One idea per band. A band carries a picture and at most a line
+        under it; if it needs a paragraph, it is two bands.
+     2. Type sits at two sizes only — a statement, and a caption. The
+        middle size is what turns a page into a document.
+     3. Nothing is a bullet list. Lists were what made the first version
+        read as a specification rather than a studio.
+   ================================================================== */
+
+/* ---- The hero -------------------------------------------------- *
+   A full-bleed photograph with the title at its foot, the same
+   composition as the homepage, so a room page opens like the site
+   rather than like a sub-page. Shorter than the homepage's full
+   viewport: this one has a page under it that should show it has. */
+.org-hero {
+  position: relative;
+  display: grid;
+  align-content: end;
+  height: min(720px, 78svh);
+  min-height: 460px;
+  overflow: hidden;
+  color: #fff;
+  background: #6d6556;
+}
+.org-hero > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 55%;
+  animation: hero-image-in 1.8s var(--ease) both;
+}
+/* These photographs are bright — pale cabinetry, white shelving, daylight —
+   and the copy sits on the lower third of them. The scrim is heavier than
+   the homepage's for that reason, and heavier again where the frame is
+   narrow and the copy takes up more of it. */
+.org-hero-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(18, 20, 15, 0.42), transparent 24%),
+    linear-gradient(
+      0deg,
+      rgba(18, 20, 15, 0.86) 0%,
+      rgba(18, 20, 15, 0.64) 26%,
+      rgba(18, 20, 15, 0.26) 52%,
+      transparent 72%
+    );
+}
+.org-hero-copy {
+  position: relative;
+  padding-top: 92px;
+  padding-bottom: 54px;
+  animation: hero-copy-in 1s 0.15s both;
+}
+.org-hero-copy .eyebrow {
+  margin-bottom: 16px;
+  color: rgba(255, 255, 255, 0.78);
+}
+.org-hero-copy h1 {
+  font-size: clamp(28px, 2.5vw, 40px);
+  max-width: 17ch;
+  margin-bottom: 20px;
+  text-wrap: balance;
+}
+/* The lead is one sentence. Its width is set in characters so it breaks
+   into two lines at every width rather than running the full frame. */
+.org-hero-copy p {
+  max-width: 46ch;
+  margin: 0 0 30px;
+  font-size: 14px;
+  line-height: 1.85;
+  color: rgba(255, 255, 255, 0.86);
+}
+/* The trail belongs under the picture, not over it: on the photograph it
+   would be one more thing competing with the title. */
+.org-crumb {
+  padding-block: 22px;
+  border-bottom: 1px solid var(--line);
+}
+.org-crumb .breadcrumb {
+  margin-bottom: 0;
+}
+
+/* ---- The four moves -------------------------------------------- *
+   Visit, edit, fit, finish. This replaced five headed lists: the
+   consultation's points, the four steps of the edit, the system and the
+   finish. A photograph, a numeral and one line each says the same shape
+   of thing, and a visitor takes it in at a glance instead of reading it.
+   The numeral is drawn large and pale so it reads as a rhythm mark
+   rather than as content. */
+.org-moves {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--wall-gap);
+}
+.org-moves li {
+  min-width: 0;
+}
+.org-moves figure {
+  position: relative;
+  margin: 0 0 20px;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--sand);
+}
+.org-moves img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease);
+}
+@media (hover: hover) and (pointer: fine) {
+  .org-moves li:hover img {
+    transform: scale(1.03);
+  }
+}
+.org-moves figcaption {
+  position: absolute;
+  left: 18px;
+  bottom: 12px;
+  font-family: var(--font-assistant), sans-serif;
+  font-size: 40px;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 1px 16px rgba(18, 20, 15, 0.45);
+}
+.org-moves h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+.org-moves p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+  max-width: 30ch;
+}
+
+/* The price line on a tier card. Never an invented figure: a package with
+   no confirmed starting fee says so instead. */
+.org-price {
+  padding-top: 22px;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.org-price strong {
+  display: block;
+  margin-top: 4px;
+  font-family: var(--font-assistant), sans-serif;
+  font-size: 26px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink);
+}
+
+/* ---- Before ----------------------------------------------------- *
+   Four portrait frames. Until the studio has real client photographs
+   they are empty and labelled — a hatched frame reads as a slot that is
+   waiting, where a stock photograph would read as a claim. */
+.org-before {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--wall-gap);
+}
+.org-before li {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--sand);
+}
+.org-before img,
+.org-before-empty {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.org-before-empty {
+  background:
+    repeating-linear-gradient(
+      135deg,
+      transparent 0 14px,
+      rgba(41, 42, 39, 0.04) 14px 15px
+    ),
+    var(--sand);
+}
+.org-before-label {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 13px;
+  color: var(--ink);
+}
+.org-before-label span {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--muted);
+}
+.org-before li:has(img) .org-before-label,
+.org-before li:has(img) .org-before-label span {
+  color: #fff;
+  text-shadow: 0 1px 12px rgba(18, 20, 15, 0.5);
+}
+
+/* ---- Room tiles -------------------------------------------------- *
+   The hub's grid, and the two-room pager at the foot of each room page.
+   A photograph with its name on it: the rooms are the navigation, so
+   they are shown rather than listed. */
+.room-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--wall-gap);
+}
+.room-tile {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 0.84;
+  background: var(--sand);
+  color: #fff;
+}
+.room-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.9s var(--ease);
+}
+.room-tile:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(22, 23, 18, 0.72) 0%,
+    rgba(22, 23, 18, 0.2) 40%,
+    rgba(22, 23, 18, 0) 68%
+  );
+  transition: opacity 0.5s var(--ease);
+}
+.room-tile-body {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 22px 22px 20px;
+}
+.room-tile-body h3 {
+  font-size: 23px;
+}
+/* The summary is the only thing held back, and only where there is a
+   pointer to hold it back from. On a touch screen the tile is a
+   photograph, a name and a tap. */
+.room-tile-body p {
+  margin: 8px 0 0;
+  font-size: 12px;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.82);
+}
+@media (hover: hover) and (pointer: fine) {
+  .room-tile-body p {
+    max-height: 0;
+    opacity: 0;
+    margin-top: 0;
+    overflow: hidden;
+    transition:
+      max-height 0.5s var(--ease),
+      opacity 0.4s var(--ease),
+      margin-top 0.5s var(--ease);
+  }
+  .room-tile:hover img {
+    transform: scale(1.04);
+  }
+  .room-tile:hover .room-tile-body p {
+    max-height: 5em;
+    opacity: 1;
+    margin-top: 8px;
+  }
+}
+/* The eighth tile on the hub: no photograph, so it holds the ground
+   itself and reads as the end of the set rather than a missing room. */
+.room-tile-cta {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 26px 24px;
+  background: var(--ink);
+}
+.room-tile-cta:before {
+  content: none;
+}
+.room-tile-cta p {
+  margin: 12px 0 20px;
+  font-size: 13px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.74);
+}
+.room-tile-cta .text-link {
+  align-self: flex-start;
+  color: #fff;
+  border-bottom-color: rgba(255, 255, 255, 0.45);
+}
+
+/* ---- Rhythm ------------------------------------------------------ *
+   The same vertical rhythm as every other section on the site. These
+   bands ran at 120px on the first pass, which is what left a heading
+   sitting alone in half a screen of white. */
+.org-band {
+  padding-block: var(--section-y);
+}
+.org-band-tight {
+  padding-block: var(--section-y-sm);
+}
+.org-head {
+  margin-bottom: 40px;
+}
+.org-head h2 {
+  max-width: 20ch;
+  text-wrap: balance;
+}
+.org-head .eyebrow {
+  margin-bottom: 14px;
+}
+/* A single quiet line under a band — the product-testing note, the
+   pricing note. Never more than one sentence. */
+.org-note {
+  margin: 34px 0 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+@media (max-width: 1100px) {
+  .room-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .org-moves {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 30px var(--wall-gap);
+  }
+}
+@media (max-width: 800px) {
+  .org-head {
+    margin-bottom: 34px;
+  }
+}
+@media (max-width: 560px) {
+  .org-hero {
+    height: min(560px, 74svh);
+  }
+  .org-hero-shade {
+    background: linear-gradient(
+      0deg,
+      rgba(18, 20, 15, 0.92) 0%,
+      rgba(18, 20, 15, 0.78) 34%,
+      rgba(18, 20, 15, 0.4) 62%,
+      rgba(18, 20, 15, 0.12) 100%
+    );
+  }
+  .org-hero-copy {
+    padding-bottom: 42px;
+  }
+  .room-grid,
+  .org-before {
+    grid-template-columns: 1fr 1fr;
+  }
+  .room-tile-body {
+    padding: 16px 16px 15px;
+  }
+  .room-tile-body h3 {
+    font-size: 18px;
+  }
+  .org-moves {
+    grid-template-columns: 1fr;
+  }
+  .org-moves figure {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+/* ==================================================================
+   Interior organizing — room bands
+   ------------------------------------------------------------------
+   Everything below borrows a composition the homepage already uses, so
+   a room page reads as the same site rather than as a second design:
+
+     .org-room-intro  is the homepage .intro — eyebrow, heading, copy
+                      beside it — followed by a mosaic instead of a
+                      single frame.
+     .org-sourcing    is .philosophy — a covering photograph on one
+                      half, copy centred on linen on the other.
+     .org-tiers       is the .section-heading + card grid used by the
+                      service and concept sections.
+
+   The type scale is the site's, not its own: every heading here is a
+   plain h2 or h3 and takes clamp(28px, 2.6vw, 36px) / 25px from the
+   base sheet. The first pass set display sizes up to 62px on these
+   bands, which made four short lines of copy read as a poster and left
+   the rest of the page looking like a different website.
+   ================================================================== */
+
+/* ---- The room, reset -------------------------------------------- *
+   The homepage's intro grid verbatim, then a two-frame mosaic under it
+   — the wide room shot and the detail beside it, closing flush the way
+   .intro-mosaic does. */
+/* Room headings are written, not hand-broken, so the measure and `balance`
+   pick the line break. 14ch put the longest of the seven onto four lines. */
+.org-room-intro .intro h2 {
+  max-width: 18ch;
+  text-wrap: balance;
+}
+.org-mosaic {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: var(--grid-gap);
+  margin-top: 70px;
+  height: clamp(420px, 52vh, 620px);
+}
+/* One frame while the room's detail photograph is outstanding. */
+.org-mosaic-solo {
+  grid-template-columns: 1fr;
+  height: clamp(360px, 44vh, 540px);
+}
+.org-mosaic figure {
+  margin: 0;
+  overflow: hidden;
+  background: var(--sand);
+}
+.org-mosaic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---- Sourcing ---------------------------------------------------- *
+   .philosophy's two halves. The three product groups sit where the
+   material swatches sit on the homepage: a quiet ruled list, caption
+   sized, under the copy rather than beside it. */
+.org-sourcing {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--linen);
+}
+.org-sourcing figure {
+  margin: 0;
+  min-height: 590px;
+  overflow: hidden;
+}
+.org-sourcing figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.org-sourcing-copy {
+  padding: var(--section-y-sm) clamp(35px, 7vw, 110px);
+  align-self: center;
+}
+.org-sourcing-copy h2 {
+  margin-bottom: 25px;
+}
+.org-sourcing-copy > p:not(.eyebrow) {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.95;
+}
+.org-sourcing-list {
+  list-style: none;
+  margin: 30px 0 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+.org-sourcing-list li {
+  padding: 15px 0;
+  border-bottom: 1px solid var(--line);
+}
+.org-sourcing-list strong {
+  display: block;
+  font-weight: 400;
+  font-size: 14px;
+}
+.org-sourcing-list span {
+  display: block;
+  margin-top: 3px;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+/* ---- Tiers ------------------------------------------------------- *
+   Three cards on one rule, the same weight as the packages band on a
+   service page. The number is a caption, the name an h3, the scope a
+   single line — no inclusion list, because the proposal carries that. */
+.org-tiers {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+.org-tiers article {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 34px 32px;
+  background: var(--paper);
+}
+.band-linen .org-tiers article {
+  background: var(--linen);
+}
+.org-tiers article > span {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--muted);
+}
+.org-tiers h3 {
+  margin-top: 26px;
+  font-size: 22px;
+}
+.org-tiers p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.85;
+  color: var(--muted);
+}
+.org-tiers .org-price {
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+@media (max-width: 900px) {
+  .org-mosaic {
+    height: auto;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 12px;
+    margin-top: 44px;
+  }
+  .org-mosaic figure:first-child {
+    aspect-ratio: 1.05;
+  }
+  .org-mosaic figure:last-child {
+    aspect-ratio: 0.82;
+    align-self: end;
+  }
+  /* The single-frame variant keeps the full column, and a wider crop —
+     stacking it into 1.2fr of a two-column grid left it sitting in half
+     the page with nothing beside it. */
+  .org-mosaic-solo {
+    grid-template-columns: 1fr;
+  }
+  .org-mosaic-solo figure:first-child {
+    aspect-ratio: 4 / 3;
+  }
+  .org-sourcing {
+    grid-template-columns: 1fr;
+  }
+  .org-sourcing figure {
+    min-height: 0;
+    aspect-ratio: 16 / 10;
+  }
+  .org-tiers {
+    grid-template-columns: 1fr;
+  }
+  .org-tiers h3 {
+    margin-top: 10px;
+  }
+}
+@media (max-width: 560px) {
+  .org-sourcing-copy {
+    padding: 48px var(--gutter);
+  }
+}
+
+/* ==================================================================
+   ZoneMap — the room, annotated
+   ------------------------------------------------------------------
+   Zoning is the idea this whole service turns on, and it is the one
+   thing on these pages that a photograph alone cannot say: you can see
+   that a shelf is tidy, but not why the everyday jars are at eye level
+   and the seldom-used ones are above them. So the picture is marked and
+   the reasons sit beside it, three lines long.
+
+   The frame is 16:9, which is the native ratio of all seven room
+   photographs, so `cover` never crops and a mark stays on the shelf it
+   was placed on at every width.
+   ================================================================== */
+.zonemap {
+  display: grid;
+  grid-template-columns: minmax(0, 1.42fr) minmax(0, 1fr);
+  gap: var(--band-gap);
+  align-items: center;
+}
+.zonemap-frame {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--sand);
+}
+.zonemap-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* A mark, not a pin: a thin ring with a numeral in it, sized so it reads
+   on a pale kitchen and a dark garage alike. The ring is drawn with a
+   shadow rather than a border so it holds its edge over any photograph. */
+.zonemap-pin {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  margin: -17px 0 0 -17px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.28);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.9),
+    0 2px 14px rgba(18, 20, 15, 0.35);
+  backdrop-filter: blur(2px);
+  color: #fff;
+  font-family: var(--font-assistant), sans-serif;
+  font-size: 13px;
+  line-height: 1;
+  transition:
+    background 0.35s var(--ease),
+    color 0.35s var(--ease),
+    transform 0.35s var(--ease);
+}
+.zonemap-pin.is-active {
+  background: var(--paper);
+  color: var(--ink);
+  transform: scale(1.14);
+}
+/* The ring that says the mark is live. It sits behind the mark and is
+   only drawn for the active one, so the picture carries one highlight
+   rather than three competing ones. */
+.zonemap-pin:after {
+  content: "";
+  position: absolute;
+  inset: -9px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(0.82);
+  transition:
+    opacity 0.4s var(--ease),
+    transform 0.4s var(--ease);
+}
+.zonemap-pin.is-active:after {
+  opacity: 1;
+  transform: scale(1);
+}
+.zonemap-key {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+.zonemap-key li {
+  border-bottom: 1px solid var(--line);
+}
+/* The row is the control. It carries its own text at rest — the active
+   state changes emphasis, never what is readable — so the band says
+   everything it has to say with scripting off. */
+.zonemap-key button {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 2px 14px;
+  width: 100%;
+  padding: 18px 0;
+  border: 0;
+  background: none;
+  text-align: left;
+  color: inherit;
+}
+.zonemap-n {
+  grid-row: 1 / 3;
+  font-family: var(--font-assistant), sans-serif;
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--muted);
+  transition: color 0.3s var(--ease);
+}
+.zonemap-key strong {
+  font-weight: 400;
+  font-size: 15px;
+}
+.zonemap-key button > span:last-child {
+  font-size: 12px;
+  line-height: 1.75;
+  color: var(--muted);
+}
+.zonemap-key li.is-active .zonemap-n {
+  color: var(--ink);
+}
+.zonemap-key li.is-active {
+  box-shadow: inset 2px 0 0 var(--ink);
+}
+.zonemap-key li.is-active button {
+  padding-left: 16px;
+}
+
+/* ==================================================================
+   RoomIndex — the other rooms, in one band
+   ------------------------------------------------------------------
+   Six names, one photograph, and the photograph follows the name under
+   the cursor. It replaced a pager that showed two of the six and sent
+   everyone else back to the hub.
+   ================================================================== */
+.room-index {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: var(--band-gap);
+  align-items: center;
+}
+.room-index-stage {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--sand);
+}
+.room-index-stage img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.03);
+  transition:
+    opacity 0.65s var(--ease),
+    transform 1.4s var(--ease);
+}
+.room-index-stage img.is-active {
+  opacity: 1;
+  transform: scale(1);
+}
+.room-index-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+.room-index-list li {
+  border-bottom: 1px solid var(--line);
+}
+.room-index-list a {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 4px 20px;
+  padding: 20px 0;
+  transition: padding-left 0.4s var(--ease);
+}
+.room-index-thumb {
+  display: none;
+}
+.room-index-body strong {
+  display: block;
+  font-family: var(--font-assistant), sans-serif;
+  font-weight: 400;
+  font-size: 23px;
+  line-height: 1.25;
+}
+.room-index-body > span {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+.room-index-list .arrow {
+  opacity: 0;
+  transform: translate(-6px, 4px);
+  transition:
+    opacity 0.35s var(--ease),
+    transform 0.35s var(--ease);
+}
+.room-index-list li.is-active {
+  box-shadow: inset 2px 0 0 var(--ink);
+}
+@media (hover: hover) and (pointer: fine) {
+  .room-index-list li.is-active a {
+    padding-left: 18px;
+  }
+  .room-index-list li.is-active .arrow {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+/* No second column to pin a stage to, and no hover to drive it: the
+   stage goes, and each row carries its own thumbnail instead. */
+@media (max-width: 900px) {
+  .zonemap,
+  .room-index {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+  .room-index-stage {
+    display: none;
+  }
+  .room-index-thumb {
+    display: block;
+    width: 74px;
+    aspect-ratio: 1;
+    overflow: hidden;
+    background: var(--sand);
+  }
+  .room-index-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .room-index-list a {
+    grid-template-columns: 74px 1fr auto;
+  }
+  .room-index-list .arrow {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (max-width: 560px) {
+  .zonemap-pin {
+    width: 28px;
+    height: 28px;
+    margin: -14px 0 0 -14px;
+    font-size: 12px;
+  }
+  .room-index-body strong {
+    font-size: 19px;
+  }
+}
+
+/* ==================================================================
+   StyleRail — the ways one room can be laid out
+   ------------------------------------------------------------------
+   The mechanism is the partner strip's, because it is already solved
+   here: two copies of one track, each travelling exactly one copy-width
+   in the same time, so when the first has left the frame the second is
+   where the first began and there is no seam to land on.
+
+   What is different is the intent. The partner strip is a quiet row of
+   marks you are not meant to stop on. This one is a set you are meant to
+   find yourself in — so the frames are large, they alternate tall and
+   short, they sit high and low against the rail, and the whole thing
+   holds still the moment the cursor is over it.
+   ================================================================== */
+.style-band {
+  overflow: hidden;
+}
+.style-rail {
+  display: flex;
+  margin-top: 8px;
+  /* The rail runs off both edges of the page. The mask is what tells you
+     so: the frames arrive and leave rather than starting and stopping at
+     a hard edge. */
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 7%,
+    #000 93%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 7%,
+    #000 93%,
+    transparent
+  );
+}
+/* flex: none stops the two copies sharing the width instead of queueing,
+   and min-width keeps one copy at least as wide as the screen so the pair
+   always covers the frame. */
+.style-track {
+  display: flex;
+  flex: none;
+  min-width: 100%;
+  align-items: stretch;
+  gap: var(--grid-gap);
+  padding: 0 calc(var(--grid-gap) / 2);
+  margin: 0;
+  list-style: none;
+  animation: style-rail 64s linear infinite;
+}
+.style-track li {
+  flex: none;
+  width: min(25vw, 320px);
+}
+/* High and low. A single line of frames at one height is a conveyor belt;
+   two heights, offset against each other, is a strip someone laid out. */
+.style-track .is-high {
+  padding-bottom: 54px;
+}
+.style-track .is-low {
+  padding-top: 54px;
+}
+.style-track figure {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 0;
+}
+.style-track .is-high figure > :first-child {
+  aspect-ratio: 4 / 5;
+}
+.style-track .is-low figure > :first-child {
+  aspect-ratio: 3 / 4;
+}
+.style-track img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: var(--sand);
+  transition:
+    filter 0.5s var(--ease),
+    transform 0.9s var(--ease);
+}
+.style-track figcaption {
+  padding-top: 16px;
+}
+.style-track strong {
+  display: block;
+  font-family: var(--font-assistant), sans-serif;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.3;
+}
+.style-track figcaption span {
+  display: block;
+  margin-top: 5px;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+@keyframes style-rail {
+  to {
+    transform: translateX(-100%);
+  }
+}
+/* The rail is there to be looked at, and a photograph that will not stop
+   moving cannot be. Both copies pause together or the seam drifts apart.
+   The frame under the cursor comes forward and the rest step back, which
+   is the whole hover state — no overlay, no caption reveal. */
+@media (hover: hover) and (pointer: fine) {
+  .style-rail:hover .style-track {
+    animation-play-state: paused;
+  }
+  .style-rail:hover img {
+    filter: saturate(0.82) brightness(1.03);
+  }
+  .style-track li:hover img {
+    filter: none;
+    transform: scale(1.04);
+  }
+}
+/* No pointer to hover with, or motion explicitly declined: the drift is
+   the wrong answer either way. The rail becomes an ordinary scroll-snap
+   row — pushed with a finger, a trackpad or an arrow key — and the
+   duplicate copy goes, because a hand-driven row has no seam to hide. */
+@media (hover: none), (prefers-reduced-motion: reduce) {
+  .style-rail {
+    display: block;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .style-rail::-webkit-scrollbar {
+    display: none;
+  }
+  .style-track {
+    animation: none;
+    min-width: 0;
+    padding-inline: var(--gutter);
+  }
+  .style-track[aria-hidden="true"] {
+    display: none;
+  }
+  .style-track li {
+    width: min(66vw, 300px);
+    scroll-snap-align: center;
+  }
+}
+@media (max-width: 900px) {
+  .style-track .is-high {
+    padding-bottom: 34px;
+  }
+  .style-track .is-low {
+    padding-top: 34px;
+  }
+}

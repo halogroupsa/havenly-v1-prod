@@ -1,0 +1,531 @@
+{
+  "/images/about-hero.webp": {
+    "width": 1817,
+    "height": 866,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/bedroom-dubai-luxury.webp": {
+    "width": 1024,
+    "height": 1536,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/bedroom.webp": {
+    "width": 1440,
+    "height": 960,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/consultation-table.webp": {
+    "width": 1440,
+    "height": 810,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/contact-entrance.webp": {
+    "width": 1672,
+    "height": 941,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/dining-dubai-luxury-landscape.webp": {
+    "width": 1440,
+    "height": 960,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/dining.webp": {
+    "width": 1440,
+    "height": 960,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/faq-room.webp": {
+    "width": 1086,
+    "height": 1448,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/founder-portrait.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/install-day.webp": {
+    "width": 1904,
+    "height": 826,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/intro-bedroom.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/intro-detail.webp": {
+    "width": 1440,
+    "height": 720,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/intro-room.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/intro-threshold.webp": {
+    "width": 1440,
+    "height": 720,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/material-detail.webp": {
+    "width": 1920,
+    "height": 760,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/org-bathroom.webp": {
+    "width": 1440,
+    "height": 810,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/org-bedroom.webp": {
+    "width": 1440,
+    "height": 810,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/org-garage.webp": {
+    "width": 1440,
+    "height": 810,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/org-hero.webp": {
+    "width": 1440,
+    "height": 810,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/org-kids-room.webp": {
+    "width": 1440,
+    "height": 810,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/org-kitchen.webp": {
+    "width": 1440,
+    "height": 810,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/org-laundry.webp": {
+    "width": 1440,
+    "height": 810,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/org-pantry.webp": {
+    "width": 1440,
+    "height": 810,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/org-products.webp": {
+    "width": 1672,
+    "height": 941,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/partner-dubai-properties.webp": {
+    "width": 400,
+    "height": 222,
+    "widths": [
+      320
+    ]
+  },
+  "/images/partner-iskon.webp": {
+    "width": 400,
+    "height": 222,
+    "widths": [
+      320
+    ]
+  },
+  "/images/partner-jumeirah.webp": {
+    "width": 128,
+    "height": 71,
+    "widths": []
+  },
+  "/images/partner-majid-al-futtaim.webp": {
+    "width": 400,
+    "height": 222,
+    "widths": [
+      320
+    ]
+  },
+  "/images/partner-one-and-only.webp": {
+    "width": 400,
+    "height": 222,
+    "widths": [
+      320
+    ]
+  },
+  "/images/partner-rotana.webp": {
+    "width": 128,
+    "height": 71,
+    "widths": []
+  },
+  "/images/partner-sheraton.webp": {
+    "width": 400,
+    "height": 222,
+    "widths": [
+      320
+    ]
+  },
+  "/images/partner-siemens.webp": {
+    "width": 400,
+    "height": 222,
+    "widths": [
+      320
+    ]
+  },
+  "/images/principle-climate.webp": {
+    "width": 1440,
+    "height": 1080,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/principle-materials.webp": {
+    "width": 1440,
+    "height": 1080,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/principle-proportion.webp": {
+    "width": 1440,
+    "height": 1080,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/principle-restraint.webp": {
+    "width": 1440,
+    "height": 1080,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/process-moodboard.webp": {
+    "width": 1440,
+    "height": 901,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/process-reveal.webp": {
+    "width": 1440,
+    "height": 901,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/service-tile-consultation.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/service-tile-furnishing.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/service-tile-staging.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/services-hero.webp": {
+    "width": 1817,
+    "height": 866,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/space-entrance.webp": {
+    "width": 1440,
+    "height": 810,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/space-majlis.webp": {
+    "width": 1440,
+    "height": 810,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/space-penthouse.webp": {
+    "width": 1440,
+    "height": 810,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/space-terrace.webp": {
+    "width": 1440,
+    "height": 810,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/space-townhouse.webp": {
+    "width": 1440,
+    "height": 810,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/spaces-hero.webp": {
+    "width": 1920,
+    "height": 768,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/staging-after.webp": {
+    "width": 1440,
+    "height": 810,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/staging-before.webp": {
+    "width": 1440,
+    "height": 810,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/swatch-boucle.webp": {
+    "width": 1254,
+    "height": 1254,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/swatch-linen.webp": {
+    "width": 1254,
+    "height": 1254,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/swatch-oak.webp": {
+    "width": 1254,
+    "height": 1254,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/swatch-travertine.webp": {
+    "width": 1254,
+    "height": 1254,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/uae-band.webp": {
+    "width": 1672,
+    "height": 941,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/villa-dubai-luxury.webp": {
+    "width": 1024,
+    "height": 1536,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/villa.webp": {
+    "width": 1672,
+    "height": 941,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  }
+}

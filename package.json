@@ -1,0 +1,27 @@
+{
+  "name": "havenly-halo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build && node scripts/og-images.mjs && node scripts/robots.mjs",
+    "typecheck": "tsc --noEmit",
+    "assets:images": "node scripts/optimize-images.mjs",
+    "start": "node scripts/serve.mjs",
+    "preview:cf": "wrangler dev",
+    "deploy": "npm run build && wrangler deploy"
+  },
+  "dependencies": {
+    "next": "^16.3.5",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "sharp": "^0.35.4",
+    "typescript": "^5.7.2",
+    "wrangler": "^4.134.0"
+  }
+}

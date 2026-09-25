@@ -1,0 +1,26 @@
+# HIDDEN SITE — nothing here should appear in search results.
+#
+# This is the form used by every build that is not the live site. A build for
+# the production origin replaces it wholesale; see scripts/robots.mjs.
+#
+# What actually keeps this build out:
+#   - X-Robots-Tag: noindex, nofollow  on every response (public/_headers)
+#   - <meta name="robots" content="noindex, nofollow">  on every page
+#     (the `robots` block in src/app/layout.tsx)
+#
+# This file deliberately does NOT say "Disallow: /", which looks like the
+# obvious thing to write here. A crawler obeys noindex only on pages it is
+# allowed to fetch: "For the noindex rule to be effective, the page or resource
+# must not be blocked by a robots.txt file ... the crawler will never see the
+# noindex rule, and the page can still appear in search results."
+# https://developers.google.com/search/docs/crawling-indexing/block-indexing
+#
+# So blocking crawlers here would be counterproductive: it would hide the
+# noindex and let these URLs be listed as bare links with no snippet. Letting
+# crawlers in means they read the noindex and drop the pages instead.
+#
+# Do not add a Disallow rule here. A Sitemap line belongs in the production
+# file that scripts/robots.mjs writes, not in this one.
+
+User-agent: *
+Disallow:

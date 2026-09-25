@@ -1,0 +1,29 @@
+/**
+ * Cloudflare Workers configuration — PRODUCTION (havenly.ae).
+ *
+ * The site is a Next.js static export (`output: "export"`), so there is no
+ * `main` Worker script: Cloudflare serves `out/` directly and no Worker is
+ * invoked. Run `npm run build` before deploying; `npm run deploy` does both.
+ *
+ * This file is NOT synced from the staging checkout (havenly-halo-staging) —
+ * `scripts/sync-tree.sh` excludes wrangler.* in both directions, because the
+ * Worker name is the one thing that must differ. Staging deploys the Worker
+ * `havenly-halo`; this deploys `havenly-v1-prod`, which is the Worker the
+ * havenly.ae custom domain is attached to under Settings → Domains & Routes.
+ *
+ * Everything else here is kept identical to staging on purpose: the point of
+ * the staging deploy is that it exercises the same asset routing.
+ */
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "havenly-v1-prod",
+  "compatibility_date": "2026-09-17",
+  "assets": {
+    "directory": "./out",
+    // next.config.mjs sets `trailingSlash: true`, so /privacy redirects to
+    // /privacy/ rather than serving the same page at two URLs.
+    "html_handling": "force-trailing-slash",
+    // Serve the exported out/404.html instead of Cloudflare's default 404.
+    "not_found_handling": "404-page"
+  }
+}

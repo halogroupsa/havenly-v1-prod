@@ -1,0 +1,45 @@
+# Response headers for the Cloudflare static-asset deployment.
+# Next copies this file into out/ at build time; Cloudflare parses it and does
+# not serve it. Local `npm start` (scripts/serve.mjs) ignores it.
+#
+# Edit this file, never out/_headers — the export overwrites that every build.
+# The block marked "hidden-only" below is what keeps a non-production build out
+# of search results; scripts/robots.mjs deletes it from out/_headers when the
+# build is for the live origin.
+
+/*
+  # >>> hidden-only
+  # Keep every URL out of search results. This header is the primary control:
+  # it covers HTML and non-HTML assets (images, fonts) alike, which a <meta>
+  # tag cannot. Removed automatically when NEXT_PUBLIC_SITE_URL names the
+  # production origin. See "Indexing" in README.md before changing.
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet, noimageindex
+  # <<< hidden-only
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Cross-Origin-Opener-Policy: same-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+  # The site's own assets are all same-origin. The only third parties allowed
+  # are Google Tag Manager, Google Ads and GA4 (which GTM commonly carries),
+  # per Google's CSP guidance — they load only when NEXT_PUBLIC_GTM_ID or
+  # NEXT_PUBLIC_GOOGLE_ADS_ID is set (src/lib/analytics.ts), so on a build
+  # without them these entries allow nothing that is ever requested.
+  # tagmanager.google.com, fonts.googleapis.com/gstatic and ssl/www.gstatic.com
+  # are for GTM Preview mode. www.google.ae is Google Ads' regional endpoint
+  # for UAE visitors. Any other vendor added in GTM needs its domains here.
+  # 'unsafe-inline' is required because a static export cannot emit
+  # per-request nonces for Next's hydration, critical-CSS and GTM inline blocks.
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://*.googletagmanager.com https://tagmanager.google.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com; style-src 'self' 'unsafe-inline' https://tagmanager.google.com https://fonts.googleapis.com; img-src 'self' data: https://*.googletagmanager.com https://*.google-analytics.com https://googleads.g.doubleclick.net https://*.g.doubleclick.net https://www.google.com https://www.google.ae https://pagead2.googlesyndication.com https://ssl.gstatic.com https://www.gstatic.com; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://*.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://googleads.g.doubleclick.net https://*.g.doubleclick.net https://www.google.com https://www.google.ae https://pagead2.googlesyndication.com https://www.googleadservices.com; frame-src https://www.googletagmanager.com https://td.doubleclick.net; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'
+
+# Build output is content-hashed, so it can be cached permanently.
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Stable filenames: cache for a week, then revalidate.
+/fonts/*
+  Cache-Control: public, max-age=604800
+/images/*
+  Cache-Control: public, max-age=604800
+/og/*
+  Cache-Control: public, max-age=604800
