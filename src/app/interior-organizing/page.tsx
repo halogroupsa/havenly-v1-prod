@@ -98,7 +98,6 @@ export default function InteriorOrganizingPage() {
       <OrgHero
         eyebrow="INTERIOR ORGANIZING"
         title="Make your home a haven."
-        lead="Room-by-room organizing in Dubai. One framework, seven rooms — from the first visit to a styled finish."
         image={img.orgHero}
         imageAlt="An organizing consultation: a measured plan, container samples and a tape measure on a table"
         crumbs={[
@@ -126,6 +125,10 @@ export default function InteriorOrganizingPage() {
             <p className="eyebrow muted">ROOM BY ROOM</p>
             <h2 id="rooms-title">Where would you like to start?</h2>
           </div>
+          <p>
+            Room-by-room organizing in Dubai. One framework, seven rooms
+            <br /> — from the first visit to a styled finish.
+          </p>
         </div>
         <div className="room-grid">
           {rooms.map((room) => (
@@ -145,7 +148,59 @@ export default function InteriorOrganizingPage() {
         </div>
       </section>
 
+      <section className="container org-band" aria-labelledby="consultation-title">
+        <div className="section-heading org-head" data-reveal>
+          <div>
+            <p className="eyebrow muted">THE FIRST STEP</p>
+            <h2 id="consultation-title">A plan shaped around your home.</h2>
+          </div>
+          <p>Every project begins with an in-home consultation.</p>
+        </div>
+        <p>
+          We learn your routines and what is causing friction, review the layout
+          and existing storage, and measure the shelves, drawers and other spaces
+          that matter. From there we plan suitable products and agree the scope
+          and timeline. You receive a clear, personalized organizing plan and
+          written fee before work begins.
+        </p>
+      </section>
+
       <Moves tone="linen" />
+
+      <section className="container org-band" aria-labelledby="edit-title">
+        <div className="section-heading org-head" data-reveal>
+          <div>
+            <p className="eyebrow muted">THE EDIT PHASE</p>
+            <h2 id="edit-title">Room to keep what matters.</h2>
+          </div>
+          <p>Calm, judgment-free guidance. Every final decision is yours.</p>
+        </div>
+        <ol className="org-edit-steps" data-reveal>
+          <li><h3>Sort</h3><p>We take everything out and group it by category, regardless of where it was stored.</p></li>
+          <li><h3>Decide</h3><p>Together we consider what to keep, donate, discard or relocate.</p></li>
+          <li><h3>Edit</h3><p>We choose for your life now, leaving behind habits and “just in case” clutter that no longer serves you.</p></li>
+          <li><h3>Reset</h3><p>Only what belongs returns, ready for a practical system and a considered finish.</p></li>
+        </ol>
+      </section>
+
+      <section className="container org-band" aria-labelledby="products-title">
+        <div className="section-heading org-head" data-reveal>
+          <div>
+            <p className="eyebrow muted">PRODUCTS WITH PURPOSE</p>
+            <h2 id="products-title">Measured, tested and chosen to last.</h2>
+          </div>
+        </div>
+        <p>
+          We select storage for its fit, durability and visual harmony. Depending
+          on the room, that may mean modular shelves, uniform hangers, drawer
+          dividers and shoe storage; airtight canisters, stackable bins and spice
+          racks; or tiered trays and under-sink compartments. For a home office
+          or study, we can plan cable organizers, document trays, stationery
+          boxes and labels as part of a room or whole-home project. Baskets,
+          lidded boxes, rolling bins, acrylic risers and fridge organizers are
+          chosen only where they make the space easier to use.
+        </p>
+      </section>
 
       <SignatureFinish
         title="Calm that lasts."

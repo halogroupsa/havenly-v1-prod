@@ -154,6 +154,116 @@
       1200
     ]
   },
+  "/images/org-bathrooms-sourcing.webp": {
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/org-bathrooms-style-double-vanity.webp": {
+    "width": 1086,
+    "height": 1448,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/org-bathrooms-style-ensuite.webp": {
+    "width": 1086,
+    "height": 1448,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/org-bathrooms-style-family.webp": {
+    "width": 1086,
+    "height": 1448,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/org-bathrooms-style-powder-room.webp": {
+    "width": 1086,
+    "height": 1448,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/org-bathrooms-style-single-vanity.webp": {
+    "width": 1086,
+    "height": 1448,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/org-bedroom-sourcing.webp": {
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/org-bedroom-style-dressing-room.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/org-bedroom-style-freestanding.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/org-bedroom-style-open-rail.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/org-bedroom-style-sliding.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/org-bedroom-style-walk-in.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
   "/images/org-bedroom.webp": {
     "width": 1440,
     "height": 810,
@@ -162,6 +272,106 @@
       480,
       768,
       1200
+    ]
+  },
+  "/images/org-feature-corner-pullout.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/org-feature-kids-bunk-storage.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/org-feature-pantry-pullout.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/org-feature-utensil-drawer.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/org-feature-wardrobe-drawer.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/org-garage-sourcing.webp": {
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/org-garage-style-double.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/org-garage-style-single.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/org-garage-style-sports.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/org-garage-style-store-room.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/org-garage-style-workshop.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
     ]
   },
   "/images/org-garage.webp": {
@@ -184,6 +394,61 @@
       1200
     ]
   },
+  "/images/org-kids-room-sourcing.webp": {
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/org-kids-room-style-nursery.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/org-kids-room-style-playroom.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/org-kids-room-style-shared.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/org-kids-room-style-teen.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/org-kids-room-style-toddler.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
   "/images/org-kids-room.webp": {
     "width": 1440,
     "height": 810,
@@ -192,6 +457,61 @@
       480,
       768,
       1200
+    ]
+  },
+  "/images/org-kitchen-sourcing.webp": {
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/org-kitchen-style-drawers.webp": {
+    "width": 1086,
+    "height": 1448,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/org-kitchen-style-galley.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/org-kitchen-style-handleless.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/org-kitchen-style-island.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/org-kitchen-style-open-shelf.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
     ]
   },
   "/images/org-kitchen.webp": {
@@ -204,6 +524,61 @@
       1200
     ]
   },
+  "/images/org-laundry-sourcing.webp": {
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/org-laundry-style-closet.webp": {
+    "width": 1086,
+    "height": 1448,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/org-laundry-style-linen.webp": {
+    "width": 1086,
+    "height": 1448,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/org-laundry-style-room.webp": {
+    "width": 1086,
+    "height": 1448,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/org-laundry-style-stacked.webp": {
+    "width": 1086,
+    "height": 1448,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/org-laundry-style-utility.webp": {
+    "width": 1086,
+    "height": 1448,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
   "/images/org-laundry.webp": {
     "width": 1440,
     "height": 810,
@@ -212,6 +587,61 @@
       480,
       768,
       1200
+    ]
+  },
+  "/images/org-pantry-sourcing.webp": {
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/org-pantry-style-butlers.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/org-pantry-style-cabinet.webp": {
+    "width": 1062,
+    "height": 1480,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/org-pantry-style-open-shelf.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/org-pantry-style-under-stair.webp": {
+    "width": 1086,
+    "height": 1448,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/org-pantry-style-walk-in.webp": {
+    "width": 1086,
+    "height": 1448,
+    "widths": [
+      320,
+      480,
+      768
     ]
   },
   "/images/org-pantry.webp": {

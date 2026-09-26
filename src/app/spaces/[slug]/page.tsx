@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { CtaBand, PageHead } from "@/components/blocks";
+import { CtaBand, PageHero } from "@/components/blocks";
 import { WhatsappButton } from "@/components/creative";
 import { Arrow } from "@/components/interactive";
 import { concepts, conceptNeighbours, getConcept } from "@/lib/site";
@@ -40,10 +40,11 @@ export default async function SpacePage({
 
   return (
     <main id="main">
-      <PageHead
+      <PageHero
         eyebrow={`${concept.type.toUpperCase()} STYLING CONCEPT · ${concept.location.toUpperCase()}`}
         title={concept.title}
-        lead={<p>{concept.description}</p>}
+        image={concept.image}
+        imageAlt={concept.description}
         crumbs={[
           { href: "/", label: "Home" },
           { href: "/spaces/", label: "Our spaces" },
@@ -51,13 +52,12 @@ export default async function SpacePage({
         ]}
         actions={
           <WhatsappButton
+            className="button button-light"
             message={`Hello Havenly, I'd like to discuss a space similar to "${concept.title}".`}
           >
             Discuss a space like this
           </WhatsappButton>
         }
-        image={concept.image}
-        imageAlt={concept.description}
       />
 
       <section className="section container">
@@ -70,6 +70,7 @@ export default async function SpacePage({
             </h2>
           </div>
           <div className="split-copy">
+            <p>{concept.description}</p>
             <p>{concept.detail}</p>
           </div>
         </div>

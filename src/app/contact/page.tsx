@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { PageHead } from "@/components/blocks";
+import { PageHero } from "@/components/blocks";
 import { WhatsappButton } from "@/components/creative";
 import { Arrow, Contact } from "@/components/interactive";
 import { img } from "@/lib/images";
@@ -18,27 +18,34 @@ export const metadata: Metadata = pageMetadata({
 export default function ContactPage() {
   return (
     <main id="main">
-      <PageHead
+      <PageHero
         eyebrow="LET’S TALK"
         title="WhatsApp is the fastest way to reach us."
-        lead={
+        image={img.contactHero}
+        imageAlt="The entrance hall of a styled Dubai villa, daylight carried through by a mirror"
+        crumbs={[{ href: "/", label: "Home" }, { label: "Contact" }]}
+        actions={
+          <WhatsappButton className="button button-light">
+            Open WhatsApp
+          </WhatsappButton>
+        }
+      />
+
+      <section className="section container">
+        <div className="section-heading" data-reveal>
+          <div>
+            <p className="eyebrow muted">USEFUL TO SEND</p>
+            <h2>What to put in the message</h2>
+          </div>
           <p>
             Most projects start with a short message and two photographs. Tell
             us the property type, where it is and what you are trying to
             achieve — we will tell you which service fits and what it would
             involve.
           </p>
-        }
-        crumbs={[{ href: "/", label: "Home" }, { label: "Contact" }]}
-        actions={<WhatsappButton>Open WhatsApp</WhatsappButton>}
-        image={img.contactHero}
-        imageAlt="The entrance hall of a styled Dubai villa, daylight carried through by a mirror"
-      />
-
-      <section className="section container">
+        </div>
         <div className="card-grid" data-reveal>
           <div>
-            <p className="eyebrow muted">USEFUL TO SEND</p>
             <h3>Two or three photographs</h3>
             <p>
               Taken from the doorway of each room, with the curtains open. They
@@ -46,7 +53,6 @@ export default function ContactPage() {
             </p>
           </div>
           <div>
-            <p className="eyebrow muted">USEFUL TO SEND</p>
             <h3>The rooms that matter</h3>
             <p>
               Which spaces carry the property — or which ones are currently
@@ -55,7 +61,6 @@ export default function ContactPage() {
             </p>
           </div>
           <div>
-            <p className="eyebrow muted">USEFUL TO SEND</p>
             <h3>Your timing</h3>
             <p>
               A photography date, a handover date, a listing date, or simply

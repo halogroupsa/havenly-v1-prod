@@ -369,7 +369,7 @@ export default function Home() {
               anyone reads on a homepage. */}
           <div className="faqs">
             {generalFaqs.slice(0, 4).map((faq) => (
-              <details key={faq.question}>
+              <details key={faq.question} name="home-faq">
                 <summary>
                   {faq.question}
                   <span aria-hidden="true">+</span>

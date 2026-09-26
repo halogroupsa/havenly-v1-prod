@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { WhatsappButton } from "@/components/creative";
 import { Arrow } from "@/components/interactive";
 import {
+  BeforeIllustration,
   Moves,
   OrgHero,
   Questions,
@@ -10,6 +11,7 @@ import {
   RoomPackages,
   RoomSourcing,
   RoomStory,
+  StorageFeatures,
   StyleRail,
   Zoning,
 } from "@/components/organizing";
@@ -102,7 +104,6 @@ export default function KitchenOrganizingPage() {
       <OrgHero
         eyebrow="INTERIOR ORGANIZING"
         title="A kitchen that works as hard as you do."
-        lead="Cabinets, drawers and the fridge, zoned around the way you actually cook — so the counter stays clear."
         image={img.orgKitchen}
         imageAlt="Kitchen drawer fitted with oak dividers, utensils grouped by use"
         crumbs={[
@@ -131,9 +132,29 @@ export default function KitchenOrganizingPage() {
         detailAlt="Close detail of an oak drawer divider holding wooden utensils"
       />
 
+      <StorageFeatures
+        id="kitchen-details-title"
+        eyebrow="MADE TO REACH"
+        title="The storage comes to you."
+        items={[
+          {
+            image: img.orgFeatureCornerPullout,
+            alt: "Corner kitchen cabinet with a two-tier pull-out storing separated cookware and lids",
+            title: "The corner, opened up",
+            text: "A swing-out brings cookware and lids past the cabinet front, so nothing disappears into the back corner.",
+          },
+          {
+            image: img.orgFeatureUtensilDrawer,
+            alt: "Open oak-divided kitchen drawer with utensils grouped by cooking task",
+            title: "One task per channel",
+            text: "Dividers are measured to the drawer and grouped around preparation, so the right tool is where the action happens.",
+          },
+        ]}
+      />
+
       <StyleRail
         room="kitchen"
-        title="A kitchen can work five ways."
+        title="A kitchen can work many ways."
         styles={[
           {
             slug: "drawers",
@@ -168,6 +189,7 @@ export default function KitchenOrganizingPage() {
         ]}
       />
 
+      <BeforeIllustration room="kitchen" slug="kitchen" />
       <Moves lines={moveLines} tone="linen" />
 
       <Zoning
@@ -178,8 +200,8 @@ export default function KitchenOrganizingPage() {
           {
             label: "Within arm's reach",
             note: "The few things used at every meal, kept out and by the hob.",
-            x: 22,
-            y: 26,
+            x: 30,
+            y: 22,
           },
           {
             label: "Cut to the drawer",
@@ -197,6 +219,8 @@ export default function KitchenOrganizingPage() {
       />
 
       <RoomSourcing
+        image="/images/org-kitchen-sourcing.webp"
+        imageAlt="Fitted kitchen drawer dividers and clear cabinet organizers"
         groups={[
           { title: "Drawers", items: "Dividers and inserts planned around daily prep." },
           { title: "Cabinets", items: "Containers that make deep storage visible." },

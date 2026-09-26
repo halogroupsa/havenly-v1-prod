@@ -19,10 +19,33 @@ export type Service = {
   tileAlt: string;
   audience: string;
   introduction: string[];
-  outcomes: { title: string; text: string }[];
-  paths: { title: string; label: string; text: string }[];
-  included: string[];
-  process: { title: string; text: string }[];
+  /* Every band below carries a photograph. The service pages used to be six
+     stacked prose sections beside a sticky index — twenty-two list items among
+     them — which read as a specification rather than as a studio. The copy is
+     the same work; it is now captioned to a picture of it.
+
+     These are existing site photographs, assigned so that no two bands on a
+     page show the same room. Bespoke photography of a real project replaces a
+     slot by changing the path here, nothing else. */
+  /** The opening: the property whole, and a detail of it. */
+  story: { wide: string; wideAlt: string; detail: string; detailAlt: string };
+  outcomes: { title: string; text: string; image: string; imageAlt: string }[];
+  paths: {
+    title: string;
+    label: string;
+    text: string;
+    image: string;
+    imageAlt: string;
+  }[];
+  /** What the scope covers, as three ruled pairs beside a photograph. */
+  included: { title: string; items: string }[];
+  includedImage: string;
+  includedImageAlt: string;
+  process: { title: string; text: string; image: string; imageAlt: string }[];
+  /** The full-width band between the process and the questions. */
+  band: { image: string; alt: string };
+  faqImage: string;
+  faqImageAlt: string;
   faqs: { question: string; answer: string }[];
 };
 
@@ -48,18 +71,35 @@ export const services: Service[] = [
       "An empty room asks buyers to work too hard. A busy one can hide the space they came to see. We find the balance: enough warmth and purpose to make every room easy to understand, with enough restraint for someone else to imagine their life there.",
       "As a home staging studio in Dubai, we can work with a vacant property, edit and complement what is already there, or focus on the rooms that will carry the listing. The recommendation is shaped after we understand the property, audience and campaign.",
     ],
+    story: {
+      wide: "/images/space-townhouse.webp",
+      wideAlt:
+        "Open-plan townhouse living and dining area styled for viewings, with a clear route through to the garden",
+      detail: "/images/principle-materials.webp",
+      detailAlt:
+        "Close detail of a linen throw over a travertine bench beside an oak table",
+    },
     outcomes: [
       {
         title: "A clearer sense of space",
         text: "Layouts show scale, circulation and how each room can be used without crowding the architecture.",
+        image: "/images/principle-proportion.webp",
+        imageAlt:
+          "Apartment living room where the sofa, table and rug leave a clear route to the balcony",
       },
       {
         title: "A stronger first impression",
         text: "A cohesive visual story helps the photography, viewing experience and property presentation work together.",
+        image: "/images/space-entrance.webp",
+        imageAlt:
+          "Villa entrance hall with an oak console, a round mirror and a runner leading to the garden door",
       },
       {
         title: "One considered handover",
         text: "The agreed furniture, delivery, placement and final styling are coordinated as one scope.",
+        image: "/images/space-majlis.webp",
+        imageAlt:
+          "Majlis with low linen seating along three walls, evenly spaced and finished",
       },
     ],
     paths: [
@@ -67,44 +107,84 @@ export const services: Service[] = [
         label: "EMPTY PROPERTY",
         title: "Vacant staging",
         text: "Furniture and finishing layers bring proportion, function and warmth to the rooms that matter most.",
+        image: "/images/villa-dubai-luxury.webp",
+        imageAlt:
+          "Villa living room brought into proportion with a linen sofa, leather chairs and a stone table",
       },
       {
         label: "LIVED-IN HOME",
         title: "Occupied staging",
         text: "We edit, reposition and complement existing pieces so the home feels calm, spacious and ready to show.",
+        image: "/images/intro-room.webp",
+        imageAlt:
+          "Lived-in apartment living room edited back to a linen sofa, one chair and clear floor",
       },
       {
         label: "BEFORE THE CAMERA",
         title: "Listing-day styling",
         text: "A focused finishing pass for photography, from sightlines and surfaces to textiles and small details.",
+        image: "/images/space-penthouse.webp",
+        imageAlt:
+          "Penthouse living room dressed for photography, with the skyline left as the view",
       },
     ],
     included: [
-      "Property walkthrough and project brief",
-      "Priority-room and circulation plan",
-      "Furniture and styling direction",
-      "Sourcing or staging inventory proposal",
-      "Delivery and installation coordination",
-      "Final styling and handover review",
+      {
+        title: "Before the install",
+        items:
+          "Property walkthrough, project brief, and a plan for the rooms that carry the listing.",
+      },
+      {
+        title: "The scheme",
+        items:
+          "Furniture and styling direction, with the sourcing or staging inventory proposal to match.",
+      },
+      {
+        title: "Install and handover",
+        items:
+          "Delivery, placement, final styling and a last review before the property is shown.",
+      },
     ],
+    includedImage: "/images/principle-restraint.webp",
+    includedImageAlt:
+      "A single linen chair and a side table in an otherwise empty room, with clear floor around them",
     process: [
       {
         title: "Read the property",
         text: "We review its architecture, condition, location, audience and route to market.",
+        image: "/images/services-hero.webp",
+        imageAlt:
+          "A villa living room seen in daylight, before any furniture has been chosen for it",
       },
       {
         title: "Set the direction",
         text: "You receive a tailored scope for the right rooms, pieces and level of styling.",
+        image: "/images/process-moodboard.webp",
+        imageAlt:
+          "A marked-up floor plan with fabric, timber and stone samples laid beside it",
       },
       {
         title: "Install with care",
         text: "We coordinate access, placement and the final details around the agreed schedule.",
+        image: "/images/install-day.webp",
+        imageAlt:
+          "Installation in progress: a sofa placed, a rug laid and packing still by the door",
       },
       {
         title: "Ready to present",
         text: "The property is handed back composed and ready for its next planned step.",
+        image: "/images/process-reveal.webp",
+        imageAlt:
+          "The finished room in late afternoon light, styled and ready for viewings",
       },
     ],
+    band: {
+      image: "/images/material-detail.webp",
+      alt: "Close detail of an oak table edge, a linen cloth and a ceramic bowl on a wool rug",
+    },
+    faqImage: "/images/faq-room.webp",
+    faqImageAlt:
+      "A timber bench with a linen throw folded over it, beside a bed in quiet daylight",
     faqs: [
       {
         question: "Do you stage both vacant and occupied homes?",
@@ -154,18 +234,35 @@ export const services: Service[] = [
       "Furnishing a home is rarely about finding one good sofa. Scale, lead times, room-to-room continuity and the practical layers all have to work together. As interior stylists in Dubai, we turn those decisions into one clear plan.",
       "The result can be personal and lived-in, or composed for a rental audience. Either way, each piece earns its place through comfort, proportion and how it supports the whole space.",
     ],
+    story: {
+      wide: "/images/dining-dubai-luxury-landscape.webp",
+      wideAlt:
+        "Apartment dining room at dusk with a walnut table, upholstered chairs and the skyline beyond",
+      detail: "/images/intro-bedroom.webp",
+      detailAlt:
+        "Bedroom corner with layered linen bedding, a timber stool and a jute rug in morning light",
+    },
     outcomes: [
       {
         title: "A home that belongs together",
         text: "Furniture, lighting, rugs, art and accessories follow one restrained direction from room to room.",
+        image: "/images/space-majlis.webp",
+        imageAlt:
+          "Majlis where the seating, rugs and tables follow one restrained direction",
       },
       {
         title: "Choices made with context",
         text: "Selections respond to room dimensions, everyday use, durability and the character of the property.",
+        image: "/images/principle-climate.webp",
+        imageAlt:
+          "A deep window reveal with a woven blind and sheer linen shading a walnut bench from the sun",
       },
       {
         title: "Less to coordinate",
         text: "The approved scheme, ordering, delivery, placement and finishing details are managed as one project.",
+        image: "/images/space-entrance.webp",
+        imageAlt:
+          "An entrance hall complete on handover: console, mirror, bench and runner already in place",
       },
     ],
     paths: [
@@ -173,44 +270,84 @@ export const services: Service[] = [
         label: "A HOME OF YOUR OWN",
         title: "Move-in furnishing",
         text: "A personal, comfortable scheme built around your routines, the pieces you love and how you want to live.",
+        image: "/images/bedroom-dubai-luxury.webp",
+        imageAlt:
+          "Bedroom furnished from empty with an upholstered bed, a leather bench and a jute rug",
       },
       {
         label: "READY TO LET",
         title: "Rental-ready furnishing",
         text: "A durable, welcoming interior for long stays, with a clear inventory and practical everyday layers.",
+        image: "/images/space-townhouse.webp",
+        imageAlt:
+          "Townhouse living and dining furnished for long stays, with hard-wearing surfaces and clear circulation",
       },
       {
         label: "A LIGHTER TOUCH",
         title: "Styling refresh",
         text: "New textiles, lighting, art and placement decisions bring a home into balance without starting again.",
+        image: "/images/intro-detail.webp",
+        imageAlt:
+          "Majlis seating restyled with new cushions and textiles around a table that was already there",
       },
     ],
     included: [
-      "Discovery call and site assessment",
-      "Room layouts and design direction",
-      "Furniture, lighting and textile selection",
-      "Sourcing and order coordination",
-      "Delivery and installation planning",
-      "Accessories, styling and final handover",
+      {
+        title: "Before we specify",
+        items:
+          "Discovery call, site assessment and the room-by-room brief behind the layouts.",
+      },
+      {
+        title: "The scheme",
+        items:
+          "Room layouts, design direction, and the furniture, lighting and textile selection.",
+      },
+      {
+        title: "From order to handover",
+        items:
+          "Sourcing, delivery planning, placement, accessories and the final walkthrough.",
+      },
     ],
+    includedImage: "/images/principle-materials.webp",
+    includedImageAlt:
+      "Linen, travertine, oak, ceramic and wool shown together in close detail",
     process: [
       {
         title: "Understand your brief",
         text: "We map the rooms, how they will be used, your priorities, timeline and investment range.",
+        image: "/images/consultation-table.webp",
+        imageAlt:
+          "A floor plan, fabric swatches and a timber sample laid out on a table",
       },
       {
         title: "Build the scheme",
         text: "Layouts, finishes and selections are brought into a coherent proposal for your review.",
+        image: "/images/process-moodboard.webp",
+        imageAlt:
+          "A marked-up plan with fabric, timber and stone samples set out beside it",
       },
       {
         title: "Source and coordinate",
         text: "Approved pieces move into ordering, delivery planning and any required substitutions.",
+        image: "/images/install-day.webp",
+        imageAlt:
+          "Delivery day: furniture being placed and packaging cleared from the room",
       },
       {
         title: "Settle every detail",
         text: "Furniture is placed and the final layers are styled before the home is handed over.",
+        image: "/images/process-reveal.webp",
+        imageAlt:
+          "The finished living room in afternoon light, styled down to the last layer",
       },
     ],
+    band: {
+      image: "/images/space-terrace.webp",
+      alt: "A shaded terrace furnished with weather-ready seating around a low table",
+    },
+    faqImage: "/images/faq-room.webp",
+    faqImageAlt:
+      "A timber bench with a linen throw folded over it, beside a bed in quiet daylight",
     faqs: [
       {
         question: "Can you work within a defined investment range?",
@@ -260,18 +397,35 @@ export const services: Service[] = [
       "Sometimes a room does not need a full redesign. It needs a better layout, a calmer palette, the right scale of furniture or an experienced eye on what to change first.",
       "An interior design consultation brings those decisions into focus. We listen, walk through your Dubai apartment or villa and leave you with practical direction you can act on with confidence.",
     ],
+    story: {
+      wide: "/images/intro-room.webp",
+      wideAlt:
+        "Apartment living room with a linen sofa, a woven chair and a travertine table, the marina beyond the glazing",
+      detail: "/images/material-detail.webp",
+      detailAlt:
+        "Close detail of an oak table edge, a linen cloth and a ceramic bowl",
+    },
     outcomes: [
       {
         title: "Decisions in the right order",
         text: "We identify the moves with the most impact before you spend time or money on the smaller details.",
+        image: "/images/intro-threshold.webp",
+        imageAlt:
+          "Dining room with an oak table under a plaster pendant, sized to the room rather than to a catalogue",
       },
       {
         title: "A room that works better",
         text: "Layout and scale recommendations improve circulation, comfort and the way the space is used.",
+        image: "/images/principle-restraint.webp",
+        imageAlt:
+          "A quiet corner with one chair and a side table, and clear floor space around them",
       },
       {
         title: "A direction you can follow",
         text: "A concise set of recommendations gives your next choices a clear visual and practical foundation.",
+        image: "/images/space-entrance.webp",
+        imageAlt:
+          "An entrance hall following an agreed palette of oak, plaster and jute",
       },
     ],
     paths: [
@@ -279,44 +433,84 @@ export const services: Service[] = [
         label: "ONE ROOM",
         title: "Room reset",
         text: "A focused review of layout, furniture scale, lighting, colour and the details holding the room back.",
+        image: "/images/principle-proportion.webp",
+        imageAlt:
+          "A living room re-planned so the sofa, table and rug leave a clear route to the balcony",
       },
       {
         label: "BEFORE YOU BUY",
         title: "Selection review",
         text: "Bring shortlisted furniture, finishes or plans and get a professional view before you commit.",
+        image: "/images/service-tile-consultation.webp",
+        imageAlt:
+          "Plans and samples spread across a round walnut table with four chairs pulled up to it",
       },
       {
         label: "A NEW BEGINNING",
         title: "Home direction",
         text: "Set a coherent palette and design language to guide a new home one room at a time.",
+        image: "/images/space-penthouse.webp",
+        imageAlt:
+          "A new apartment with the palette set and the first pieces in place",
       },
     ],
     included: [
-      "Pre-consultation questions and image review",
-      "Focused visit or remote working session",
-      "Layout and furniture-scale guidance",
-      "Palette, material and lighting direction",
-      "Prioritised recommendations",
-      "A concise written follow-up",
+      {
+        title: "Before the session",
+        items:
+          "Your pre-consultation questions answered, and your images and measurements reviewed.",
+      },
+      {
+        title: "On the day",
+        items:
+          "A focused visit or remote working session on layout, furniture scale, palette and light.",
+      },
+      {
+        title: "Afterwards",
+        items:
+          "Prioritised recommendations and a concise written follow-up you can act on at your pace.",
+      },
     ],
+    includedImage: "/images/principle-climate.webp",
+    includedImageAlt:
+      "A shaded window with a woven blind and sheer linen over a walnut bench",
     process: [
       {
         title: "Share the challenge",
         text: "Send the room, measurements where available, reference images and the decisions on your mind.",
+        image: "/images/consultation-table.webp",
+        imageAlt:
+          "A floor plan, fabric swatches and a timber sample laid out on a table",
       },
       {
         title: "Walk through it together",
         text: "We look at the space in context and test the strongest options against your priorities.",
+        image: "/images/services-hero.webp",
+        imageAlt:
+          "A living room seen in daylight during a walkthrough, before anything has been changed",
       },
       {
         title: "Set the priorities",
         text: "The discussion becomes a clear sequence of changes, purchases and things worth keeping.",
+        image: "/images/process-moodboard.webp",
+        imageAlt:
+          "A marked-up plan with the decisions ordered and samples set out beside them",
       },
       {
         title: "Move forward clearly",
         text: "You receive the agreed direction in a practical format you can return to as you make changes.",
+        image: "/images/process-reveal.webp",
+        imageAlt:
+          "The room after the agreed changes, in late afternoon light",
       },
     ],
+    band: {
+      image: "/images/intro-detail.webp",
+      alt: "Low majlis seating and a timber table in warm afternoon light",
+    },
+    faqImage: "/images/faq-room.webp",
+    faqImageAlt:
+      "A timber bench with a linen throw folded over it, beside a bed in quiet daylight",
     faqs: [
       {
         question: "Is a consultation suitable for one room?",

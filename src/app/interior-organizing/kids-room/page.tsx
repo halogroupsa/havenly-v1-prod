@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { WhatsappButton } from "@/components/creative";
 import { Arrow } from "@/components/interactive";
 import {
+  BeforeIllustration,
   Moves,
   OrgHero,
   Questions,
@@ -10,6 +11,7 @@ import {
   RoomPackages,
   RoomSourcing,
   RoomStory,
+  StorageFeatures,
   StyleRail,
   Zoning,
 } from "@/components/organizing";
@@ -102,7 +104,6 @@ export default function KidsRoomOrganizingPage() {
       <OrgHero
         eyebrow="INTERIOR ORGANIZING"
         title="A room they can tidy on their own."
-        lead="Toys, clothes and books given low, labelled homes a child can reach — and put back without help."
         image={img.orgKids}
         imageAlt="Child's room with low open shelving, lidded toy baskets and picture labels"
         crumbs={[
@@ -130,9 +131,25 @@ export default function KidsRoomOrganizingPage() {
         detail={img.orgKidsDetail}
         detailAlt="Close detail of a lidded seagrass basket with a small picture label"
       />
+      <StorageFeatures
+        id="kids-storage-title"
+        eyebrow="ROOM TO GROW"
+        title="Beds that make space back."
+        items={[
+          {
+            image: img.orgFeatureKidsBunkStorage,
+            alt: "Shared children's room with oak bunk beds and organized under-bed drawers",
+            title: "Storage below the play zone",
+            text: "Integrated drawers keep bedding and larger toys out of sight but close enough for a child to take responsibility for.",
+            /* The drawers sit low in a tall frame, so the landscape crop is
+               biased down rather than taking the middle. */
+            focus: "center 62%",
+          },
+        ]}
+      />
       <StyleRail
         room="kids-room"
-        title="A kids room can work five ways."
+        title="A kids room can work many ways."
         styles={[
           {
             slug: "nursery",
@@ -167,6 +184,7 @@ export default function KidsRoomOrganizingPage() {
         ]}
       />
 
+      <BeforeIllustration room="kids room" slug="kids-room" />
       <Moves lines={moveLines} tone="linen" />
       <Zoning
         title="A kids room, zoned."
@@ -177,7 +195,7 @@ export default function KidsRoomOrganizingPage() {
             label: "Seen, not stored",
             note: "Books and artwork face out on a ledge, so choosing is part of the room.",
             x: 55,
-            y: 19,
+            y: 13,
           },
           {
             label: "At their height",
@@ -194,7 +212,7 @@ export default function KidsRoomOrganizingPage() {
         ]}
       />
 
-      <RoomSourcing groups={[
+      <RoomSourcing image="/images/org-kids-room-sourcing.webp" imageAlt="Child-height toy baskets, books, art supplies and clothing" groups={[
         { title: "Toys", items: "Clear, low homes for the things they reach for." },
         { title: "Clothes", items: "Simple daily categories that can grow with them." },
         { title: "Books & art", items: "A place to choose, use and put back." },

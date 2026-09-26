@@ -1,10 +1,18 @@
-import { Fragment } from "react";
+import {
+  FaqPanel,
+  Features,
+  FilmStrip,
+  PhotoStory,
+  Sourcing,
+  type Feature,
+} from "@/components/bands";
 import { CtaBand } from "@/components/blocks";
 import { Parallax } from "@/components/creative";
 import { Img } from "@/components/image";
 import { Arrow } from "@/components/interactive";
 import {
   RoomIndex,
+  StyleRailSurface,
   ZoneMap,
   type Zone,
 } from "@/components/organizing-interactive";
@@ -22,87 +30,35 @@ import {
 import { site } from "@/lib/site";
 import {
   JsonLd,
-  breadcrumbJsonLd,
   businessId,
   faqJsonLd,
   ogImage,
 } from "@/lib/seo";
 
 /*
- * The organizing pages are built from these bands rather than from the
- * service-page template. The service pages are read: someone deciding
- * between staging and furnishing wants the detail. An organizing page is
- * looked at — the work is a drawer, a rail, a shelf — so each band here
- * carries a photograph and a caption, and the detail that used to sit in
- * bullet lists either became a picture or moved into the proposal.
+ * The organizing pages are built from bands rather than from stacked prose:
+ * the work is a drawer, a rail, a shelf, so each band carries a photograph
+ * and a caption, and the detail that used to sit in bullet lists either
+ * became a picture or moved into the proposal.
+ *
+ * The compositions themselves now live in components/bands.tsx, because the
+ * service pages read from the same vocabulary. What stays here is this
+ * trade's wording — the room's eyebrow, the room's heading, the room's
+ * accordion — wrapped around them, plus the bands that only a room has.
  */
 
 type Faq = { question: string; answer: string };
-type Crumb = { href?: string; label: string };
 
 /* ------------------------------------------------------------------ *
  * The opening
  * ------------------------------------------------------------------ */
 
 /**
- * Full-bleed photograph, title at its foot — the homepage's composition,
- * so a room page opens like the site rather than like a sub-page. The
- * breadcrumb sits under the picture, where it can be read.
+ * The organizing pages' opening is now the site's opening: every top-level
+ * page uses the same full-bleed composition. Kept under its old name so the
+ * seven room pages read the same as before.
  */
-export function OrgHero({
-  eyebrow,
-  title,
-  lead,
-  image,
-  imageAlt,
-  crumbs,
-  actions,
-}: {
-  eyebrow: string;
-  title: string;
-  lead: string;
-  image: string;
-  imageAlt: string;
-  crumbs: Crumb[];
-  actions: React.ReactNode;
-}) {
-  return (
-    <>
-      {site.url && <JsonLd data={breadcrumbJsonLd(crumbs)} />}
-      <section className="org-hero" aria-labelledby="page-title">
-        <Img
-          src={image}
-          alt={imageAlt}
-          sizes="100vw"
-          width="1920"
-          height="1080"
-          fetchPriority="high"
-        />
-        <div className="org-hero-shade" aria-hidden="true" />
-        <div className="container org-hero-copy">
-          <p className="eyebrow">{eyebrow}</p>
-          <h1 id="page-title">{title}</h1>
-          <p>{lead}</p>
-          <div className="hero-actions">{actions}</div>
-        </div>
-      </section>
-      <div className="container org-crumb">
-        <nav className="breadcrumb" aria-label="Breadcrumb">
-          {crumbs.map((crumb, i) => (
-            <Fragment key={crumb.label}>
-              {i > 0 && <span aria-hidden="true">/</span>}
-              {crumb.href ? (
-                <a href={crumb.href}>{crumb.label}</a>
-              ) : (
-                <span aria-current="page">{crumb.label}</span>
-              )}
-            </Fragment>
-          ))}
-        </nav>
-      </div>
-    </>
-  );
-}
+export { PageHero as OrgHero } from "@/components/blocks";
 
 /* ------------------------------------------------------------------ *
  * The bands
@@ -142,39 +98,19 @@ export function Moves({
   tone?: "paper" | "linen";
 }) {
   return (
-    <section
-      className={tone === "linen" ? "band band-linen org-band" : "org-band"}
-      aria-labelledby="moves-title"
-    >
-      <div className="container">
-        <div className="section-heading org-head" data-reveal>
-          <div>
-            <p className="eyebrow muted">{eyebrow}</p>
-            <h2 id="moves-title">{title}</h2>
-          </div>
-          {aside}
-        </div>
-        <ol className="org-moves">
-          {moves.map((move: Move, i) => (
-            <li key={move.title} data-reveal>
-              <figure>
-                <Img
-                  src={move.image}
-                  sizes="(max-width: 560px) 92vw, (max-width: 1100px) 46vw, 23vw"
-                  width="900"
-                  height="1125"
-                  alt={move.alt}
-                  loading="lazy"
-                />
-                <figcaption aria-hidden="true">0{i + 1}</figcaption>
-              </figure>
-              <h3>{move.title}</h3>
-              <p>{lines?.[i] ?? move.text}</p>
-            </li>
-          ))}
-        </ol>
-      </div>
-    </section>
+    <FilmStrip
+      id="moves-title"
+      eyebrow={eyebrow}
+      title={title}
+      aside={aside}
+      tone={tone}
+      steps={moves.map((move: Move, i) => ({
+        image: move.image,
+        alt: move.alt,
+        title: move.title,
+        text: lines?.[i] ?? move.text,
+      }))}
+    />
   );
 }
 
@@ -228,6 +164,36 @@ export function Before({
   );
 }
 
+/** One matched room concept, shown before and after the organizing system. */
+export function BeforeIllustration({ room, slug }: { room: string; slug: string }) {
+  return (
+    <section className="org-comparison org-band-tight" aria-labelledby="before-example-title">
+      <div className="container section-heading org-head" data-reveal>
+        <div>
+          <p className="eyebrow muted">ORGANIZING CONCEPT</p>
+          <h2 id="before-example-title">A room, thoughtfully reworked.</h2>
+        </div>
+        <p>Measured storage, considered zones and a finish that belongs in the home.</p>
+      </div>
+      <div className="container org-comparison-grid" data-reveal>
+        {(["before", "after"] as const).map((state) => (
+          <figure key={state}>
+            <Img
+              src={`/images/org-${slug}-transformation-concept.webp`}
+              sizes="(max-width: 800px) 46vw, 44vw"
+              width="1536"
+              height="1024"
+              alt={`${state === "before" ? "Before" : "After"} view of an illustrative ${room} organizing concept`}
+              loading="lazy"
+            />
+            <figcaption>{state === "before" ? "BEFORE" : "AFTER"}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 /**
  * The room's questions, on the homepage's FAQ composition — a tall frame in
  * the left column, the collapsed questions in the right.
@@ -246,44 +212,14 @@ export function Questions({
   imageAlt: string;
 }) {
   return (
-    <section
-      className="container org-band-tight faq-section"
-      aria-labelledby="questions-title"
-    >
-      <figure className="faq-image" data-reveal>
-        <Img
-          src={image}
-          sizes="(max-width: 800px) 92vw, 40vw"
-          width="1000"
-          height="1250"
-          alt={imageAlt}
-          loading="lazy"
-        />
-      </figure>
-      <div data-reveal>
-        <p className="eyebrow muted">GOOD QUESTIONS</p>
-        <h2 id="questions-title">Before you book</h2>
-        <div className="faqs">
-          {faqs.map((faq) => (
-            <details key={faq.question}>
-              <summary>
-                {faq.question}
-                <span aria-hidden="true">+</span>
-              </summary>
-              <p>{faq.answer}</p>
-            </details>
-          ))}
-        </div>
-        <div className="faq-actions">
-          <a className="text-link" href="/questions/">
-            See all questions <Arrow />
-          </a>
-          <a className="text-link" href="/contact/">
-            Ask us something else <Arrow />
-          </a>
-        </div>
-      </div>
-    </section>
+    <FaqPanel
+      eyebrow="GOOD QUESTIONS"
+      title="Before you book"
+      name="room-faq"
+      faqs={faqs}
+      image={image}
+      imageAlt={imageAlt}
+    />
   );
 }
 
@@ -361,54 +297,57 @@ export function RoomStory({
   detail: string;
   detailAlt: string;
 }) {
+  /* `img` falls back to the room's wide shot for a detail slot with no file
+     of its own, and PhotoStory drops to a single frame when the two match. */
   return (
-    <section className="section org-room-intro" aria-labelledby="story-title">
-      <div className="container">
-        <div className="intro" data-reveal>
-          <p className="eyebrow muted">THE ROOM, RESET</p>
-          <h2 id="story-title">{line}</h2>
-          <div className="intro-copy">
-            <p>{body}</p>
-            <a className="text-link" href="#packages">
-              See what a reset covers <Arrow />
-            </a>
-          </div>
-        </div>
-      </div>
-      {/* Two frames — the room, and a detail of it — unless the room's
-          close-up photograph has not been taken yet. `img` falls back to the
-          room's wide shot for a detail slot that has no file, and the same
-          picture printed twice side by side looks like a mistake rather than
-          a pair, so the band drops to one frame until the detail lands. */}
-      <div
-        className={detail === wide ? "container org-mosaic org-mosaic-solo" : "container org-mosaic"}
-        data-reveal
-      >
-        <figure>
-          <Img
-            src={wide}
-            sizes={detail === wide ? "(max-width: 1240px) 92vw, 1240px" : "(max-width: 900px) 55vw, 44vw"}
-            width="1440"
-            height="1080"
-            alt={wideAlt}
-            loading="lazy"
-          />
-        </figure>
-        {detail !== wide && (
-          <figure>
-            <Img
-              src={detail}
-              sizes="(max-width: 900px) 42vw, 33vw"
-              width="1000"
-              height="1250"
-              alt={detailAlt}
-              loading="lazy"
-            />
-          </figure>
-        )}
-      </div>
-    </section>
+    <PhotoStory
+      eyebrow="THE ROOM, RESET"
+      line={line}
+      body={body}
+      cta="See what a reset covers"
+      href="#packages"
+      wide={wide}
+      wideAlt={wideAlt}
+      detail={detail}
+      detailAlt={detailAlt}
+    />
   );
+}
+
+/**
+ * A short, room-specific proof of how a system works. Unlike the style rail,
+ * these are close functional views: the pull-out, the drawer, the storage a
+ * child can use. They add evidence without asking a visitor to infer the
+ * useful part from a room-wide photograph.
+ *
+ * The band also performs what it describes. Photograph and copy meet with
+ * nothing between them, and the copy starts tucked toward the picture and
+ * settles out as the band is scrolled into view — a drawer, opening. The
+ * whole of that is in the stylesheet, twice over: where the browser can
+ * scrub an animation against the scroll position the drawer opens under the
+ * visitor's hand, and everywhere else the same movement is played once off
+ * the reveal observer the rest of the site already uses. Either way it ends
+ * open and stays open, so nothing here is behind an interaction — the rule
+ * the zone map and the room index keep too.
+ *
+ * `focus` is the one thing a page may need to say about its photograph. The
+ * frame is landscape and these renders are portrait, so the frame keeps the
+ * middle of the picture unless the page names a better part to keep.
+ */
+export type StorageFeature = Feature;
+
+export function StorageFeatures({
+  id,
+  eyebrow = "THE DETAIL THAT HELPS",
+  title,
+  items,
+}: {
+  id: string;
+  eyebrow?: string;
+  title: string;
+  items: StorageFeature[];
+}) {
+  return <Features id={id} eyebrow={eyebrow} title={title} items={items} />;
 }
 
 /**
@@ -419,38 +358,25 @@ export function RoomStory({
 export function RoomSourcing({
   title = "Made for this space.",
   text = "Nothing is bought before it is measured. Containers are chosen for the shelf they will sit on, and pre-tested for quality, scale and how they sit together.",
+  image,
+  imageAlt,
   groups,
 }: {
   title?: string;
   text?: string;
+  image: string;
+  imageAlt: string;
   groups: { title: string; items: string }[];
 }) {
   return (
-    <section className="org-sourcing" aria-labelledby="sourcing-title">
-      <figure>
-        <Img
-          src={img.orgProducts}
-          sizes="(max-width: 900px) 100vw, 50vw"
-          width="1536"
-          height="1024"
-          alt="Organizing products selected for a calm, cohesive home"
-          loading="lazy"
-        />
-      </figure>
-      <div className="org-sourcing-copy" data-reveal>
-        <p className="eyebrow muted">MEASURED TO FIT</p>
-        <h2 id="sourcing-title">{title}</h2>
-        <p>{text}</p>
-        <ul className="org-sourcing-list">
-          {groups.slice(0, 3).map((group) => (
-            <li key={group.title}>
-              <strong>{group.title}</strong>
-              <span>{group.items}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
+    <Sourcing
+      eyebrow="MEASURED TO FIT"
+      title={title}
+      text={text}
+      image={image}
+      imageAlt={imageAlt}
+      groups={groups}
+    />
   );
 }
 
@@ -467,25 +393,30 @@ export function RoomSourcing({
  * the cursor, and it carries more frames than fit on the screen, which is the
  * point — the set is meant to feel longer than the page. The mechanism is the
  * homepage partner strip's, verbatim: two copies of the same track, each
- * travelling one copy-width in the same time, so the restart has no seam. The
- * second copy is decoration and is hidden from assistive technology; the
- * first names every style once.
+ * travelling one copy-width in the same time, so the restart has no seam.
+ * The second copy is decoration and is hidden from assistive technology;
+ * the first names every style once.
  *
  * Frames alternate tall and short, and sit high and low against the rail, so
  * the row reads as a strip someone laid out rather than a conveyor belt.
  *
- * No JavaScript: the drift, the hover-pause and the fallbacks are all CSS.
- * Where there is no pointer to hover with — a phone — and wherever reduced
- * motion is asked for, the drift is dropped entirely and the rail becomes an
- * ordinary scroll-snap row that you push with a finger or an arrow key.
+ * The drift, the hover-pause and the fallbacks are all CSS. Where there is
+ * no pointer to hover with — a phone — and wherever reduced motion is asked
+ * for, the drift is dropped entirely and the rail becomes an ordinary
+ * scroll-snap row that you push with a finger or an arrow key. On a
+ * trackpad or a mouse StyleRailSurface adds the same push, and the rail is
+ * complete without it.
  * ------------------------------------------------------------------ */
 export type RoomStyle = {
-  /** Also the file: /images/org-<room>-style-<slug>.webp */
+  /** Usually names the file: /images/org-<room>-style-<slug>.webp */
   slug: string;
   name: string;
   /** One short line. What makes this layout its own thing. */
   note: string;
   alt: string;
+  /** An explicitly selected photograph, when a room needs a precise art
+   * direction rather than the conventional filename lookup. */
+  image?: string;
 };
 
 /* Below three real photographs the rail is not a range, it is a repeat, so
@@ -494,7 +425,7 @@ const RAIL_MINIMUM = 3;
 
 export function StyleRail({
   room,
-  eyebrow = "FIVE WAYS",
+  eyebrow = "MANY WAYS",
   title,
   styles,
 }: {
@@ -507,12 +438,22 @@ export function StyleRail({
   const live = styles
     .map((style) => ({
       ...style,
-      src: shot(`org-${room}-style-${style.slug}`),
+      src: style.image ?? shot(`org-${room}-style-${style.slug}`),
     }))
     .filter((style): style is RoomStyle & { src: string } =>
       Boolean(style.src),
     );
   if (live.length < RAIL_MINIMUM) return null;
+
+  /* How many times a copy repeats the room's styles, which two things
+     decide. High and low alternate by position, so a copy holding an odd
+     number of frames stands two highs side by side where it meets the next
+     copy — the count has to be even. And a copy narrower than the screen
+     cannot cover the frame on its own, which is the second copy's whole
+     job. Both are free to fix: it is the same set of photographs either way. */
+  let repeats = Math.max(1, Math.ceil(8 / live.length));
+  if ((repeats * live.length) % 2) repeats += 1;
+  const frames = Array.from({ length: repeats }, () => live).flat();
 
   return (
     <section className="org-band style-band" aria-labelledby="styles-title">
@@ -526,35 +467,43 @@ export function StyleRail({
           <br /> It will be planned like these.
         </p>
       </div>
-      <div className="style-rail">
+      <StyleRailSurface>
         {[0, 1].map((copy) => (
           <ul
             key={copy}
             className="style-track"
             aria-label={copy === 0 ? `${title} — the layouts` : undefined}
-            aria-hidden={copy === 1 || undefined}
+            aria-hidden={copy !== 0 || undefined}
           >
-            {live.map((style, i) => (
-              <li key={style.slug} className={i % 2 ? "is-low" : "is-high"}>
-                <figure>
-                  <Img
-                    src={style.src}
-                    sizes="(max-width: 560px) 66vw, (max-width: 900px) 38vw, 25vw"
-                    width="1000"
-                    height="1250"
-                    alt={copy === 0 ? style.alt : ""}
-                    loading="lazy"
-                  />
-                  <figcaption>
-                    <strong>{style.name}</strong>
-                    <span>{style.note}</span>
-                  </figcaption>
-                </figure>
-              </li>
-            ))}
+            {frames.map((style, i) => {
+              /* The first pass through the styles is the one that speaks. */
+              const spoken = copy === 0 && i < live.length;
+              return (
+                <li
+                  key={`${style.slug}-${i}`}
+                  className={i % 2 ? "is-low" : "is-high"}
+                  aria-hidden={!spoken || undefined}
+                >
+                  <figure>
+                    <Img
+                      src={style.src}
+                      sizes="(max-width: 560px) 66vw, (max-width: 900px) 38vw, 25vw"
+                      width="1000"
+                      height="1250"
+                      alt={spoken ? style.alt : ""}
+                      loading="lazy"
+                    />
+                    <figcaption>
+                      <strong>{style.name}</strong>
+                      <span>{style.note}</span>
+                    </figcaption>
+                  </figure>
+                </li>
+              );
+            })}
           </ul>
         ))}
-      </div>
+      </StyleRailSurface>
     </section>
   );
 }

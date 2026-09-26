@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { WhatsappButton } from "@/components/creative";
 import { Arrow } from "@/components/interactive";
 import {
+  BeforeIllustration,
   Moves,
   OrgHero,
   Questions,
@@ -102,7 +103,6 @@ export default function LaundryOrganizingPage() {
       <OrgHero
         eyebrow="INTERIOR ORGANIZING"
         title="A small room that works harder."
-        lead="Sorting, supplies, ironing and linen, planned in the order the work actually happens."
         image={img.orgLaundry}
         imageAlt="Laundry room with labelled supply jars and stacked linen"
         crumbs={[
@@ -132,41 +132,47 @@ export default function LaundryOrganizingPage() {
       />
       <StyleRail
         room="laundry"
-        title="A laundry can work five ways."
+        title="A laundry can work many ways."
         styles={[
           {
             slug: "room",
             name: "Laundry room",
             note: "A room laid out in the order the work happens.",
-            alt: "Laundry room with machines, a folding counter and shelving of decanted supplies above",
+            image: "/images/org-laundry-style-room.webp",
+            alt: "Working apartment laundry with side-by-side machines, a sink, supplies and a drying rack",
           },
           {
             slug: "closet",
             name: "Laundry cupboard",
             note: "A metre wide, doors closed, and still a system.",
-            alt: "Laundry cupboard with stacked machines, a narrow shelf of supplies and doors open",
+            image: "/images/org-laundry-style-closet.webp",
+            alt: "Apartment laundry cupboard with stacked machines behind unevenly open white doors",
           },
           {
             slug: "stacked",
             name: "Stacked in a niche",
             note: "Machines one above the other, with the space beside them worked.",
-            alt: "Stacked washer and dryer in a niche with a narrow rolling cart in the gap beside them",
+            image: "/images/org-laundry-style-stacked.webp",
+            alt: "Tight laundry niche with stacked machines, exposed utility connections and a blue rolling cart",
           },
           {
             slug: "utility",
             name: "Utility and mudroom",
             note: "Laundry that also has to take shoes, bags and the outside.",
-            alt: "Utility room with laundry machines on one side and hooks, a bench and shoe storage opposite",
+            image: "/images/org-laundry-style-utility.webp",
+            alt: "Rainy-day mudroom with shoes, coat hooks, a timber bench and laundry machines",
           },
           {
             slug: "linen",
             name: "Laundry and linen store",
             note: "Washing and storing in one room, kept firmly apart.",
-            alt: "Laundry room with a machine run and a separate shelved linen store, sets folded together",
+            image: "/images/org-laundry-style-linen.webp",
+            alt: "Laundry and linen wall with varied folded sheets, storage bins, sorter and a machine at the side",
           },
         ]}
       />
 
+      <BeforeIllustration room="laundry room" slug="laundry" />
       <Moves lines={moveLines} tone="linen" />
       <Zoning
         title="A laundry, zoned."
@@ -176,14 +182,14 @@ export default function LaundryOrganizingPage() {
           {
             label: "Linen, out",
             note: "Clean sets folded together on the top shelf — one shelf, one household.",
-            x: 47,
-            y: 20,
+            x: 36,
+            y: 8,
           },
           {
             label: "Supplies, decanted",
             note: "Detergent and softener in dispensers you can see the level through.",
-            x: 42,
-            y: 41,
+            x: 47,
+            y: 20,
           },
           {
             label: "Sorting, in",
@@ -194,7 +200,7 @@ export default function LaundryOrganizingPage() {
         ]}
       />
 
-      <RoomSourcing groups={[
+      <RoomSourcing image="/images/org-laundry-sourcing.webp" imageAlt="Laundry sorting baskets, supplies and folded linen" groups={[
         { title: "Sorting", items: "Baskets that guide laundry through the room." },
         { title: "Supplies", items: "Everyday products kept clear and within reach." },
         { title: "Linen", items: "Sets stored together, ready when needed." },

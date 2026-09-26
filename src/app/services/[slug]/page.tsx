@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { CtaBand, PageHead, Voices } from "@/components/blocks";
 import {
-  BeforeAfter,
-  OnThisPage,
-  Parallax,
-  WhatsappButton,
-} from "@/components/creative";
+  FaqPanel,
+  Features,
+  FilmStrip,
+  PhotoCards,
+  PhotoStory,
+  Sourcing,
+  TilePair,
+} from "@/components/bands";
+import { CtaBand, PageHero, Voices } from "@/components/blocks";
+import { BeforeAfter, Parallax, WhatsappButton } from "@/components/creative";
 import { Arrow } from "@/components/interactive";
 import { img } from "@/lib/images";
 import {
@@ -46,6 +50,24 @@ export async function generateMetadata({
   });
 }
 
+/*
+ * A service page is a sequence of photographed bands, the same vocabulary the
+ * organizing pages read from. It replaced a sticky index beside six stacked
+ * prose sections: three headed paragraphs for the ways in, a six-item
+ * checklist for the scope, and two card grids for the outcomes and the
+ * process. The words are largely the same words — each one now sits as a
+ * caption to a picture of the thing it describes, which is what someone
+ * choosing between staging, furnishing and a consultation actually wants to
+ * compare.
+ *
+ * The order is also the ground the bands sit on, and no two touching bands
+ * share one. Reading down: white, sand, white, linen, white, photograph,
+ * white, ink, white, linen — every seam is a change of colour, so a band ends
+ * where the ground ends rather than wherever its copy runs out. Staging adds
+ * its comparison on linen straight after the opening, which is the one place
+ * a before-and-after belongs and keeps the alternation intact. Move a band
+ * here and its neighbour's tone has to move with it.
+ */
 export default async function ServicePage({
   params,
 }: {
@@ -57,16 +79,6 @@ export default async function ServicePage({
   const guide = serviceGuide[service.slug];
   const showComparison = service.slug === "home-staging";
   const others = services.filter((s) => s.slug !== service.slug);
-
-  const sections = [
-    { id: "overview", label: "Overview" },
-    { id: "paths", label: "Ways in" },
-    ...(showComparison ? [{ id: "difference", label: "The difference" }] : []),
-    { id: "included", label: "What’s included" },
-    { id: "outcomes", label: "What changes" },
-    { id: "process", label: "How it runs" },
-    { id: "questions", label: "Questions" },
-  ];
 
   return (
     <main id="main">
@@ -86,17 +98,12 @@ export default async function ServicePage({
         />
       )}
       <JsonLd data={faqJsonLd(service.faqs)} />
-      <PageHead
+
+      <PageHero
         eyebrow={service.eyebrow}
         title={service.hero}
-        lead={
-          <>
-            <p>{service.summary}</p>
-            <p className="lead-note muted">
-              {service.audience}
-            </p>
-          </>
-        }
+        image={service.image}
+        imageAlt={service.imageAlt}
         crumbs={[
           { href: "/", label: "Home" },
           { href: "/services/", label: "Services" },
@@ -104,7 +111,10 @@ export default async function ServicePage({
         ]}
         actions={
           <>
-            <WhatsappButton message={guide.waMessage}>
+            <WhatsappButton
+              className="button button-light"
+              message={guide.waMessage}
+            >
               Start on WhatsApp
             </WhatsappButton>
             <a className="text-link" href="#included">
@@ -112,127 +122,107 @@ export default async function ServicePage({
             </a>
           </>
         }
-        image={service.image}
-        imageAlt={service.imageAlt}
       />
 
-      <div className="container section">
-        <div className="service-body">
-          <OnThisPage sections={sections} />
-          <div className="service-sections">
-            <section id="overview" data-reveal>
-              <h2>{guide.bestWhen}</h2>
-              {service.introduction.map((paragraph) => (
-                <p key={paragraph} className="split-copy">
-                  {paragraph}
-                </p>
-              ))}
-            </section>
+      <PhotoStory
+        eyebrow={service.eyebrow}
+        line={`${guide.bestWhen}.`}
+        body={[service.summary, service.introduction[0]]}
+        cta="See what’s included"
+        href="#included"
+        wide={service.story.wide}
+        wideAlt={service.story.wideAlt}
+        detail={service.story.detail}
+        detailAlt={service.story.detailAlt}
+      />
 
-            <section id="paths" data-reveal>
-              <h2>Three ways this usually starts</h2>
-              <ul className="feature-list">
-                {service.paths.map((path) => (
-                  <li key={path.title}>
-                    <div>
-                      <p className="eyebrow muted">{path.label}</p>
-                      <h3>{path.title}</h3>
-                    </div>
-                    <p>{path.text}</p>
-                  </li>
-                ))}
-              </ul>
-            </section>
-
-            {showComparison && (
-              <section id="difference" data-reveal>
-                <h2>The same room, twice</h2>
-                <p className="split-copy">
-                  Nothing structural changes between these two photographs. The
-                  walls, the light and the floor area are identical — only the
-                  furniture, its placement and the finishing layers are
-                  different. Drag to compare.
-                </p>
-                <BeforeAfter
-                  before={img.stagingBefore}
-                  after={img.stagingAfter}
-                  beforeAlt="The room before styling, with no furniture to give it scale"
-                  afterAlt="The same room after styling, with seating, textiles and layered light"
-                  beforeLabel="Before styling"
-                  afterLabel="After styling"
-                />
-              </section>
-            )}
-
-            <section id="included" data-reveal>
-              <h2>What’s included</h2>
-              <p className="split-copy">
-                Every proposal is written for the property in front of us, so
-                the detail moves. This is the shape it generally takes.
+      {/* Staging is the one service whose whole argument is a photograph of
+          the same room twice, so it keeps the wipe — and takes the linen the
+          organizing pages give their comparison. */}
+      {showComparison && (
+        <section
+          id="difference"
+          className="band band-linen org-band-tight"
+          aria-labelledby="difference-title"
+        >
+          <div className="container">
+            <div className="section-heading org-head" data-reveal>
+              <div>
+                <p className="eyebrow muted">THE SAME ROOM, TWICE</p>
+                <h2 id="difference-title">Nothing structural changed.</h2>
+              </div>
+              <p>
+                The walls, the light and the floor area are identical.
+                <br /> Drag to compare.
               </p>
-              <ul className="checklist">
-                {service.included.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </section>
-
-            <section id="outcomes" data-reveal>
-              <h2>What actually changes</h2>
-              <div className="card-grid card-grid-2">
-                {service.outcomes.map((outcome) => (
-                  <div key={outcome.title}>
-                    <h3>{outcome.title}</h3>
-                    <p>{outcome.text}</p>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            <section id="process" data-reveal>
-              <h2>How it runs</h2>
-              <div className="card-grid card-grid-2">
-                {service.process.map((step, i) => (
-                  <div key={step.title}>
-                    <span className="step-number">0{i + 1}</span>
-                    <h3>{step.title}</h3>
-                    <p>{step.text}</p>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            <section id="questions" data-reveal>
-              <h2>Questions people ask</h2>
-              <div className="faqs">
-                {service.faqs.map((faq) => (
-                  <details key={faq.question}>
-                    <summary>
-                      {faq.question}
-                      <span aria-hidden="true">+</span>
-                    </summary>
-                    <p>{faq.answer}</p>
-                  </details>
-                ))}
-              </div>
-              <p className="concept-note">
-                {guide.considerInstead.text}{" "}
-                <a
-                  className="text-link"
-                  href={serviceHref(guide.considerInstead.slug)}
-                >
-                  Read that instead <Arrow />
-                </a>
-              </p>
-            </section>
+            </div>
+            <BeforeAfter
+              before={img.stagingBefore}
+              after={img.stagingAfter}
+              beforeAlt="The room before styling, with no furniture to give it scale"
+              afterAlt="The same room after styling, with seating, textiles and layered light"
+              beforeLabel="Before styling"
+              afterLabel="After styling"
+            />
           </div>
-        </div>
-      </div>
+        </section>
+      )}
 
-      <Parallax
-        src={img.installDay}
-        alt="Furniture and textiles being placed during an installation"
-      >
+      <Features
+        id="outcomes-title"
+        eyebrow="WHAT CHANGES"
+        title="What actually changes"
+        items={service.outcomes.map((outcome) => ({
+          image: outcome.image,
+          alt: outcome.imageAlt,
+          title: outcome.title,
+          text: outcome.text,
+        }))}
+      />
+
+      <PhotoCards
+        id="paths-title"
+        eyebrow="WAYS IN"
+        title="Three ways this usually starts"
+        aside={<p>{service.audience}</p>}
+        cards={service.paths.map((path) => ({
+          image: path.image,
+          alt: path.imageAlt,
+          label: path.label,
+          title: path.title,
+          text: path.text,
+        }))}
+      />
+
+      <Sourcing
+        anchor="included"
+        eyebrow="IN THE SCOPE"
+        title="What’s included"
+        text={service.introduction[1]}
+        image={service.includedImage}
+        imageAlt={service.includedImageAlt}
+        groups={service.included}
+      />
+
+      <FilmStrip
+        id="process-title"
+        eyebrow="HOW IT RUNS"
+        title="From first look to handover"
+        aside={
+          <p>
+            Four stages, every time.
+            <br /> Only the property changes.
+          </p>
+        }
+        steps={service.process.map((step) => ({
+          image: step.image,
+          alt: step.imageAlt,
+          title: step.title,
+          text: step.text,
+        }))}
+      />
+
+      <Parallax src={service.band.image} alt={service.band.alt}>
         <div data-reveal>
           <p className="eyebrow">{service.eyebrow}</p>
           <h2>{guide.typicalScope}.</h2>
@@ -240,28 +230,41 @@ export default async function ServicePage({
         </div>
       </Parallax>
 
-      <Voices tone="paper" />
+      <FaqPanel
+        eyebrow="GOOD QUESTIONS"
+        title="Questions people ask"
+        name="service-faq"
+        faqs={service.faqs}
+        image={service.faqImage}
+        imageAlt={service.faqImageAlt}
+        note={
+          <p className="concept-note">
+            {guide.considerInstead.text}{" "}
+            <a
+              className="text-link"
+              href={serviceHref(guide.considerInstead.slug)}
+            >
+              Read that instead <Arrow />
+            </a>
+          </p>
+        }
+      />
 
-      <section className="band band-linen">
-        <div className="container">
-          <div className="section-heading" data-reveal>
-            <div>
-              <p className="eyebrow muted">THE OTHER TWO</p>
-              <h2>If this isn’t quite it</h2>
-            </div>
-          </div>
-          <div className="pager" data-reveal>
-            {others.map((other) => (
-              <a key={other.slug} href={serviceHref(other.slug)}>
-                <p className="eyebrow">{other.eyebrow}</p>
-                <h3>
-                  {other.title} <Arrow />
-                </h3>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Voices tone="ink" />
+
+      <TilePair
+        id="others-title"
+        eyebrow="THE OTHER TWO"
+        title="If this isn’t quite it"
+        tone="paper"
+        tiles={others.map((other) => ({
+          href: serviceHref(other.slug),
+          image: other.tile,
+          alt: other.tileAlt,
+          title: other.title,
+          text: serviceGuide[other.slug].bestWhen,
+        }))}
+      />
 
       <CtaBand
         title={

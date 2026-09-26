@@ -14,6 +14,79 @@ import {
 } from "@/lib/site";
 import { JsonLd, breadcrumbJsonLd } from "@/lib/seo";
 
+type Crumb = { href?: string; label: string };
+
+/** The visible trail, restated for search results. Needs an absolute origin,
+    so staging builds (which are noindex) leave it out. */
+function Breadcrumb({ crumbs }: { crumbs: Crumb[] }) {
+  return (
+    <nav className="breadcrumb" aria-label="Breadcrumb">
+      {crumbs.map((crumb, i) => (
+        <Fragment key={crumb.label}>
+          {i > 0 && <span aria-hidden="true">/</span>}
+          {crumb.href ? (
+            <a href={crumb.href}>{crumb.label}</a>
+          ) : (
+            <span aria-current="page">{crumb.label}</span>
+          )}
+        </Fragment>
+      ))}
+    </nav>
+  );
+}
+
+/**
+ * Full-bleed photograph, title at its foot — the homepage's composition, so
+ * every page opens like the site rather than like a sub-page. The breadcrumb
+ * sits under the picture, where it can be read rather than competing with the
+ * title.
+ *
+ * There is deliberately no lead: the hero carries an eyebrow, a heading and
+ * the actions, and nothing else. A paragraph over the photograph is what
+ * stops a page reading like the homepage, so copy that would sit here goes
+ * in the first band underneath instead.
+ */
+export function PageHero({
+  eyebrow,
+  title,
+  image,
+  imageAlt,
+  crumbs,
+  actions,
+}: {
+  eyebrow: string;
+  title: React.ReactNode;
+  image: string;
+  imageAlt: string;
+  crumbs: Crumb[];
+  actions?: React.ReactNode;
+}) {
+  return (
+    <>
+      {site.url && <JsonLd data={breadcrumbJsonLd(crumbs)} />}
+      <section className="page-hero" aria-labelledby="page-title">
+        <Img
+          src={image}
+          alt={imageAlt}
+          sizes="100vw"
+          width="1920"
+          height="1080"
+          fetchPriority="high"
+        />
+        <div className="page-hero-shade" aria-hidden="true" />
+        <div className="container page-hero-copy">
+          <p className="eyebrow">{eyebrow}</p>
+          <h1 id="page-title">{title}</h1>
+          {actions && <div className="hero-actions">{actions}</div>}
+        </div>
+      </section>
+      <div className="container page-hero-crumb">
+        <Breadcrumb crumbs={crumbs} />
+      </div>
+    </>
+  );
+}
+
 /** Shared page opening: breadcrumb, heading, lead copy, actions, wide image. */
 export function PageHead({
   eyebrow,
@@ -27,28 +100,15 @@ export function PageHead({
   eyebrow: string;
   title: React.ReactNode;
   lead: React.ReactNode;
-  crumbs: { href?: string; label: string }[];
+  crumbs: Crumb[];
   actions?: React.ReactNode;
   image?: string;
   imageAlt?: string;
 }) {
   return (
     <div className="container page-head">
-      {/* The visible trail, restated for search results. Needs an absolute
-          origin, so staging builds (which are noindex) leave it out. */}
       {site.url && <JsonLd data={breadcrumbJsonLd(crumbs)} />}
-      <nav className="breadcrumb" aria-label="Breadcrumb">
-        {crumbs.map((crumb, i) => (
-          <Fragment key={crumb.label}>
-            {i > 0 && <span aria-hidden="true">/</span>}
-            {crumb.href ? (
-              <a href={crumb.href}>{crumb.label}</a>
-            ) : (
-              <span aria-current="page">{crumb.label}</span>
-            )}
-          </Fragment>
-        ))}
-      </nav>
+      <Breadcrumb crumbs={crumbs} />
       <div className="page-head-grid">
         <div>
           <p className="eyebrow muted">{eyebrow}</p>

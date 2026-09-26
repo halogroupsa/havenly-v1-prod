@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { WhatsappButton } from "@/components/creative";
 import { Arrow } from "@/components/interactive";
 import {
+  BeforeIllustration,
   Moves,
   OrgHero,
   Questions,
@@ -102,7 +103,6 @@ export default function BathroomsOrganizingPage() {
       <OrgHero
         eyebrow="INTERIOR ORGANIZING"
         title="A clear counter, every morning."
-        lead="Vanities and under-sink cupboards edited and fitted to your measurements, then styled for a spa-like finish."
         image={img.orgBathroom}
         imageAlt="Bathroom vanity with a stone tray of daily essentials and folded towels"
         crumbs={[
@@ -132,41 +132,47 @@ export default function BathroomsOrganizingPage() {
       />
       <StyleRail
         room="bathrooms"
-        title="A bathroom can work five ways."
+        title="A bathroom can work many ways."
         styles={[
           {
             slug: "double-vanity",
             name: "Double vanity",
             note: "Two routines, two zones, and nothing shared that does not need to be.",
-            alt: "Double vanity with a tray of essentials at each basin and a divided drawer open below",
+            image: "/images/org-bathrooms-style-double-vanity.webp",
+            alt: "Walnut double vanity in a lived-in Dubai apartment, with one divided drawer open below",
           },
           {
             slug: "single-vanity",
             name: "Single vanity",
             note: "One cupboard doing everything, which is a question of what leaves.",
-            alt: "Small bathroom vanity with a single basin, a stone tray and a divided drawer beneath",
+            image: "/images/org-bathrooms-style-single-vanity.webp",
+            alt: "Compact green single vanity with an open drawer of everyday bathroom supplies",
           },
           {
             slug: "powder-room",
             name: "Powder room",
             note: "Nothing on show but what a guest would use.",
-            alt: "Powder room with a narrow basin, a folded hand towel and a single dispenser",
+            image: "/images/org-bathrooms-style-powder-room.webp",
+            alt: "Small vintage-style powder room viewed through a partly open door",
           },
           {
             slug: "ensuite",
             name: "Ensuite and linen tower",
             note: "Daily things low, towels and back-up in a tower beside.",
-            alt: "Ensuite bathroom with a vanity and a tall linen tower alongside, one door open to folded towels",
+            image: "/images/org-bathrooms-style-ensuite.webp",
+            alt: "Ensuite bathroom with a white vanity and tall oak linen tower open to mixed towels and supplies",
           },
           {
             slug: "family",
             name: "Family bathroom",
             note: "Heights that suit the shortest person using it.",
-            alt: "Family bathroom with a low labelled basket of children's things beside the bath and a vanity above",
+            image: "/images/org-bathrooms-style-family.webp",
+            alt: "Family bathroom with a child-height step stool, bath toys and towels at two heights",
           },
         ]}
       />
 
+      <BeforeIllustration room="bathroom" slug="bathrooms" />
       <Moves lines={moveLines} tone="linen" />
       <Zoning
         title="A bathroom, zoned."
@@ -176,25 +182,25 @@ export default function BathroomsOrganizingPage() {
           {
             label: "The daily few",
             note: "What you actually reach for each morning — on a tray, on the counter.",
-            x: 68,
-            y: 45,
+            x: 84,
+            y: 33,
           },
           {
             label: "Under the sink",
             note: "Dividers planned around the plumbing, so the awkward space still works.",
-            x: 40,
-            y: 78,
+            x: 57,
+            y: 70,
           },
           {
             label: "Linen, apart",
             note: "Towels kept out of the vanity entirely, where damp and back-up do not mix.",
-            x: 9,
-            y: 82,
+            x: 5,
+            y: 70,
           },
         ]}
       />
 
-      <RoomSourcing groups={[
+      <RoomSourcing image="/images/org-bathrooms-sourcing.webp" imageAlt="Bathroom vanity tray, under-sink bins and folded towels" groups={[
         { title: "Vanity", items: "A daily routine held in one calm zone." },
         { title: "Under the sink", items: "Storage designed around the plumbing." },
         { title: "Linen", items: "Towels and backstock with space to breathe." },

@@ -149,6 +149,15 @@ export const img = {
   orgLaundryDetail: ready("org-laundry-detail", "/images/org-laundry.webp"),
   orgGarageDetail: ready("org-garage-detail", "/images/org-garage.webp"),
 
+  /* Supplemental organizing details. These are intentionally additive: they
+     show the hardware and small systems that make an organized room work,
+     rather than taking the place of a room's hero or style-rail photographs. */
+  orgFeatureCornerPullout: ready("org-feature-corner-pullout", "/images/org-kitchen.webp"),
+  orgFeatureUtensilDrawer: ready("org-feature-utensil-drawer", "/images/org-kitchen.webp"),
+  orgFeatureWardrobeDrawer: ready("org-feature-wardrobe-drawer", "/images/org-bedroom.webp"),
+  orgFeatureKidsBunkStorage: ready("org-feature-kids-bunk-storage", "/images/org-kids-room.webp"),
+  orgFeaturePantryPullout: ready("org-feature-pantry-pullout", "/images/org-pantry.webp"),
+
   // Gallery concepts
   spaceTownhouse: "/images/space-townhouse.webp",
   spacePenthouse: "/images/space-penthouse.webp",

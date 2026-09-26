@@ -391,7 +391,10 @@ them could be swapped without anyone noticing, one of them is wasted.
 **All thirty-five:** 4:5 portrait, ≥ 1200 px wide, 35mm or 50mm, one natural
 light source, no people, no hands, no readable label text. Alternate frames on
 the rail are cropped to 3:4, so keep the subject clear of the left and right
-eighth of the frame. Avoid: [house rules] + [organizing additions].
+eighth of the frame. Keep the camera inward-facing: use plain walls, frosted
+glazing, curtains or a close balcony wall where a window is needed; do not use
+the Burj Khalifa, a recognisable skyline or any landmark as a shortcut for
+“Dubai”. Avoid: [house rules] + [organizing additions].
 
 A room's rail appears once **three of its five** exist, so finish one room
 before starting the next.

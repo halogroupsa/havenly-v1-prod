@@ -44,7 +44,7 @@ export default function QuestionsPage() {
         </div>
         <div className="faqs">
           {generalFaqs.map((faq) => (
-            <details key={faq.question}>
+            <details key={faq.question} name="faq-general">
               <summary>
                 {faq.question}
                 <span aria-hidden="true">+</span>
@@ -70,7 +70,7 @@ export default function QuestionsPage() {
           </div>
           <div className="faqs">
             {service.faqs.map((faq) => (
-              <details key={faq.question}>
+              <details key={faq.question} name={`faq-${service.slug}`}>
                 <summary>
                   {faq.question}
                   <span aria-hidden="true">+</span>

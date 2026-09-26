@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { WhatsappButton } from "@/components/creative";
 import { Arrow } from "@/components/interactive";
 import {
+  BeforeIllustration,
   Moves,
   OrgHero,
   Questions,
@@ -10,6 +11,7 @@ import {
   RoomPackages,
   RoomSourcing,
   RoomStory,
+  StorageFeatures,
   StyleRail,
   Zoning,
 } from "@/components/organizing";
@@ -102,7 +104,6 @@ export default function PantryOrganizingPage() {
       <OrgHero
         eyebrow="INTERIOR ORGANIZING"
         title="See everything. Buy only what you need."
-        lead="Staples decanted, shelves stepped so nothing hides at the back, and labels the whole household can read."
         image={img.orgPantry}
         imageAlt="Pantry shelves with airtight glass canisters, woven baskets and labels"
         crumbs={[
@@ -130,9 +131,22 @@ export default function PantryOrganizingPage() {
         detail={img.orgPantryDetail}
         detailAlt="Close detail of airtight glass canisters holding grains, filled to different levels"
       />
+      <StorageFeatures
+        id="pantry-details-title"
+        eyebrow="ONE CUPBOARD, FULLY VISIBLE"
+        title="A tall pantry that comes forward."
+        items={[
+          {
+            image: img.orgFeaturePantryPullout,
+            alt: "Full-height pantry pull-out with shelves of jars, packets, oils and tins grouped by category",
+            title: "Every shelf, in view",
+            text: "The full-height frame brings staples, packets and heavier bottles into the light without turning the cabinet into a stack.",
+          },
+        ]}
+      />
       <StyleRail
         room="pantry"
-        title="A pantry can work five ways."
+        title="A pantry can work many ways."
         styles={[
           {
             slug: "butlers",
@@ -167,6 +181,7 @@ export default function PantryOrganizingPage() {
         ]}
       />
 
+      <BeforeIllustration room="pantry" slug="pantry" />
       <Moves lines={moveLines} tone="linen" />
       <Zoning
         title="A pantry, zoned."
@@ -194,7 +209,7 @@ export default function PantryOrganizingPage() {
         ]}
       />
 
-      <RoomSourcing groups={[
+      <RoomSourcing image="/images/org-pantry-sourcing.webp" imageAlt="Pantry canisters, baskets and a stepped spice shelf" groups={[
         { title: "Decanting", items: "A few considered sizes, filled to real levels." },
         { title: "Shelves", items: "Everyday food visible from the front edge." },
         { title: "Spices", items: "One clear place for every jar and packet." },

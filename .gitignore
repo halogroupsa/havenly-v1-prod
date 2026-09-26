@@ -61,3 +61,6 @@ Thumbs.db
 !.vscode/extensions.json
 !.vscode/settings.json
 *.swp
+
+# Generated image assets
+.generated/

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CtaBand, Marquee, PageHead, Voices } from "@/components/blocks";
+import { CtaBand, Marquee, PageHero, Voices } from "@/components/blocks";
 import { Parallax, WhatsappButton } from "@/components/creative";
 import { Img } from "@/components/image";
 import { Arrow } from "@/components/interactive";
@@ -19,34 +19,22 @@ export const metadata: Metadata = pageMetadata({
 export default function ServicesPage() {
   return (
     <main id="main">
-      <PageHead
+      <PageHero
         eyebrow="WHAT WE DO"
         title="Three ways to make a property feel resolved."
-        lead={
-          <>
-            <p>
-              Every property arrives at a different point. Some are empty and
-              going to market next month. Some are full of a life that is
-              halfway packed. Some simply need someone to say which decision to
-              make first.
-            </p>
-            <p>
-              Tell us where yours sits and we will tell you which of these
-              actually helps.
-            </p>
-          </>
-        }
+        image={img.servicesHero}
+        imageAlt="Villa living room styled with linen seating and warm timber"
         crumbs={[{ href: "/", label: "Home" }, { label: "Services" }]}
         actions={
           <>
-            <WhatsappButton>Ask which one fits</WhatsappButton>
+            <WhatsappButton className="button button-light">
+              Ask which one fits
+            </WhatsappButton>
             <a className="text-link" href="#compare">
               Compare the three <Arrow />
             </a>
           </>
         }
-        image={img.servicesHero}
-        imageAlt="Villa living room styled with linen seating and warm timber"
       />
 
       <div className="container marquee-wrap">
@@ -65,6 +53,29 @@ export default function ServicesPage() {
       </div>
 
       <section className="section container">
+        <div className="split" data-reveal>
+          <div>
+            <p className="eyebrow muted">WHERE YOURS SITS</p>
+            <h2>
+              Every property arrives
+              <br /> at a different point.
+            </h2>
+          </div>
+          <div className="split-copy">
+            <p>
+              Some are empty and going to market next month. Some are full of a
+              life that is halfway packed. Some simply need someone to say
+              which decision to make first.
+            </p>
+            <p>
+              Tell us where yours sits and we will tell you which of these
+              actually helps.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section section-tight container">
         <div className="offer-rows">
           {services.map((service, i) => {
             const guide = serviceGuide[service.slug];

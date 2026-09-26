@@ -1446,11 +1446,37 @@ button:hover .arrow {
   opacity: 1;
   transform: none;
 }
+/* The three service tiles arrive as a dealt hand rather than as three
+   separate fades: they start overlapped near the middle of the row, each
+   turned a degree or two off square, and settle into the grid in order.
+   It is the same reveal every other block on the site uses — only the
+   starting transform differs, so the observer, the timing curve and the
+   reduced-motion escape are all the ones already in place. Below 560px the
+   grid is a single column and there is nothing to fan, so they simply rise.
+   The middle tile is lifted above the other two, so what separates reads as
+   a stack coming apart rather than three tiles crossing. */
 .services-grid > :nth-child(2) {
   transition-delay: 0.09s;
 }
 .services-grid > :nth-child(3) {
   transition-delay: 0.18s;
+}
+@media (min-width: 561px) {
+  .services-grid > :nth-child(2) {
+    z-index: 2;
+  }
+  .services-grid > :nth-child(1).will-reveal {
+    transform: translate(74%, 20px) rotate(-2.4deg);
+  }
+  .services-grid > :nth-child(2).will-reveal {
+    transform: translate(0, 10px) rotate(0.8deg);
+  }
+  .services-grid > :nth-child(3).will-reveal {
+    transform: translate(-74%, 26px) rotate(2.2deg);
+  }
+  .services-grid > .will-reveal.revealed {
+    transform: none;
+  }
 }
 .breadcrumb {
   display: flex;
@@ -2320,11 +2346,6 @@ body.is-leaving .wa-fab {
 .page-head-actions {
   margin-top: 28px;
 }
-/* Copy inside a page lead that is a caption rather than a sentence. */
-.lead-note {
-  font-size: 12px;
-  margin-bottom: 0;
-}
 /* A marquee sitting directly under a page head. */
 .marquee-wrap {
   margin-top: var(--section-y-sm);
@@ -2384,52 +2405,6 @@ body.is-leaving .wa-fab {
 }
 .split h2 {
   margin-bottom: 22px;
-}
-
-/* Numbered or plain feature list */
-.feature-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 1px;
-  background: var(--line);
-  border-block: 1px solid var(--line);
-}
-.feature-list li {
-  background: var(--paper);
-  padding: 30px 0;
-  display: grid;
-  grid-template-columns: 200px minmax(0, 1fr) 220px;
-  gap: 40px;
-}
-.band-linen .feature-list li {
-  background: var(--linen);
-}
-.feature-list .step-number {
-  font-size: 21px;
-  margin-bottom: 8px;
-}
-.feature-list .eyebrow {
-  margin-bottom: 8px;
-}
-.feature-list h3 {
-  font-size: 21px;
-  line-height: 1.35;
-}
-/* The row's third column already holds the copy off the right edge; a measure
-   on top of that inset it twice. */
-.feature-list p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.9;
-}
-.feature-list-image {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  align-self: center;
 }
 
 /* Principles — an image-led reference library rather than a linear list. */
@@ -3103,54 +3078,6 @@ body.is-leaving .wa-fab {
 }
 
 /* ==================================================================
-   On-this-page index
-   ================================================================== */
-.service-body {
-  display: grid;
-  grid-template-columns: 210px 1fr;
-  gap: var(--band-gap);
-  align-items: start;
-}
-.page-index {
-  position: sticky;
-  top: 130px;
-}
-.page-index ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  border-left: 1px solid var(--line);
-}
-.page-index a {
-  display: block;
-  padding: 9px 0 9px 18px;
-  margin-left: -1px;
-  border-left: 1px solid transparent;
-  font-size: 12px;
-  color: var(--muted);
-  transition:
-    color 0.25s,
-    border-color 0.25s;
-}
-.page-index a:hover {
-  color: var(--ink);
-}
-.page-index a[aria-current="true"] {
-  color: var(--ink);
-  border-left-color: var(--ink);
-}
-.service-sections > section {
-  padding-bottom: 80px;
-}
-.service-sections > section:last-child {
-  padding-bottom: 0;
-}
-.service-sections h2 {
-  font-size: 30px;
-  margin-bottom: 24px;
-}
-
-/* ==================================================================
    WhatsApp
    ================================================================== */
 .button.has-glyph {
@@ -3275,13 +3202,6 @@ body.is-leaving .wa-fab {
    Inner-page responsive
    ================================================================== */
 @media (max-width: 1100px) {
-  .service-body {
-    grid-template-columns: 180px 1fr;
-  }
-  .feature-list li {
-    grid-template-columns: 170px minmax(0, 1fr) 190px;
-    gap: 28px;
-  }
   .principle-card-copy {
     padding: 22px 24px 26px;
   }
@@ -3307,35 +3227,6 @@ body.is-leaving .wa-fab {
   }
   .card-grid > * {
     padding: 30px 26px 34px;
-  }
-  .service-body {
-    grid-template-columns: 1fr;
-  }
-  .page-index {
-    position: static;
-  }
-  .page-index ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0 6px;
-    border-left: 0;
-    border-bottom: 1px solid var(--line);
-  }
-  .page-index a {
-    padding: 8px 14px 12px 0;
-    margin: 0;
-    border-left: 0;
-    border-bottom: 2px solid transparent;
-  }
-  .page-index a[aria-current="true"] {
-    border-left-color: transparent;
-    border-bottom-color: var(--ink);
-  }
-  .service-sections > section {
-    padding-bottom: 55px;
-  }
-  .service-sections h2 {
-    font-size: 27px;
   }
   .compare-table dl,
   .compare-head {
@@ -3422,15 +3313,6 @@ body.is-leaving .wa-fab {
   .card-grid,
   .card-grid-2 {
     grid-template-columns: 1fr;
-  }
-  .feature-list li {
-    grid-template-columns: 1fr;
-    gap: 12px;
-    padding: 24px 0;
-  }
-  .feature-list-image {
-    width: min(100%, 360px);
-    margin-top: 8px;
   }
   .principle-grid {
     grid-template-columns: 1fr;
@@ -3956,6 +3838,102 @@ body.is-leaving .wa-fab {
 
 
 /* ==================================================================
+   The page opening
+   ------------------------------------------------------------------
+   A full-bleed photograph with the title at its foot, the same
+   composition as the homepage, so every top-level page — services,
+   spaces, about, contact and the organizing rooms — opens on a room
+   rather than on type. Shorter than the homepage's full viewport:
+   these have a page under them that should show it has.
+   ================================================================== */
+
+.page-hero {
+  position: relative;
+  display: grid;
+  align-content: end;
+  height: min(720px, 78svh);
+  min-height: 460px;
+  overflow: hidden;
+  color: #fff;
+  background: #6d6556;
+}
+.page-hero > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 55%;
+  animation: hero-image-in 1.8s var(--ease) both;
+}
+/* These photographs are bright — pale cabinetry, white shelving, daylight —
+   and the copy sits on the lower third of them. The scrim is heavier than
+   the homepage's for that reason, and heavier again where the frame is
+   narrow and the copy takes up more of it. */
+.page-hero-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(18, 20, 15, 0.42), transparent 24%),
+    linear-gradient(
+      0deg,
+      rgba(18, 20, 15, 0.86) 0%,
+      rgba(18, 20, 15, 0.64) 26%,
+      rgba(18, 20, 15, 0.26) 52%,
+      transparent 72%
+    );
+}
+.page-hero-copy {
+  position: relative;
+  padding-top: 92px;
+  padding-bottom: 54px;
+  animation: hero-copy-in 1s 0.15s both;
+}
+.page-hero-copy .eyebrow {
+  margin-bottom: 16px;
+  color: rgba(255, 255, 255, 0.78);
+}
+/* Heading then actions, at the homepage's size, measure and spacing — there
+   is no lead paragraph on any of these. The measure is the homepage's 760px
+   rather than a narrow character count: at 17ch a sentence of ordinary
+   length stacked into three short lines down the left edge of the
+   photograph instead of running across it. `balance` picks the break,
+   since a hard one would be wrong at half the widths this has to work at. */
+.page-hero-copy h1 {
+  font-size: clamp(28px, 2.5vw, 40px);
+  max-width: 760px;
+  margin-bottom: 26px;
+  text-wrap: balance;
+}
+/* The trail belongs under the picture, not over it: on the photograph it
+   would be one more thing competing with the title. */
+.page-hero-crumb {
+  padding-block: 22px;
+  border-bottom: 1px solid var(--line);
+}
+.page-hero-crumb .breadcrumb {
+  margin-bottom: 0;
+}
+
+@media (max-width: 560px) {
+  .page-hero {
+    height: min(560px, 74svh);
+  }
+  .page-hero-shade {
+    background: linear-gradient(
+      0deg,
+      rgba(18, 20, 15, 0.92) 0%,
+      rgba(18, 20, 15, 0.78) 34%,
+      rgba(18, 20, 15, 0.4) 62%,
+      rgba(18, 20, 15, 0.12) 100%
+    );
+  }
+  .page-hero-copy {
+    padding-bottom: 42px;
+  }
+}
+
+/* ==================================================================
    Interior organizing
    ------------------------------------------------------------------
    These pages argue visually. The work is a drawer, a shelf, a rail —
@@ -3970,82 +3948,6 @@ body.is-leaving .wa-fab {
      3. Nothing is a bullet list. Lists were what made the first version
         read as a specification rather than a studio.
    ================================================================== */
-
-/* ---- The hero -------------------------------------------------- *
-   A full-bleed photograph with the title at its foot, the same
-   composition as the homepage, so a room page opens like the site
-   rather than like a sub-page. Shorter than the homepage's full
-   viewport: this one has a page under it that should show it has. */
-.org-hero {
-  position: relative;
-  display: grid;
-  align-content: end;
-  height: min(720px, 78svh);
-  min-height: 460px;
-  overflow: hidden;
-  color: #fff;
-  background: #6d6556;
-}
-.org-hero > img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 55%;
-  animation: hero-image-in 1.8s var(--ease) both;
-}
-/* These photographs are bright — pale cabinetry, white shelving, daylight —
-   and the copy sits on the lower third of them. The scrim is heavier than
-   the homepage's for that reason, and heavier again where the frame is
-   narrow and the copy takes up more of it. */
-.org-hero-shade {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(180deg, rgba(18, 20, 15, 0.42), transparent 24%),
-    linear-gradient(
-      0deg,
-      rgba(18, 20, 15, 0.86) 0%,
-      rgba(18, 20, 15, 0.64) 26%,
-      rgba(18, 20, 15, 0.26) 52%,
-      transparent 72%
-    );
-}
-.org-hero-copy {
-  position: relative;
-  padding-top: 92px;
-  padding-bottom: 54px;
-  animation: hero-copy-in 1s 0.15s both;
-}
-.org-hero-copy .eyebrow {
-  margin-bottom: 16px;
-  color: rgba(255, 255, 255, 0.78);
-}
-.org-hero-copy h1 {
-  font-size: clamp(28px, 2.5vw, 40px);
-  max-width: 17ch;
-  margin-bottom: 20px;
-  text-wrap: balance;
-}
-/* The lead is one sentence. Its width is set in characters so it breaks
-   into two lines at every width rather than running the full frame. */
-.org-hero-copy p {
-  max-width: 46ch;
-  margin: 0 0 30px;
-  font-size: 14px;
-  line-height: 1.85;
-  color: rgba(255, 255, 255, 0.86);
-}
-/* The trail belongs under the picture, not over it: on the photograph it
-   would be one more thing competing with the title. */
-.org-crumb {
-  padding-block: 22px;
-  border-bottom: 1px solid var(--line);
-}
-.org-crumb .breadcrumb {
-  margin-bottom: 0;
-}
 
 /* ---- The four moves -------------------------------------------- *
    Visit, edit, fit, finish. This replaced five headed lists: the
@@ -4305,6 +4207,86 @@ body.is-leaving .wa-fab {
   color: var(--muted);
 }
 
+/* ---- Photo cards ------------------------------------------------- *
+   Three portrait frames with a caption under each. This is what the service
+   pages' three headed paragraphs became: the difference between vacant and
+   occupied staging is visible in a second and takes a sentence to write.
+   Same frame and same two type sizes as the film strip above, so a page that
+   uses both reads as one band repeated at a different count. */
+.photo-cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--wall-gap);
+}
+.photo-cards li {
+  min-width: 0;
+}
+.photo-cards figure {
+  margin: 0 0 20px;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--sand);
+}
+.photo-cards img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease);
+}
+@media (hover: hover) and (pointer: fine) {
+  .photo-cards li:hover img {
+    transform: scale(1.03);
+  }
+}
+.photo-cards .eyebrow {
+  margin-bottom: 8px;
+}
+.photo-cards h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+.photo-cards p:not(.eyebrow) {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+  max-width: 34ch;
+}
+
+/* ---- Tile pair --------------------------------------------------- *
+   Two of the room index's tiles side by side, closing a service page. Someone
+   who has read this far and found the wrong service is shown the other one as
+   a photograph rather than as a heading with an arrow after it. */
+.tile-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--wall-gap);
+}
+/* Two of them fill a whole container, where four fill it as portraits, so the
+   frame is squared up rather than left at the index's 0.84. */
+.tile-pair .room-tile {
+  aspect-ratio: 1.2;
+}
+
+@media (max-width: 900px) {
+  .photo-cards {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+  .photo-cards figure {
+    aspect-ratio: 16 / 10;
+  }
+  .photo-cards p:not(.eyebrow) {
+    max-width: none;
+  }
+  .tile-pair {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 1100px) {
   .room-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -4320,21 +4302,6 @@ body.is-leaving .wa-fab {
   }
 }
 @media (max-width: 560px) {
-  .org-hero {
-    height: min(560px, 74svh);
-  }
-  .org-hero-shade {
-    background: linear-gradient(
-      0deg,
-      rgba(18, 20, 15, 0.92) 0%,
-      rgba(18, 20, 15, 0.78) 34%,
-      rgba(18, 20, 15, 0.4) 62%,
-      rgba(18, 20, 15, 0.12) 100%
-    );
-  }
-  .org-hero-copy {
-    padding-bottom: 42px;
-  }
   .room-grid,
   .org-before {
     grid-template-columns: 1fr 1fr;
@@ -4407,6 +4374,122 @@ body.is-leaving .wa-fab {
   object-fit: cover;
 }
 
+/* ---- Storage features ------------------------------------------ *
+   The wide room photograph explains a room's feeling; this is the closer,
+   practical proof of how it works — and the band performs the thing it is
+   describing. Photograph and copy are one landscape block with nothing
+   between them: the slab is the drawer's cavity, flush to the picture's edge
+   and exactly as tall, and what slides is what a drawer actually moves —
+   its contents. The copy starts tucked toward the photograph and settles out
+   as the band is scrolled into view.
+
+   Moving the slab itself was the first attempt and it was wrong: a slab that
+   travels leaves the far edge of its column bare for the length of the
+   journey, which reads as a hole in the band rather than as a drawer. Moving
+   only the contents can open no gap at all.
+
+   The travel is always smaller than the slab's leading padding, so no word is
+   ever behind the photograph. And it is scroll-driven CSS with no observer
+   behind it, so where `view()` is unsupported — or where the visitor has
+   asked for less motion — the copy simply sits where it lands. */
+.org-features {
+  padding-block: var(--section-y);
+  background: #e8e8df;
+}
+.org-pulls {
+  display: grid;
+  gap: clamp(46px, 6vw, 92px);
+}
+.org-pull {
+  --pull-travel: clamp(38px, 4.5vw, 70px);
+  --pull-from: calc(var(--pull-travel) * -1);
+  display: grid;
+  /* The photograph takes the larger share, so the row reads as a picture with
+     its caption set into it rather than as two equal halves. */
+  grid-template-columns: minmax(0, 1.34fr) minmax(0, 1fr);
+  align-items: stretch;
+}
+.org-pull figure {
+  margin: 0;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--sand);
+}
+.org-pull figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* No margin and no gap: the slab starts where the photograph stops, and the
+   grid row makes it exactly as tall. */
+.org-pull-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* `clip`, never `hidden`: `hidden` would make this slab a scroll container,
+     and a scroll container is exactly what the copy's `view()` timeline
+     measures itself against — the copy is always fully visible inside its own
+     slab, so the timeline would sit still and the drawer would never open. */
+  overflow: clip;
+  background: var(--linen);
+  padding: clamp(32px, 3.6vw, 56px) clamp(30px, 3.2vw, 48px)
+    clamp(32px, 3.6vw, 56px) clamp(56px, 6vw, 96px);
+}
+.org-pull h3 {
+  margin: 0 0 12px;
+  font-size: clamp(21px, 1.9vw, 27px);
+  line-height: 1.15;
+}
+.org-pull p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.85;
+  color: var(--muted);
+  max-width: 34ch;
+}
+/* A second feature in the same band opens from the other side, so two rows
+   do not read as the same row printed twice. */
+.org-pull.is-flipped figure {
+  order: 2;
+}
+.org-pull.is-flipped {
+  --pull-from: var(--pull-travel);
+}
+.org-pull.is-flipped .org-pull-copy {
+  order: 1;
+  padding-inline: clamp(56px, 6vw, 96px) clamp(30px, 3.2vw, 48px);
+}
+@keyframes org-pull-open {
+  from {
+    transform: translateX(var(--pull-from));
+  }
+  to {
+    transform: none;
+  }
+}
+/* Where the browser can scrub an animation against the scroll position, the
+   drawer opens under the visitor's hand — it is tied to where the band sits
+   on screen rather than played at it once. */
+@supports (animation-timeline: view()) {
+  .org-pull-body {
+    animation: org-pull-open linear both;
+    animation-timeline: view();
+    animation-range: entry 10% cover 55%;
+  }
+}
+/* Everywhere else — Firefox before 144, Safari before 26 — the same movement
+   is played once off the reveal observer the rest of the site already uses.
+   Only the slide: the row around it has done the fading, and the same copy
+   fading twice reads as a stutter. Reduced motion never gets `will-reveal` at
+   all, so this leaves it alone by construction. */
+.org-pull-body.will-reveal {
+  opacity: 1;
+  transform: translateX(var(--pull-from));
+}
+.org-pull-body.will-reveal.revealed {
+  transform: none;
+}
+
 /* ---- Sourcing ---------------------------------------------------- *
    .philosophy's two halves. The three product groups sit where the
    material swatches sit on the homepage: a quiet ruled list, caption
@@ -4472,6 +4555,68 @@ body.is-leaving .wa-fab {
   background: var(--line);
   border: 1px solid var(--line);
 }
+.org-edit-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  margin: 0;
+  padding: 1px;
+  background: var(--line);
+  list-style: none;
+}
+.org-comparison {
+  background: var(--linen);
+}
+.org-comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.org-comparison-grid figure {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+}
+.org-comparison-grid img {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  max-width: none;
+  height: 100%;
+}
+.org-comparison-grid figure:nth-child(2) img {
+  left: -100%;
+}
+.org-comparison-grid figcaption {
+  position: absolute;
+  left: 22px;
+  bottom: 22px;
+  padding: 9px 12px;
+  background: var(--paper);
+  font-size: 10px;
+  letter-spacing: .18em;
+}
+@media (max-width: 560px) {
+  .org-comparison-grid { gap: 8px; }
+  .org-comparison-grid figcaption { left: 8px; bottom: 8px; padding: 7px 8px; }
+}
+.org-edit-steps li {
+  padding: 28px;
+  background: var(--paper);
+}
+.org-edit-steps h3 {
+  margin: 0 0 12px;
+  font-size: 22px;
+}
+.org-edit-steps p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.85;
+}
 .org-tiers article {
   display: flex;
   flex-direction: column;
@@ -4535,13 +4680,42 @@ body.is-leaving .wa-fab {
   .org-tiers {
     grid-template-columns: 1fr;
   }
+  .org-edit-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
   .org-tiers h3 {
     margin-top: 10px;
+  }
+  /* No second column to pull out of, so the slab stops being a drawer and
+     becomes what it was under the photograph all along: a caption. */
+  /* One column: the slab stops being a drawer beside the picture and becomes
+     what it was all along, a caption under it. */
+  .org-pull {
+    grid-template-columns: 1fr;
+  }
+  .org-pull.is-flipped .org-pull-copy,
+  .org-pull.is-flipped figure {
+    order: 0;
+  }
+  .org-pull-copy,
+  .org-pull.is-flipped .org-pull-copy {
+    padding: 30px clamp(24px, 4vw, 40px);
+  }
+  .org-pull-body,
+  .org-pull-body.will-reveal {
+    animation: none;
+    transform: none;
+  }
+  .org-pull figure {
+    aspect-ratio: 16 / 11;
   }
 }
 @media (max-width: 560px) {
   .org-sourcing-copy {
     padding: 48px var(--gutter);
+  }
+  .org-pull h3 {
+    font-size: 23px;
   }
 }
 
@@ -4848,7 +5022,9 @@ body.is-leaving .wa-fab {
 }
 /* flex: none stops the two copies sharing the width instead of queueing,
    and min-width keeps one copy at least as wide as the screen so the pair
-   always covers the frame. */
+   always covers the frame. A copy repeats the room's styles enough times
+   to be wider than the screen on its own, so min-width is normally slack
+   that never gets taken up. */
 .style-track {
   display: flex;
   flex: none;
@@ -4859,9 +5035,16 @@ body.is-leaving .wa-fab {
   margin: 0;
   list-style: none;
   animation: style-rail 64s linear infinite;
+  /* Where the drift picks up. Zero until a hand has pushed the rail, and
+     from then on the phase StyleRailSurface hands back, so the rail
+     resumes from where it was left rather than from the top. */
+  animation-delay: var(--rail-phase, 0s);
 }
 .style-track li {
-  flex: none;
+  /* Capped, but allowed to grow. On a screen wider than a whole copy the
+     min-width above stretches the track, and a frame that cannot grow
+     leaves that slack in one hole at the end of the copy. */
+  flex: 1 0 auto;
   width: min(25vw, 320px);
 }
 /* High and low. A single line of frames at one height is a conveyor belt;
@@ -4914,6 +5097,31 @@ body.is-leaving .wa-fab {
   to {
     transform: translateX(-100%);
   }
+}
+/* In hand. StyleRailSurface adds this while someone is dragging the rail
+   or flicking it sideways on a trackpad, and takes it off again when they
+   stop: the drift gives way to a scroll container holding the position the
+   drift had reached, and picks up from the position the hand leaves. The
+   mask stays — the frames still arrive and leave rather than starting and
+   stopping at an edge. */
+.style-rail.is-manual {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  cursor: grab;
+  user-select: none;
+}
+.style-rail.is-manual::-webkit-scrollbar {
+  display: none;
+}
+.style-rail.is-manual:active {
+  cursor: grabbing;
+}
+.style-rail.is-manual .style-track {
+  animation: none;
+}
+.style-rail.is-manual img {
+  -webkit-user-drag: none;
 }
 /* The rail is there to be looked at, and a photograph that will not stop
    moving cannot be. Both copies pause together or the seam drifts apart.

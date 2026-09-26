@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CtaBand, PageHead } from "@/components/blocks";
+import { CtaBand, PageHero } from "@/components/blocks";
 import { Parallax, WhatsappButton } from "@/components/creative";
 import { Arrow, Spaces } from "@/components/interactive";
 import { img } from "@/lib/images";
@@ -17,33 +17,37 @@ export const metadata: Metadata = pageMetadata({
 export default function SpacesPage() {
   return (
     <main id="main">
-      <PageHead
+      <PageHero
         eyebrow="STYLING CONCEPTS"
         title="Rooms, and the reasons they work."
-        lead={
-          <>
-            <p>
-              A visual record of how we think about space. Each one is a
-              styling concept rather than a client project, chosen to show a
-              specific decision — where the seating faces, how a plan is zoned,
-              what a terrace needs to stop being an afterthought.
-            </p>
-          </>
-        }
+        image={img.spacesHero}
+        imageAlt="Sunlit villa living room styled with linen seating and open garden views"
         crumbs={[{ href: "/", label: "Home" }, { label: "Our spaces" }]}
         actions={
-          <WhatsappButton>Discuss a space like this</WhatsappButton>
+          <WhatsappButton className="button button-light">
+            Discuss a space like this
+          </WhatsappButton>
         }
       />
 
       <section className="section section-tight container">
+        <div className="section-heading" data-reveal>
+          <div>
+            <p className="eyebrow muted">WHAT YOU ARE LOOKING AT</p>
+            <h2>Concepts, not client projects</h2>
+          </div>
+          <p>
+            A visual record of how we think about space. Each one is chosen to
+            show a specific decision — where the seating faces, how a plan is
+            zoned, what a terrace needs to stop being an afterthought.
+          </p>
+        </div>
         <Spaces />
-        
       </section>
 
       <Parallax
-        src={img.spacesHero}
-        alt="Sunlit villa interior with linen seating and open garden views"
+        src={img.heroVilla}
+        alt="Villa interior arranged around the light from the garden doors"
       >
         <div data-reveal>
           <p className="eyebrow">HOW TO READ THESE</p>

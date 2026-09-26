@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import {
   CtaBand,
   FounderNote,
-  PageHead,
+  PageHero,
   Partners,
   Voices,
 } from "@/components/blocks";
@@ -25,25 +25,17 @@ export const metadata: Metadata = pageMetadata({
 export default function AboutPage() {
   return (
     <main id="main">
-      <PageHead
+      <PageHero
         eyebrow="ABOUT THE STUDIO"
         title="We take things out before we put things in."
-        lead={
-          <>
-            <p>
-              Havenly is a home staging and styling studio in Al Quoz, working
-              across Dubai. We prepare properties for viewings and photography, and
-              we furnish homes people actually live in.
-            </p>
-            <p>
-              The work is quieter than most interiors work. That is deliberate.
-            </p>
-          </>
-        }
-        crumbs={[{ href: "/", label: "Home" }, { label: "About us" }]}
-        actions={<WhatsappButton>Talk to the studio</WhatsappButton>}
         image={img.aboutHero}
         imageAlt="Calm apartment dining area in natural daylight"
+        crumbs={[{ href: "/", label: "Home" }, { label: "About us" }]}
+        actions={
+          <WhatsappButton className="button button-light">
+            Talk to the studio
+          </WhatsappButton>
+        }
       />
 
       <section className="section container">
@@ -56,6 +48,11 @@ export default function AboutPage() {
             </h2>
           </div>
           <div className="split-copy">
+            <p>
+              Havenly is a home staging and styling studio in Al Quoz, working
+              across Dubai. We prepare properties for viewings and photography,
+              and we furnish homes people actually live in.
+            </p>
             <p>
               Whoever walks in — a buyer, a tenant, a photographer, or you on
               the first evening in a new home — makes a judgement long before
@@ -89,6 +86,10 @@ export default function AboutPage() {
               <p className="eyebrow muted">WHAT GUIDES THE WORK</p>
               <h2>Four things we hold to</h2>
             </div>
+            <p>
+              The work is quieter than
+              <br /> most interiors work. That is deliberate.
+            </p>
           </div>
           <ul className="principle-grid" data-reveal>
             {principles.map((principle, i) => (

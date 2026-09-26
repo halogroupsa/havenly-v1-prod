@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { WhatsappButton } from "@/components/creative";
 import { Arrow } from "@/components/interactive";
 import {
+  BeforeIllustration,
   Moves,
   OrgHero,
   Questions,
@@ -102,7 +103,6 @@ export default function GarageOrganizingPage() {
       <OrgHero
         eyebrow="INTERIOR ORGANIZING"
         title="Off the floor, and easy to find."
-        lead="Sports gear, tools, suitcases and seasonal things sorted onto shelving and into boxes anyone can label-read."
         image={img.orgGarage}
         imageAlt="Villa garage with shelving and labelled lidded boxes grouped by category"
         crumbs={[
@@ -132,7 +132,7 @@ export default function GarageOrganizingPage() {
       />
       <StyleRail
         room="garage"
-        title="A garage can work five ways."
+        title="A garage can work many ways."
         styles={[
           {
             slug: "single",
@@ -167,6 +167,7 @@ export default function GarageOrganizingPage() {
         ]}
       />
 
+      <BeforeIllustration room="garage" slug="garage" />
       <Moves lines={moveLines} tone="linen" />
       <Zoning
         title="A garage, zoned."
@@ -176,14 +177,14 @@ export default function GarageOrganizingPage() {
           {
             label: "Off the floor",
             note: "Categories boxed, labelled and shelved — sport, tools, seasonal, spare.",
-            x: 30,
-            y: 56,
+            x: 44,
+            y: 40,
           },
           {
             label: "On the wall",
             note: "Bikes and anything long hung up, where it takes no floor at all.",
-            x: 68,
-            y: 52,
+            x: 80,
+            y: 29,
           },
           {
             label: "Floor, clear",
@@ -194,7 +195,7 @@ export default function GarageOrganizingPage() {
         ]}
       />
 
-      <RoomSourcing groups={[
+      <RoomSourcing image="/images/org-garage-sourcing.webp" imageAlt="Garage shelving with lidded boxes and sports equipment" groups={[
         { title: "Shelving", items: "Strong, clear structure for every category." },
         { title: "Containers", items: "Lidded storage that makes the floor feel open." },
         { title: "Seasonal", items: "Travel, sport and overflow ready when needed." },

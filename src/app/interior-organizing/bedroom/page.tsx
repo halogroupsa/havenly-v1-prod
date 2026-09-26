@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { WhatsappButton } from "@/components/creative";
 import { Arrow } from "@/components/interactive";
 import {
+  BeforeIllustration,
   Moves,
   OrgHero,
   Questions,
@@ -10,6 +11,7 @@ import {
   RoomPackages,
   RoomSourcing,
   RoomStory,
+  StorageFeatures,
   StyleRail,
   Zoning,
 } from "@/components/organizing";
@@ -102,7 +104,6 @@ export default function BedroomOrganizingPage() {
       <OrgHero
         eyebrow="INTERIOR ORGANIZING"
         title="Open the doors and see everything you own."
-        lead="Every piece edited with you, then hung, folded and shelved on a system measured to your wardrobe."
         image={img.orgBedroom}
         imageAlt="Walk-in wardrobe with matching velvet hangers and folded knitwear"
         crumbs={[
@@ -130,9 +131,22 @@ export default function BedroomOrganizingPage() {
         detail={img.orgBedroomDetail}
         detailAlt="Close detail of a rail of matched velvet hangers, all facing the same way"
       />
+      <StorageFeatures
+        id="wardrobe-details-title"
+        eyebrow="FOLDED WITH A PLACE"
+        title="A drawer that keeps its shape."
+        items={[
+          {
+            image: img.orgFeatureWardrobeDrawer,
+            alt: "Oak wardrobe drawer divided between folded knitwear, rolled clothes and a small jewellery tray",
+            title: "Folded by how you dress",
+            text: "Deep sections hold knitwear and daily layers; small compartments keep the things that otherwise migrate across the top.",
+          },
+        ]}
+      />
       <StyleRail
         room="bedroom"
-        title="A wardrobe can work five ways."
+        title="A wardrobe can work many ways."
         styles={[
           {
             slug: "dressing-room",
@@ -167,6 +181,7 @@ export default function BedroomOrganizingPage() {
         ]}
       />
 
+      <BeforeIllustration room="wardrobe" slug="bedroom" />
       <Moves lines={moveLines} tone="linen" />
       <Zoning
         title="A wardrobe, zoned."
@@ -177,7 +192,7 @@ export default function BedroomOrganizingPage() {
             label: "Folded, above",
             note: "Knitwear and off-season, boxed and labelled so the rail stays clear.",
             x: 47,
-            y: 19,
+            y: 12,
           },
           {
             label: "Hung by length",
@@ -194,7 +209,7 @@ export default function BedroomOrganizingPage() {
         ]}
       />
 
-      <RoomSourcing groups={[
+      <RoomSourcing image="/images/org-bedroom-sourcing.webp" imageAlt="Wardrobe rail, folded knitwear and spaced shoe storage" groups={[
         { title: "Hanging", items: "A single rail, aligned for the morning." },
         { title: "Shelves", items: "Folded pieces and drawers held in calm zones." },
         { title: "Shoes", items: "Measured spacing that lets every pair be seen." },
