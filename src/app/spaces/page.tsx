@@ -34,7 +34,7 @@ export default function SpacesPage() {
         <div className="section-heading" data-reveal>
           <div>
             <p className="eyebrow muted">WHAT YOU ARE LOOKING AT</p>
-            <h2>Concepts, not client projects</h2>
+            <h2>Every room starts with a decision</h2>
           </div>
           <p>
             A visual record of how we think about space. Each one is chosen to
