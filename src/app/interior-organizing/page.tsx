@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PhotoStory, Sourcing } from "@/components/bands";
 import { CtaBand } from "@/components/blocks";
 import { WhatsappButton } from "@/components/creative";
 import { Arrow } from "@/components/interactive";
@@ -148,22 +149,23 @@ export default function InteriorOrganizingPage() {
         </div>
       </section>
 
-      <section className="container org-band" aria-labelledby="consultation-title">
-        <div className="section-heading org-head" data-reveal>
-          <div>
-            <p className="eyebrow muted">THE FIRST STEP</p>
-            <h2 id="consultation-title">A plan shaped around your home.</h2>
-          </div>
-          <p>Every project begins with an in-home consultation.</p>
-        </div>
-        <p>
-          We learn your routines and what is causing friction, review the layout
-          and existing storage, and measure the shelves, drawers and other spaces
-          that matter. From there we plan suitable products and agree the scope
-          and timeline. You receive a clear, personalized organizing plan and
-          written fee before work begins.
-        </p>
-      </section>
+      {/* The consultation, on the homepage's intro composition: the plan and
+          the measured drawer carry what the paragraph used to list. */}
+      <PhotoStory
+        id="consultation-title"
+        eyebrow="THE FIRST STEP"
+        line="A plan shaped around your home."
+        body={[
+          "Every project begins with an in-home consultation. We learn your routines, review the layout and measure the shelves, drawers and spaces that matter.",
+          "You receive a personalized organizing plan, scope and written fee before work begins.",
+        ]}
+        cta="Book a consultation"
+        href="/contact/"
+        wide={img.consultationTable}
+        wideAlt="A floor plan, fabric swatches and an oak sample on a table during an in-home consultation"
+        detail={img.orgFeatureUtensilDrawer}
+        detailAlt="A kitchen drawer fitted with measured oak dividers for utensils, knives and measuring spoons"
+      />
 
       <Moves tone="linen" />
 
@@ -183,24 +185,19 @@ export default function InteriorOrganizingPage() {
         </ol>
       </section>
 
-      <section className="container org-band" aria-labelledby="products-title">
-        <div className="section-heading org-head" data-reveal>
-          <div>
-            <p className="eyebrow muted">PRODUCTS WITH PURPOSE</p>
-            <h2 id="products-title">Measured, tested and chosen to last.</h2>
-          </div>
-        </div>
-        <p>
-          We select storage for its fit, durability and visual harmony. Depending
-          on the room, that may mean modular shelves, uniform hangers, drawer
-          dividers and shoe storage; airtight canisters, stackable bins and spice
-          racks; or tiered trays and under-sink compartments. For a home office
-          or study, we can plan cable organizers, document trays, stationery
-          boxes and labels as part of a room or whole-home project. Baskets,
-          lidded boxes, rolling bins, acrylic risers and fridge organizers are
-          chosen only where they make the space easier to use.
-        </p>
-      </section>
+      <Sourcing
+        id="products-title"
+        eyebrow="PRODUCTS WITH PURPOSE"
+        title={"Measured, tested and chosen to\u00a0last."}
+        text="Storage is chosen for its fit, durability and visual harmony — baskets, lidded boxes, rolling bins, acrylic risers and fridge organizers only where they make a space easier to use."
+        image="/images/org-pantry-sourcing.webp"
+        imageAlt="A pantry of airtight glass canisters, woven baskets and a stepped spice shelf"
+        groups={[
+          { title: "Wardrobe", items: "Modular shelves, uniform hangers, drawer dividers, shoe storage" },
+          { title: "Kitchen & bath", items: "Airtight canisters, stackable bins, spice racks, tiered trays, under-sink compartments" },
+          { title: "Home office", items: "Cable organizers, document trays, stationery boxes, labels" },
+        ]}
+      />
 
       <SignatureFinish
         title="Calm that lasts."
