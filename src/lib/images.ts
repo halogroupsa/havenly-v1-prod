@@ -13,7 +13,7 @@ import manifest from "./image-manifest.json";
  * the full prepare → ladder pipeline has run, so a half-applied image never
  * ships without its mobile sizes.
  */
-function ready(name: string, fallback: string) {
+export function ready(name: string, fallback: string) {
   const src = `/images/${name}.webp`;
   return src in manifest ? src : fallback;
 }

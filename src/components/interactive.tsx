@@ -43,6 +43,12 @@ const menus: Record<
     all: "All rooms",
     links: rooms.map((r) => ({ href: roomHref(r.slug), label: r.title })),
   },
+  "/spaces/": {
+    id: "nav-spaces",
+    noun: "spaces",
+    all: "All spaces",
+    links: concepts.map((c) => ({ href: `/spaces/${c.slug}/`, label: c.title })),
+  },
 };
 
 export function Header() {
@@ -178,7 +184,8 @@ export function Header() {
                 {item.label}
               </a>
             );
-            /* Services and interior organizing each carry a submenu. */
+            /* Services, interior organizing and the spaces each carry a
+               submenu. */
             const menu = menus[item.href];
             if (!menu) return link;
             const isOpen = subOpen === item.href;

@@ -4271,6 +4271,63 @@ body.is-leaving .wa-fab {
   aspect-ratio: 1.2;
 }
 
+/* ---- Space palette ------------------------------------------------ *
+   A concept page's materials, as the homepage's swatches at the size of a
+   band: four square macros and one word under each. Alone in its band it
+   runs the full container; under the close-ups it steps down to the right
+   two thirds with its label beside it, so the band ends quieter than it
+   began rather than with a second row of large pictures. */
+.space-palette {
+  display: grid;
+  grid-template-columns: repeat(var(--swatches, 4), minmax(0, 1fr));
+  gap: var(--wall-gap);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.space-palette li {
+  display: grid;
+  gap: 11px;
+  min-width: 0;
+}
+.space-palette figure {
+  margin: 0;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: var(--sand);
+}
+.space-palette img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.space-palette span {
+  font-size: 10px;
+  letter-spacing: 0.055em;
+  color: var(--muted);
+}
+/* Under the close-ups the label sits above the row rather than beside it —
+   a one-word label in its own column left a third of the band empty — and
+   the swatches run the full width as landscape tiles, so they line up with
+   the three portraits above without competing with them. */
+.space-palette-row {
+  margin-top: var(--section-y-sm);
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+.space-palette-row .eyebrow {
+  margin-bottom: 18px;
+}
+.space-palette-row .space-palette figure {
+  aspect-ratio: 3 / 2;
+}
+@media (max-width: 560px) {
+  .space-palette {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px var(--wall-gap);
+  }
+}
+
 @media (max-width: 900px) {
   .photo-cards {
     grid-template-columns: 1fr;

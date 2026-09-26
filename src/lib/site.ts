@@ -234,21 +234,16 @@ export const principles = [
   },
 ];
 
+/* The concept grid on /spaces/ and the pager on each concept page. Everything
+   else a concept page says — its SEO title, its decisions, its palette — is
+   written in that page's own file, app/spaces/<slug>/page.tsx. */
 export type Concept = {
   slug: string;
   title: string;
   type: string;
   location: string;
   image: string;
-  /* Search-facing title and description. The on-page heading and lead stay in
-     the studio's voice; these carry the phrase and the city the page is meant
-     to rank for (keywords_planner/page_keyword_map.csv). */
-  seoTitle: string;
-  seoDescription?: string;
   description: string;
-  detail: string;
-  scope: string;
-  notes: string[];
 };
 
 export const concepts: Concept[] = [
@@ -258,17 +253,8 @@ export const concepts: Concept[] = [
     type: "Villa",
     location: "Dubai",
     image: img.heroVilla,
-    seoTitle: "Villa Interior Styling in Dubai",
     description:
       "Soft linen, warm timber and open sightlines. A calm, welcoming approach to styling and staging a family villa in Dubai.",
-    detail:
-      "An inviting seating arrangement gives a generous living room a clear purpose. Natural textures soften the architecture, while a restrained palette lets the light and garden remain the focal points.",
-    scope: "Living room · Furniture selection · Finishing touches",
-    notes: [
-      "Seating turned towards the garden so the view does the work",
-      "A single large rug to hold the room together at this scale",
-      "Low pieces throughout to keep the ceiling height visible",
-    ],
   },
   {
     slug: "city-residence",
@@ -276,19 +262,8 @@ export const concepts: Concept[] = [
     type: "Apartment",
     location: "Dubai",
     image: img.dining,
-    seoTitle: "Apartment Dining Room Styling in Dubai",
-    seoDescription:
-      "An apartment dining room styled in Dubai: an oval table, upholstered chairs and sheer curtains that carry from listing photographs to the first viewing.",
     description:
       "A considered dining space that brings warmth and everyday ease to city living.",
-    detail:
-      "A sculptural dining table anchors the room without crowding it. Upholstered chairs, simple ceramics and soft curtains create a sense of home that translates beautifully from listing photography to a first viewing.",
-    scope: "Dining room · Space planning · Styling",
-    notes: [
-      "An oval table to keep circulation open in a narrow plan",
-      "One branch instead of a full arrangement — quieter in photographs",
-      "Sheer curtains to soften afternoon glare without losing the outlook",
-    ],
   },
   {
     slug: "quiet-retreat",
@@ -296,19 +271,8 @@ export const concepts: Concept[] = [
     type: "Bedroom",
     location: "Dubai",
     image: img.bedroom,
-    seoTitle: "Bedroom Styling in Dubai — A Restful Retreat",
-    seoDescription:
-      "Bedroom styling for a Dubai home: layered textiles, warm bedside lighting and a balanced layout that photographs well and feels restful in person.",
     description:
       "Layered textures and gentle tones create a bedroom that feels instantly restful.",
-    detail:
-      "A balanced furniture layout makes the room easy to understand. Tactile bedding, warm bedside lighting and carefully chosen art create a comfortable retreat without distracting from the space itself.",
-    scope: "Bedroom · Furnishing · Textile selection",
-    notes: [
-      "Bedding left softly imperfect so the room reads as lived-in",
-      "Warm bedside lighting for viewings that run into the evening",
-      "Art kept low and horizontal to widen the wall",
-    ],
   },
   {
     slug: "townhouse-family",
@@ -316,19 +280,8 @@ export const concepts: Concept[] = [
     type: "Townhouse",
     location: "Dubai",
     image: img.spaceTownhouse,
-    seoTitle: "Open-Plan Townhouse Styling in Dubai",
-    seoDescription:
-      "Townhouse styling in Dubai: an open-plan ground floor zoned with rugs, orientation and lighting, so a family can read the whole layout at a glance.",
     description:
       "An open-plan ground floor arranged so a family can read the whole layout at a glance.",
-    detail:
-      "Townhouse ground floors often run living, dining and kitchen into one volume. Defining each zone with rugs, orientation and lighting makes the plan legible without building walls out of furniture.",
-    scope: "Open plan · Zoning · Lighting",
-    notes: [
-      "Three defined zones, one continuous palette",
-      "Nothing above shoulder height in the middle of the plan",
-      "A practical, hard-wearing rug where a family would actually live",
-    ],
   },
   {
     slug: "skyline-penthouse",
@@ -336,17 +289,8 @@ export const concepts: Concept[] = [
     type: "Apartment",
     location: "Dubai",
     image: img.spacePenthouse,
-    seoTitle: "Penthouse Interior Styling in Dubai",
     description:
       "A restrained penthouse interior for a Dubai apartment, with the attention kept on the view and the light.",
-    detail:
-      "When a property's best feature is outside the glass, the interior's job is to frame it. Low furniture, a narrow palette and considered reflections keep the skyline as the subject of every photograph.",
-    scope: "Living & dining · Furniture scale · Photography prep",
-    notes: [
-      "Furniture kept below the window line throughout",
-      "Matte surfaces chosen to control reflections in glass",
-      "Evening lighting plan for twilight photography",
-    ],
   },
   {
     slug: "majlis-welcome",
@@ -354,17 +298,8 @@ export const concepts: Concept[] = [
     type: "Villa",
     location: "Dubai",
     image: img.spaceMajlis,
-    seoTitle: "Modern Majlis Design in Dubai — Seating & Styling",
     description:
       "A modern majlis design for a Dubai villa: a formal receiving room styled for generous seating and easy conversation.",
-    detail:
-      "A majlis has to seat more people than a living room and still feel calm. In this modern Arabic majlis design, perimeter seating, layered floor textiles and a considered approach to lighting keep the room hospitable rather than formal.",
-    scope: "Majlis · Seating plan · Textiles",
-    notes: [
-      "Seating arranged for conversation across the room, not at a screen",
-      "Layered floor textiles for acoustic softness",
-      "Serving surfaces kept within reach of every seat",
-    ],
   },
   {
     slug: "first-impression-entrance",
@@ -372,19 +307,8 @@ export const concepts: Concept[] = [
     type: "Detail",
     location: "Dubai",
     image: img.spaceEntrance,
-    seoTitle: "Entrance & Hallway Styling in Dubai",
-    seoDescription:
-      "Entrance styling for Dubai homes going to viewing: a shallow console, one mirror and considered light that set the tone from the front door.",
     description:
       "The first three metres of a home, treated as carefully as the rooms beyond.",
-    detail:
-      "A viewing begins at the door. A console, a mirror, a considered light and somewhere to set keys down give the entrance a purpose and set the tone for everything that follows.",
-    scope: "Entrance · Console styling · Lighting",
-    notes: [
-      "One mirror to carry daylight further into the plan",
-      "A shallow console so the corridor keeps its width",
-      "Scent, sound and light considered for viewing day",
-    ],
   },
   {
     slug: "shaded-terrace",
@@ -392,19 +316,8 @@ export const concepts: Concept[] = [
     type: "Detail",
     location: "Dubai",
     image: img.spaceTerrace,
-    seoTitle: "Terrace & Balcony Styling in Dubai",
-    seoDescription:
-      "Terrace styling built for a Dubai summer: shade first, seating for two and weather-honest materials, so outdoor space reads as a room at a viewing.",
     description:
       "Outdoor space styled as a usable room, not an afterthought at the end of the tour.",
-    detail:
-      "Terraces are frequently the least convincing part of a viewing. Shade, seating for two and a single planted moment are usually enough to make the space read as somewhere you would sit.",
-    scope: "Terrace · Outdoor furniture · Planting",
-    notes: [
-      "Seating for two rather than a full outdoor suite",
-      "Weather-honest materials that survive a Dubai summer",
-      "Shade resolved before anything else is placed",
-    ],
   },
 ];
 
@@ -416,10 +329,6 @@ export const conceptFilters = [
   "Bedroom",
   "Detail",
 ];
-
-export function getConcept(slug: string) {
-  return concepts.find((c) => c.slug === slug);
-}
 
 /** Neighbouring concepts, for the previous / next pager on a detail page. */
 export function conceptNeighbours(slug: string) {

@@ -209,6 +209,16 @@
       768
     ]
   },
+  "/images/org-bathrooms-transformation-concept.webp": {
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
   "/images/org-bedroom-sourcing.webp": {
     "width": 1536,
     "height": 1024,
@@ -262,6 +272,16 @@
       320,
       480,
       768
+    ]
+  },
+  "/images/org-bedroom-transformation-concept.webp": {
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
     ]
   },
   "/images/org-bedroom.webp": {
@@ -374,6 +394,16 @@
       768
     ]
   },
+  "/images/org-garage-transformation-concept.webp": {
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
   "/images/org-garage.webp": {
     "width": 1440,
     "height": 810,
@@ -449,6 +479,16 @@
       768
     ]
   },
+  "/images/org-kids-room-transformation-concept.webp": {
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
   "/images/org-kids-room.webp": {
     "width": 1440,
     "height": 810,
@@ -512,6 +552,16 @@
       320,
       480,
       768
+    ]
+  },
+  "/images/org-kitchen-transformation-concept.webp": {
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
     ]
   },
   "/images/org-kitchen.webp": {
@@ -579,6 +629,16 @@
       768
     ]
   },
+  "/images/org-laundry-transformation-concept.webp": {
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
   "/images/org-laundry.webp": {
     "width": 1440,
     "height": 810,
@@ -642,6 +702,16 @@
       320,
       480,
       768
+    ]
+  },
+  "/images/org-pantry-transformation-concept.webp": {
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
     ]
   },
   "/images/org-pantry.webp": {
@@ -813,9 +883,157 @@
       1200
     ]
   },
+  "/images/space-city-residence-close-chair.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/space-city-residence-close-sideboard.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/space-city-residence-close-table-edge.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/space-city-residence-wide.webp": {
+    "width": 1672,
+    "height": 941,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
   "/images/space-entrance.webp": {
     "width": 1440,
     "height": 810,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/space-first-impression-entrance-close-keys.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/space-first-impression-entrance-close-runner.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/space-first-impression-entrance-close-vessel.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/space-first-impression-entrance-wide.webp": {
+    "width": 1672,
+    "height": 941,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/space-garden-villa-close-linen.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/space-garden-villa-close-threshold.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/space-garden-villa-close-travertine.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/space-garden-villa-wide.webp": {
+    "width": 1672,
+    "height": 941,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/space-majlis-welcome-close-cushions.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/space-majlis-welcome-close-pouf.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/space-majlis-welcome-close-serving.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/space-majlis-welcome-wide.webp": {
+    "width": 1672,
+    "height": 941,
     "widths": [
       320,
       480,
@@ -843,9 +1061,157 @@
       1200
     ]
   },
+  "/images/space-quiet-retreat-close-bedding.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/space-quiet-retreat-close-bench.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/space-quiet-retreat-close-lamp.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/space-quiet-retreat-wide.webp": {
+    "width": 1672,
+    "height": 941,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/space-shaded-terrace-close-planter.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/space-shaded-terrace-close-rope.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/space-shaded-terrace-close-table.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/space-shaded-terrace-wide.webp": {
+    "width": 1672,
+    "height": 941,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/space-skyline-penthouse-close-chair.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/space-skyline-penthouse-close-curtain.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/space-skyline-penthouse-close-table.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/space-skyline-penthouse-wide.webp": {
+    "width": 1672,
+    "height": 941,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
   "/images/space-terrace.webp": {
     "width": 1440,
     "height": 810,
+    "widths": [
+      320,
+      480,
+      768,
+      1200
+    ]
+  },
+  "/images/space-townhouse-family-close-pendant.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/space-townhouse-family-close-rug.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/space-townhouse-family-close-stools.webp": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/space-townhouse-family-wide.webp": {
+    "width": 1672,
+    "height": 941,
     "widths": [
       320,
       480,
@@ -902,6 +1268,33 @@
       768
     ]
   },
+  "/images/swatch-bronze.webp": {
+    "width": 1254,
+    "height": 1254,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/swatch-cast-stone.webp": {
+    "width": 1200,
+    "height": 1200,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/swatch-jute.webp": {
+    "width": 1254,
+    "height": 1254,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
   "/images/swatch-linen.webp": {
     "width": 1254,
     "height": 1254,
@@ -920,7 +1313,61 @@
       768
     ]
   },
+  "/images/swatch-plaster.webp": {
+    "width": 1254,
+    "height": 1254,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/swatch-rattan.webp": {
+    "width": 1254,
+    "height": 1254,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/swatch-rope.webp": {
+    "width": 1200,
+    "height": 1200,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/swatch-teak.webp": {
+    "width": 1200,
+    "height": 1200,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
   "/images/swatch-travertine.webp": {
+    "width": 1254,
+    "height": 1254,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/swatch-walnut.webp": {
+    "width": 1254,
+    "height": 1254,
+    "widths": [
+      320,
+      480,
+      768
+    ]
+  },
+  "/images/swatch-wool.webp": {
     "width": 1254,
     "height": 1254,
     "widths": [
