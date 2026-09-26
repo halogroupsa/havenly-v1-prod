@@ -195,17 +195,19 @@ photography as available.
 
 ## Analytics and ads
 
-Google Tag Manager and the Google Ads tag are wired in but **off by default**. Each loads only when its
-ID is set at build time:
+Google Tag Manager loads in **production builds only**. The studio's container `GTM-5GVBDLTP` is
+baked into `src/lib/analytics.ts` as `GTM_CONTAINER_ID` and switched by the same condition as
+[Indexing](#indexing): it loads only when `NEXT_PUBLIC_SITE_URL` is `https://havenly.ae`. The
+production deploy can't forget it, and staging and local builds never reach the reports. The Google
+Ads tag is **off** until its ID is set.
 
 | Variable | Example | Loads |
 | --- | --- | --- |
-| `NEXT_PUBLIC_GTM_ID` | `GTM-XXXXXXX` | The GTM container, plus its `<noscript>` fallback |
-| `NEXT_PUBLIC_GOOGLE_ADS_ID` | `AW-123456789` | The Google Ads tag via gtag.js |
+| `NEXT_PUBLIC_GTM_ID` | `GTM-XXXXXXX` | Forces a GTM container onto any build, e.g. staging for GTM Preview. Unset = the baked container on production, nothing elsewhere |
+| `NEXT_PUBLIC_GOOGLE_ADS_ID` | `AW-123456789` | The Google Ads tag via gtag.js. Unset = no Ads tag |
 
-Set them only in the production build's environment, next to `NEXT_PUBLIC_SITE_URL`, so staging and
-local traffic never reach the reports. A malformed ID fails the build instead of shipping a tag that
-tracks nothing. The code is in `src/lib/analytics.ts` and `src/components/analytics.tsx`.
+To load no GTM anywhere, blank `GTM_CONTAINER_ID`. A malformed ID fails the build instead of shipping a
+tag that tracks nothing. The code is in `src/lib/analytics.ts` and `src/components/analytics.tsx`.
 
 - **One home for the Ads tag.** If Google Ads is also configured as a Google tag inside the GTM
   container, leave `NEXT_PUBLIC_GOOGLE_ADS_ID` unset, or every conversion is counted twice.

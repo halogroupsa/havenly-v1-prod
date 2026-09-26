@@ -22,9 +22,9 @@
   Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
   # The site's own assets are all same-origin. The only third parties allowed
   # are Google Tag Manager, Google Ads and GA4 (which GTM commonly carries),
-  # per Google's CSP guidance — they load only when NEXT_PUBLIC_GTM_ID or
-  # NEXT_PUBLIC_GOOGLE_ADS_ID is set (src/lib/analytics.ts), so on a build
-  # without them these entries allow nothing that is ever requested.
+  # per Google's CSP guidance. GTM loads only in production builds (see
+  # src/lib/analytics.ts) and Ads only when NEXT_PUBLIC_GOOGLE_ADS_ID is set,
+  # so on a staging build these entries allow nothing that is ever requested.
   # tagmanager.google.com, fonts.googleapis.com/gstatic and ssl/www.gstatic.com
   # are for GTM Preview mode. www.google.ae is Google Ads' regional endpoint
   # for UAE visitors. Any other vendor added in GTM needs its domains here.

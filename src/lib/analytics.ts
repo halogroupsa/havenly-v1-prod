@@ -1,20 +1,29 @@
 /**
  * Google Tag Manager and the Google Ads tag.
  *
- * Both are OFF unless their ID is set at build time, so a clean checkout, a
- * local build and staging load no third-party script at all. Set the IDs only
- * in the production build's environment (the Cloudflare dashboard, alongside
- * NEXT_PUBLIC_SITE_URL) so staging traffic never reaches the ad account.
+ * The studio's GTM container is baked in below, but it loads in PRODUCTION
+ * BUILDS ONLY. There is no separate switch for that: it hangs off `indexable`
+ * from src/lib/site.ts, which is true only when NEXT_PUBLIC_SITE_URL names the
+ * live origin. So the production deploy can never forget the tag, and staging
+ * and local builds never reach the reports — the same one condition that
+ * decides whether a bundle may appear in search.
  *
- * The Google Ads tag is loaded directly with gtag.js. If the same AW- ID is
- * also added as a Google tag inside the GTM container, every conversion is
- * counted twice. Pick one home for it: leave NEXT_PUBLIC_GOOGLE_ADS_ID unset
- * if marketing manages Google Ads from GTM.
+ * To load GTM from a staging build anyway — GTM Preview, or a separate test
+ * container — set NEXT_PUBLIC_GTM_ID. An explicit ID always wins, on any
+ * build. Blanking GTM_CONTAINER_ID turns the baked tag off everywhere.
+ *
+ * The Google Ads tag has no baked-in default and stays OFF until
+ * NEXT_PUBLIC_GOOGLE_ADS_ID is set at build time. It is loaded directly with
+ * gtag.js, so if the same AW- ID is also added as a Google tag inside the GTM
+ * container, every conversion is counted twice. Pick one home for it: leave
+ * the variable unset if marketing manages Google Ads from GTM.
  *
  * Adding any other vendor's tag in GTM (Meta, LinkedIn, Hotjar…) also means
  * allowing its domains in the Content-Security-Policy in public/_headers,
  * or the browser will block it.
  */
+
+import { indexable } from "./site";
 
 /**
  * Validate an ID before it is written into an inline <script>.
@@ -30,16 +39,24 @@ function parseId(name: string, value: string | undefined, pattern: RegExp, examp
   if (!pattern.test(raw)) {
     throw new Error(
       `${name} must look like ${example} — "${raw}" does not. Copy it from ` +
-        `the Google account exactly, or leave it unset to load no tag.`,
+        `the Google account exactly, or leave it unset.`,
     );
   }
   return raw;
 }
 
+/**
+ * The studio's GTM container, used by production builds. Blanking this turns
+ * the baked tag off everywhere; NEXT_PUBLIC_GTM_ID overrides it on any build.
+ */
+export const GTM_CONTAINER_ID = "GTM-5GVBDLTP";
+
 export const analytics = {
+  /* An explicit ID wins on any build, so staging can opt in for GTM Preview.
+     Otherwise the baked container is a production-build default only. */
   gtmId: parseId(
     "NEXT_PUBLIC_GTM_ID",
-    process.env.NEXT_PUBLIC_GTM_ID,
+    process.env.NEXT_PUBLIC_GTM_ID || (indexable ? GTM_CONTAINER_ID : ""),
     /^GTM-[A-Z0-9]{4,12}$/,
     "GTM-XXXXXXX",
   ),
