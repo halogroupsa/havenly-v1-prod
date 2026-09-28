@@ -3,12 +3,12 @@ import { img } from "./images";
 /* The studio's real contact routes, baked in so the site works from a clean
    checkout with no .env at all. The environment variables stay as overrides
    for staging builds that need to point somewhere else. */
-export const CONTACT_EMAIL = "hello@havenly.ae";
+export const CONTACT_EMAIL = "Mansi@Havenly.ae";
 /* International format, no spaces and no leading +. */
-export const WHATSAPP_NUMBER = "971565600005";
+export const WHATSAPP_NUMBER = "971503986006";
 /* The line the studio answers. Same handset as the WhatsApp number, kept as
    its own constant so either can move without dragging the other with it. */
-export const PHONE_NUMBER = "971565600005";
+export const PHONE_NUMBER = "971503986006";
 
 /* The studio address. Havenly works out of the same Dubai premises as
    Halo Interiors, so this is that address verbatim — one string, because the
