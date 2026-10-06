@@ -127,28 +127,33 @@ export default function RootLayout({
         </a>
         <Header />
         <noscript>
-          <style>{`.header.is-over-hero{position:sticky;background:rgba(255,255,255,.97);border-bottom-color:#eeede9;color:var(--ink)}.hero-content{padding-top:0}.hero{height:min(730px,calc(100svh - 92px))}@media(max-width:1100px){.hero{height:min(640px,calc(90svh - 76px))}}.menu-toggle,.nav-group-toggle,.space-filters,.contact-form,.voices-controls{display:none!important}.voices-body{gap:40px}.voices-item{grid-area:auto;opacity:1;visibility:visible;transform:none}@media(max-width:800px){.main-nav{display:flex;position:static;inset:auto;flex-wrap:wrap;box-shadow:none;gap:15px;padding:10px 0;background:none;backdrop-filter:none;color:inherit;font-size:12px;overflow:visible}.main-nav .nav-link{color:inherit;border:0;padding:0}.nav-group,.nav-group-row{display:contents}.nav-sub{display:none}.nav-inner{flex-wrap:wrap;padding-block:16px}.main-nav .nav-cta{margin:0}}`}</style>
+          <style>{`.header.is-over-hero{position:sticky;background:rgba(255,255,255,.97);border-bottom-color:#eceee9;color:var(--ink)}.hero-content{padding-top:0}.hero{height:min(730px,calc(100svh - 92px))}@media(max-width:1100px){.hero{height:min(640px,calc(90svh - 76px))}}.menu-toggle,.nav-group-toggle,.space-filters,.contact-form,.voices-controls{display:none!important}.voices-body{gap:40px}.voices-item{grid-area:auto;opacity:1;visibility:visible;transform:none}@media(max-width:800px){.main-nav{display:flex;position:static;inset:auto;flex-wrap:wrap;box-shadow:none;gap:15px;padding:10px 0;background:none;backdrop-filter:none;color:inherit;font-size:12px;overflow:visible}.main-nav .nav-link{color:inherit;border:0;padding:0}.nav-group,.nav-group-row{display:contents}.nav-sub{display:none}.nav-inner{flex-wrap:wrap;padding-block:16px}.main-nav .nav-cta{margin:0}}`}</style>
         </noscript>
         {/* Held between pages: while one document hands over to the next,
             the content fades down to the paper ground and the mark is what
             stands on it. Static markup — the fade is CSS both ways, so it
             plays on an ordinary page load too. */}
         <div className="page-mark" aria-hidden="true">
-          <span className="brand-mark">
-            h<span>h</span>
-          </span>
+          <img
+            className="page-mark-emblem"
+            src="/images/logo/havenly-emblem.png"
+            alt=""
+            width={256}
+            height={256}
+          />
         </div>
         {children}
         <footer className="footer">
           <div className="container footer-top">
             <div className="footer-brand">
               <a className="brand" href="/" aria-label="Havenly home">
-                <span className="brand-mark">
-                  h<span>h</span>
-                </span>
-                <span>
-                  HAVENLY<small>HOME STAGING &amp; STYLING</small>
-                </span>
+                <img
+                  className="brand-logo"
+                  src="/images/logo/havenly-logo.png"
+                  alt="Havenly"
+                  width={1200}
+                  height={424}
+                />
               </a>
               <p>
                 Thoughtfully styled.

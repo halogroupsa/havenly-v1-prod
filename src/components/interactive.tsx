@@ -141,12 +141,13 @@ export function Header() {
     >
       <div className="container nav-inner">
         <a className="brand" href="/" aria-label="Havenly home">
-          <span className="brand-mark">
-            h<span>h</span>
-          </span>
-          <span>
-            HAVENLY<small>HOME STAGING &amp; STYLING</small>
-          </span>
+          <img
+            className="brand-logo"
+            src="/images/logo/havenly-logo.png"
+            alt="Havenly"
+            width={1200}
+            height={424}
+          />
         </a>
         <button
           ref={toggle}

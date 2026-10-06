@@ -1,11 +1,19 @@
 :root {
+  /* Sage & Gold. Ink stays the text colour; sage carries every action; the
+     logo gold is decoration and type on dark grounds only — it is 2.3:1 on
+     white, so gold type on a light ground uses --gold-text (5.9:1) instead. */
   --ink: #292a27;
-  --muted: #66665e;
+  --muted: #5f6658;
   --paper: #fff;
-  --linen: #f5f4f0;
-  --sand: #e9e5de;
-  --line: #deddd6;
-  --accent: #777968;
+  --linen: #eef0ea;
+  --sand: #dfe3d6;
+  --line: #d9ddd0;
+  --accent: #5f6b55;
+  --accent-deep: #4c5744;
+  --sage-light: #a7b09a;
+  --deep: #2b3128;
+  --gold: #cfa469;
+  --gold-text: #7d5f2c;
   --wa: #25d366;
   --wa-hover: #1eb757;
 
@@ -96,7 +104,7 @@ button {
   color: var(--ink);
 }
 :focus-visible {
-  outline: 2px solid #7c6a45;
+  outline: 2px solid var(--gold-text);
   outline-offset: 5px;
 }
 section[id] {
@@ -114,6 +122,7 @@ section[id] {
   padding-top: var(--section-y-sm);
 }
 .eyebrow {
+  color: var(--eyebrow-color, var(--gold-text));
   font-size: 10px;
   letter-spacing: 0.18em;
   font-weight: 500;
@@ -122,6 +131,17 @@ section[id] {
 }
 .muted {
   color: var(--muted);
+}
+.eyebrow.muted {
+  color: var(--eyebrow-color, var(--gold-text));
+}
+.hero,
+.page-hero,
+.parallax,
+.uae-banner,
+.band-ink,
+.footer {
+  --eyebrow-color: var(--gold);
 }
 .button {
   display: inline-flex;
@@ -158,28 +178,30 @@ button:hover .arrow {
   transform: translate(3px, -3px);
 }
 .button-dark {
-  background: var(--ink);
+  background: var(--accent);
   color: white;
 }
 .button-dark:hover {
-  background: #4e5047;
+  background: var(--accent-deep);
 }
+/* The action on a dark ground or a photograph: the logo gold, which holds
+   6.3:1 against the ink it carries. */
 .button-light {
-  background: white;
+  background: var(--gold);
   color: var(--ink);
 }
 .button-light:hover {
-  background: var(--sand);
+  background: #dbb682;
 }
 /* Secondary action. Reads as the quieter sibling of .button-dark without
    introducing a second filled colour next to it. */
 .button-outline {
   background: transparent;
-  border-color: var(--ink);
-  color: var(--ink);
+  border-color: var(--accent);
+  color: var(--accent);
 }
 .button-outline:hover {
-  background: var(--ink);
+  background: var(--accent);
   color: white;
 }
 .text-link {
@@ -189,7 +211,7 @@ button:hover .arrow {
   gap: 30px;
   padding: 8px 0;
   border: 0;
-  border-bottom: 1px solid #a4a498;
+  border-bottom: 1px solid var(--gold);
   background: none;
   font-size: 12px;
   line-height: 1.6;
@@ -221,7 +243,7 @@ button:hover .arrow {
      has no ground of its own. */
   --menu-ground: var(--paper);
   --menu-edge: var(--line);
-  --menu-shadow: 0 18px 40px rgba(20, 22, 15, 0.1);
+  --menu-shadow: 0 18px 40px rgba(19, 21, 16, 0.1);
   --menu-item: var(--muted);
   --menu-item-on: var(--ink);
   --menu-hover: var(--linen);
@@ -229,7 +251,7 @@ button:hover .arrow {
   position: sticky;
   top: 0;
   z-index: 20;
-  border-bottom: 1px solid #eeede9;
+  border-bottom: 1px solid #eceee9;
 }
 /* Over the homepage hero the bar has no ground of its own — the photograph
    is its background. It has to leave the flow to do that, so it is fixed
@@ -254,9 +276,9 @@ button:hover .arrow {
    held short of solid so the image still reads through it. Pinned, the
    tokens above come back and the panel turns white with the bar. */
 .header.is-over-hero:not(.is-pinned) {
-  --menu-ground: rgba(41, 42, 39, 0.88);
+  --menu-ground: rgba(45, 49, 40, 0.9);
   --menu-edge: rgba(255, 255, 255, 0.16);
-  --menu-shadow: 0 20px 44px rgba(20, 22, 15, 0.32);
+  --menu-shadow: 0 20px 44px rgba(19, 21, 16, 0.32);
   --menu-item: rgba(255, 255, 255, 0.72);
   --menu-item-on: #fff;
   --menu-hover: rgba(255, 255, 255, 0.08);
@@ -266,7 +288,7 @@ button:hover .arrow {
    block in layout.tsx for the case where that handler never runs. */
 .header.is-over-hero.is-pinned {
   background: rgba(255, 255, 255, 0.97);
-  border-bottom-color: #eeede9;
+  border-bottom-color: #eceee9;
   color: var(--ink);
 }
 .nav-inner {
@@ -286,28 +308,10 @@ button:hover .arrow {
   letter-spacing: 0.14em;
   line-height: 1.2;
 }
-.brand small {
+.brand-logo {
   display: block;
-  letter-spacing: 0.18em;
-  font-size: 8px;
-  margin-top: 6px;
-}
-.brand-mark {
-  border: 1px solid currentColor;
-  width: 39px;
-  height: 43px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 34px;
-  font-weight: 300;
-  line-height: 1;
-  letter-spacing: -7px;
-  padding-right: 7px;
-}
-.brand-mark span {
-  transform: rotate(180deg);
-  display: block;
+  width: auto;
+  height: 60px;
 }
 .main-nav {
   /* Stretched to the full height of the bar, not just to the height of its
@@ -419,7 +423,7 @@ button:hover .arrow {
   bottom: 8px;
   width: 0;
   height: 1px;
-  background: var(--ink);
+  background: var(--gold);
   transition: width 0.25s;
 }
 .main-nav .nav-link:hover:after,
@@ -445,7 +449,7 @@ button:hover .arrow {
   min-height: 540px;
   color: white;
   overflow: hidden;
-  background: #6d6556;
+  background: #626d56;
 }
 /* The scale-in belongs to the stack, not to a frame: it should play once on
    arrival, not again on every cross-dissolve. */
@@ -478,7 +482,7 @@ button:hover .arrow {
   gap: 12px;
   font-size: 10px;
   letter-spacing: 0.055em;
-  color: #f2f0e9;
+  color: #eef0eb;
 }
 .hero-scroll span {
   font-size: 17px;
@@ -520,7 +524,7 @@ button:hover .arrow {
   content: "";
   width: 7px;
   height: 7px;
-  border: 1px solid #f2f0e9;
+  border: 1px solid #eef0eb;
   border-radius: 50%;
   opacity: 0.55;
   transition:
@@ -528,7 +532,7 @@ button:hover .arrow {
     opacity 0.4s var(--ease);
 }
 .hero-dots button.is-active:after {
-  background: #f2f0e9;
+  background: #eef0eb;
   opacity: 1;
 }
 .hero-shade {
@@ -701,18 +705,18 @@ button:hover .arrow {
 .service-tile:before {
   background: linear-gradient(
     to top,
-    rgba(26, 24, 21, 0.66) 0%,
-    rgba(26, 24, 21, 0.22) 34%,
-    rgba(26, 24, 21, 0) 62%
+    rgba(24, 26, 21, 0.66) 0%,
+    rgba(24, 26, 21, 0.22) 34%,
+    rgba(24, 26, 21, 0) 62%
   );
 }
 .service-tile-scrim {
   opacity: 0;
   background: linear-gradient(
     to top,
-    rgba(26, 24, 21, 0.78) 0%,
-    rgba(26, 24, 21, 0.5) 55%,
-    rgba(26, 24, 21, 0.18) 100%
+    rgba(24, 26, 21, 0.78) 0%,
+    rgba(24, 26, 21, 0.5) 55%,
+    rgba(24, 26, 21, 0.18) 100%
   );
   transition: opacity 0.6s var(--ease);
 }
@@ -896,7 +900,7 @@ button:hover .arrow {
   inset: auto 0 0;
   margin: 0;
   padding: 14px 16px;
-  background: rgba(41, 42, 39, 0.86);
+  background: rgba(45, 49, 40, 0.86);
   color: #fff;
   font-size: 10px;
   font-weight: 500;
@@ -911,7 +915,7 @@ button:hover .arrow {
   transition: background 0.4s var(--ease);
 }
 .space-card:hover .card-caption {
-  background: var(--ink);
+  background: var(--deep);
 }
 .space-card:nth-child(1) img {
   object-position: 56%;
@@ -1061,7 +1065,7 @@ button:hover .arrow {
   color: white;
   text-align: center;
   padding-block: calc(var(--section-y-sm) + 22px);
-  background: #3a3d34;
+  background: #393e33;
 }
 /* Same mechanism as .parallax: the picture is pinned to the viewport, so
    the band scrolls over a still image rather than carrying it along. A
@@ -1098,7 +1102,7 @@ button:hover .arrow {
   position: relative;
 }
 .uae-banner .eyebrow {
-  color: #eceee2;
+  color: var(--gold);
   margin-bottom: 16px;
 }
 .uae-banner h2 {
@@ -1106,7 +1110,7 @@ button:hover .arrow {
 }
 .uae-banner p:not(.eyebrow) {
   font-size: 13px;
-  color: #eff0e8;
+  color: #ecefe9;
 }
 .locations {
   display: flex;
@@ -1142,7 +1146,7 @@ button:hover .arrow {
 .stats-strip span + span:before {
   content: "·";
   margin-right: 30px;
-  color: #909283;
+  color: var(--gold);
 }
 .stats-note {
   margin: -6px 0 16px;
@@ -1267,7 +1271,7 @@ button:hover .arrow {
   position: absolute;
   inset: auto 0 0;
   padding: 14px 15px;
-  background: linear-gradient(0deg, #14160fc4, transparent);
+  background: linear-gradient(0deg, #131510c4, transparent);
   color: #fff;
   font-size: 11px;
   letter-spacing: 0.02em;
@@ -1344,7 +1348,7 @@ button:hover .arrow {
   display: block;
   width: 100%;
   border: 0;
-  border-bottom: 1px solid #bebeb2;
+  border-bottom: 1px solid #b8beb2;
   background: transparent;
   border-radius: 0;
   color: var(--ink);
@@ -1368,7 +1372,7 @@ button:hover .arrow {
 }
 .contact-form input::placeholder,
 .contact-form textarea::placeholder {
-  color: #78786f;
+  color: #747e69;
   opacity: 1;
 }
 .contact-form .form-note {
@@ -1399,8 +1403,8 @@ button:hover .arrow {
   margin-block: 10px;
 }
 .footer {
-  background: #292b27;
-  color: #f0f0e9;
+  background: var(--deep);
+  color: #edefea;
   padding-top: 58px;
 }
 .footer-top {
@@ -1410,15 +1414,15 @@ button:hover .arrow {
   padding-bottom: 52px;
   gap: 35px;
 }
-.footer-top > .brand {
-  font-size: 17px;
+.footer-brand .brand-logo {
+  height: 72px;
 }
 .footer-top > p {
   font-family: var(--font-assistant);
   font-size: 22px;
   line-height: 1.5;
   margin: 0;
-  color: #d6d8ce;
+  color: #d3d8ce;
 }
 .footer nav {
   display: flex;
@@ -1427,13 +1431,13 @@ button:hover .arrow {
   padding-top: 8px;
 }
 .footer-bottom {
-  border-top: 1px solid #52554c;
+  border-top: 1px solid #515849;
   display: flex;
   justify-content: space-between;
   gap: 20px;
   padding-block: 22px;
   font-size: 9px;
-  color: #c6c9bd;
+  color: #c3c9bd;
 }
 .will-reveal {
   opacity: 0;
@@ -1566,10 +1570,8 @@ button:hover .arrow {
   .brand {
     font-size: 16px;
   }
-  .brand-mark {
-    width: 33px;
-    height: 37px;
-    font-size: 30px;
+  .brand-logo {
+    height: 48px;
   }
   .menu-toggle {
     display: flex;
@@ -1639,7 +1641,7 @@ button:hover .arrow {
     inset: 0;
     z-index: 1;
     padding: 96px var(--gutter) calc(var(--gutter) + 20px);
-    background: rgba(41, 42, 39, 0.94);
+    background: rgba(45, 49, 40, 0.95);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     color: #fff;
@@ -1771,9 +1773,9 @@ button:hover .arrow {
   }
   .hero-shade {
     background:
-      linear-gradient(180deg, #14160f7a, transparent 20%),
-      linear-gradient(0deg, #14160fab, #14160f2e 44%, transparent 64%),
-      linear-gradient(90deg, #14160f3d, #0000);
+      linear-gradient(180deg, #1315107a, transparent 20%),
+      linear-gradient(0deg, #131510ab, #1315102e 44%, transparent 64%),
+      linear-gradient(90deg, #1315103d, #0000);
   }
   .hero-image {
     object-position: 60%;
@@ -2196,8 +2198,8 @@ button:hover .arrow {
     gap: 32px;
     padding-bottom: 35px;
   }
-  .footer-top > .brand {
-    font-size: 15px;
+  .footer-brand .brand-logo {
+    height: 60px;
   }
   .footer-top > p {
     font-size: 18px;
@@ -2285,8 +2287,9 @@ main,
   font-family: var(--font-assistant), sans-serif;
   animation: page-mark-out 0.42s var(--ease) backwards;
 }
-.page-mark .brand-mark {
-  transform: scale(1.35);
+.page-mark-emblem {
+  width: 76px;
+  height: 76px;
 }
 @keyframes page-mark-out {
   from {
@@ -2373,8 +2376,8 @@ body.is-leaving .wa-fab {
   background: var(--linen);
 }
 .band-ink {
-  background: var(--ink);
-  color: #f0f0e9;
+  background: var(--deep);
+  color: #edefea;
 }
 .band-ink h2,
 .band-ink h3 {
@@ -2382,11 +2385,11 @@ body.is-leaving .wa-fab {
 }
 .band-ink .muted,
 .band-ink p {
-  color: #c9cbc0;
+  color: #c6cbc0;
 }
 .band-ink .text-link {
-  color: #f0f0e9;
-  border-color: #6c6f63;
+  color: #edefea;
+  border-color: var(--gold);
 }
 
 /* Two-column text block */
@@ -2574,7 +2577,7 @@ body.is-leaving .wa-fab {
   margin: 0;
 }
 .compare-head a {
-  border-bottom: 1px solid #a4a498;
+  border-bottom: 1px solid var(--gold);
   padding-bottom: 3px;
 }
 .compare-head > span:first-child {
@@ -2616,7 +2619,7 @@ body.is-leaving .wa-fab {
 }
 .marquee-track > span:after {
   content: "◆";
-  color: #9a9c8c;
+  color: var(--gold);
   margin-left: 68px;
   font-size: 7px;
   vertical-align: middle;
@@ -2697,7 +2700,7 @@ body.is-leaving .wa-fab {
   padding-top: 62px;
 }
 .band-ink .voices-stage {
-  border-color: #4d5048;
+  border-color: #4c5345;
 }
 /* The opening mark is set as a graphic, outdented so the quote itself keeps
    a flush left edge with everything else on the page. */
@@ -2714,7 +2717,7 @@ body.is-leaving .wa-fab {
   user-select: none;
 }
 .band-ink .voices-mark {
-  color: #9aa08a;
+  color: var(--gold);
   opacity: 0.55;
 }
 /* Every quote occupies the same grid cell, so the stage is as tall as the
@@ -2760,7 +2763,7 @@ body.is-leaving .wa-fab {
   color: var(--muted);
 }
 .band-ink .voices-item figcaption {
-  color: #aeb1a5;
+  color: #acb3a3;
 }
 .voices-item figcaption strong {
   display: block;
@@ -2781,7 +2784,7 @@ body.is-leaving .wa-fab {
   border-top: 1px solid var(--line);
 }
 .band-ink .voices-controls {
-  border-color: #4d5048;
+  border-color: #4c5345;
 }
 .voices-count {
   margin: 0;
@@ -2836,16 +2839,16 @@ body.is-leaving .wa-fab {
   transition: background 0.3s;
 }
 .voices-track button:hover:before {
-  background: #b6b6aa;
+  background: #b0b7a9;
 }
 .voices-track button[aria-current="true"]:before {
-  background: var(--ink);
+  background: var(--accent);
 }
 .band-ink .voices-track button:before {
-  background: #565951;
+  background: #565d4d;
 }
 .band-ink .voices-track button[aria-current="true"]:before {
-  background: #fff;
+  background: var(--gold);
 }
 .voices-arrows {
   display: flex;
@@ -2868,11 +2871,11 @@ body.is-leaving .wa-fab {
   background: var(--sand);
 }
 .band-ink .voices-arrows button {
-  border-color: #575a50;
-  color: #f0f0e9;
+  border-color: #565d4d;
+  color: #edefea;
 }
 .band-ink .voices-arrows button:hover {
-  background: #3a3c37;
+  background: #3a3f34;
 }
 .voices-note {
   margin-top: 26px;
@@ -2885,7 +2888,7 @@ body.is-leaving .wa-fab {
   position: relative;
   overflow: hidden;
   height: min(620px, 72vh);
-  background: #6d6556;
+  background: #626d56;
   color: #fff;
   display: grid;
   align-items: center;
@@ -2951,10 +2954,10 @@ body.is-leaving .wa-fab {
   max-width: 48ch;
   font-size: 13px;
   line-height: 1.9;
-  color: #f1f1ea;
+  color: #eef0eb;
 }
 .parallax-copy .eyebrow {
-  color: #e6e6dc;
+  color: var(--gold);
 }
 
 /* ==================================================================
@@ -2998,7 +3001,7 @@ body.is-leaving .wa-fab {
   display: grid;
   place-items: center;
   font-size: 15px;
-  box-shadow: 0 2px 14px rgba(20, 22, 15, 0.22);
+  box-shadow: 0 2px 14px rgba(19, 21, 16, 0.22);
 }
 /* The chip is white wherever it lands, so it states its own text colour
    rather than inheriting one — on the homepage it sits inside a dark band. */
@@ -3110,7 +3113,7 @@ body.is-leaving .wa-fab {
   border-radius: 50%;
   background: var(--wa);
   color: #fff;
-  box-shadow: 0 6px 22px rgba(20, 22, 15, 0.22);
+  box-shadow: 0 6px 22px rgba(19, 21, 16, 0.22);
   isolation: isolate;
   transform-origin: center;
   transition:
@@ -3125,7 +3128,7 @@ body.is-leaving .wa-fab {
 }
 .wa-fab:hover {
   background: var(--wa-hover);
-  box-shadow: 0 10px 28px rgba(20, 22, 15, 0.3);
+  box-shadow: 0 10px 28px rgba(19, 21, 16, 0.3);
 }
 .wa-fab:before,
 .wa-fab:after {
@@ -3511,7 +3514,7 @@ body.is-leaving .wa-fab {
   font-size: 22px;
   line-height: 1.5;
   margin: 26px 0 0;
-  color: #d6d8ce;
+  color: #d3d8ce;
 }
 .footer-cols {
   display: grid;
@@ -3526,13 +3529,13 @@ body.is-leaving .wa-fab {
   padding: 0;
 }
 .footer-cols .eyebrow {
-  color: #9b9e92;
+  color: var(--gold);
   margin-bottom: 14px;
 }
 .footer-cols a {
   font-size: 12px;
   padding: 6px 0;
-  color: #dcded4;
+  color: #d9ded4;
   transition: color 0.25s;
 }
 .footer-cols a:hover {
@@ -3577,9 +3580,9 @@ body.is-leaving .wa-fab {
   height: 38px;
   display: grid;
   place-items: center;
-  border: 1px solid #52554c;
+  border: 1px solid #515849;
   border-radius: 50%;
-  color: #dcded4;
+  color: #d9ded4;
   transition:
     color 0.25s,
     border-color 0.25s,
@@ -3592,16 +3595,16 @@ body.is-leaving .wa-fab {
 }
 .social-row a:hover,
 .social-row a:focus-visible {
-  color: #292b27;
-  background: #f0f0e9;
-  border-color: #f0f0e9;
+  color: var(--deep);
+  background: #edefea;
+  border-color: #edefea;
 }
 /* The build credit sits last in the bottom row and is pushed to the far end,
    so the copyright and the privacy link keep the positions they had. It drops
    to its own line before the row would start wrapping awkwardly. */
 .footer-credit {
   margin-left: auto;
-  color: #9b9e92;
+  color: #99a18f;
 }
 @media (max-width: 700px) {
   .footer-credit {
@@ -3613,7 +3616,7 @@ body.is-leaving .wa-fab {
   font-style: normal;
   font-size: 12px;
   line-height: 1.7;
-  color: #b9bcb0;
+  color: #b6bdaf;
   padding: 6px 0;
   max-width: 24ch;
 }
@@ -3855,7 +3858,7 @@ body.is-leaving .wa-fab {
   min-height: 460px;
   overflow: hidden;
   color: #fff;
-  background: #6d6556;
+  background: #626d56;
 }
 .page-hero > img {
   position: absolute;
@@ -3891,7 +3894,7 @@ body.is-leaving .wa-fab {
 }
 .page-hero-copy .eyebrow {
   margin-bottom: 16px;
-  color: rgba(255, 255, 255, 0.78);
+  color: var(--gold);
 }
 /* Heading then actions, at the homepage's size, measure and spacing — there
    is no lead paragraph on any of these. The measure is the homepage's 760px
@@ -4112,9 +4115,9 @@ body.is-leaving .wa-fab {
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(22, 23, 18, 0.72) 0%,
-    rgba(22, 23, 18, 0.2) 40%,
-    rgba(22, 23, 18, 0) 68%
+    rgba(21, 23, 18, 0.72) 0%,
+    rgba(21, 23, 18, 0.2) 40%,
+    rgba(21, 23, 18, 0) 68%
   );
   transition: opacity 0.5s var(--ease);
 }
@@ -4162,7 +4165,7 @@ body.is-leaving .wa-fab {
   flex-direction: column;
   justify-content: flex-end;
   padding: 26px 24px;
-  background: var(--ink);
+  background: var(--deep);
 }
 .room-tile-cta:before {
   content: none;
@@ -4176,7 +4179,10 @@ body.is-leaving .wa-fab {
 .room-tile-cta .text-link {
   align-self: flex-start;
   color: #fff;
-  border-bottom-color: rgba(255, 255, 255, 0.45);
+  border-bottom-color: var(--gold);
+}
+.room-tile-cta .eyebrow {
+  color: var(--gold);
 }
 
 /* ---- Rhythm ------------------------------------------------------ *
@@ -4451,7 +4457,7 @@ body.is-leaving .wa-fab {
    asked for less motion — the copy simply sits where it lands. */
 .org-features {
   padding-block: var(--section-y);
-  background: #e8e8df;
+  background: #e4e8df;
 }
 .org-pulls {
   display: grid;
