@@ -3,7 +3,7 @@ import {
   CtaBand,
   FounderNote,
   PageHero,
-  Partners,
+  // Partners,
   Voices,
 } from "@/components/blocks";
 import { Parallax, WhatsappButton } from "@/components/creative";
@@ -214,7 +214,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <Partners />
+      {/* Hidden for now — uncomment (and the import above) to restore.
+      <Partners /> */}
 
       <Voices tone="ink" />
 

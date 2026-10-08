@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Partners, Voices } from "@/components/blocks";
+import { /* Partners, */ Voices } from "@/components/blocks";
 import {
   BeforeAfter,
   HeroFrames,
@@ -132,7 +132,8 @@ export default function Home() {
           about how it works, answered immediately by the names that have
           worked with it. Linen between the two white sections either side
           keeps the three reading as separate blocks. */}
-      <Partners />
+      {/* Hidden for now — uncomment (and the import above) to restore.
+      <Partners /> */}
 
       <section id="spaces" className="section container">
         <div className="section-heading" data-reveal>
